@@ -12,8 +12,8 @@ def home(request):
      return render(request, 'home.html')
 
 
-def input(request):
-    return render(request, 'input.html')
+def service(request):
+    return render(request, 'serviceCreate.html')
 
 @csrf_exempt
 def addService(request):
@@ -35,3 +35,23 @@ def addService(request):
 		service.save()
 
 		return render(request, 'input.html')
+
+@csrf_exempt
+def searchService(request):
+	if request.method == 'POST':
+
+		cityName = request.POST.get('city', '')
+
+		if City.objects.filter(name=cityName) == False:
+			city = City(name=cityName)
+			city.save()
+		else:
+			city = City.objects.filter(name=cityName)
+
+		typeOfSearch = request.POST.get('type', '')
+
+		if typeOfSearch == "service":
+			services = Service.objects.all().filter(city=city[0])
+			return render(request, 'results.html', {'results' : services})
+
+		return HttpResponse("TAPAK")

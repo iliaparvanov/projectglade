@@ -5,8 +5,10 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
- 	url(r'^input/', views.input, name='input'),
- 	url(r'^addService/', views.addService, name='input'),
+ 	url(r'^service/', views.service, name='service'),
+ 	url(r'^addService/', views.addService, name='addService'),
+ 	url(r'^searchService/', views.searchService, name='searchService'),
+ 	
  	
        
 ]
