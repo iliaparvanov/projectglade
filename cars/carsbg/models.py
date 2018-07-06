@@ -6,8 +6,10 @@ class City(models.Model):
 
 
 class Service(models.Model):
-	city = models.ForeignKey(City, on_delete = models.CASCADE)
-	""" add more info.... """
+	name = models.CharField(max_length = 15)
+	city = models.ForeignKey(City, on_delete = models.CASCADE, null=True)
+	address = models.CharField(max_length = 100)
+	tel = models.CharField(max_length = 10)
 
 class CarDealer(models.Model):
 	city = models.ForeignKey(City, on_delete = models.CASCADE)

@@ -1,0 +1,28 @@
+{% extends "header.html" %}
+
+{% block content %}
+    <!--TODO: FIX ALL LINKS/STATIC FILES-->
+    <nav id="nav">
+      <ul>
+        <li><a href="/input">INPUT</a><li>
+      </ul>
+
+    </nav>
+    <ul style='margin-top: 200px;'>
+        {% if not user.is_authenticated %}
+        <p style="font-size: 18px;">Note: You are currently not logged in and your test will not be saved!</p>
+        {% endif %}
+        <form action=/addService/ method="post" accept-charset="utf-8"> <!-- action is the url the form data is returned to-->
+            {% csrf_token %}
+            <label style="margin-top: 20px;" for="name"> Име на сервиза:</label><input type="text" name="name"  id="name" autocomplete="off" />
+            <label style="margin-top: 20px;" for="city"> Град:</label><input type="text" name="city"  id="city" autocomplete="off" />
+            ned to-->
+            <label style="margin-top: 20px;" for="address"> Адрес:</label><input type="text" name="address"  id="name" autocomplete="off" />
+            <label style="margin-top: 20px;" for="tel"> Телефон:</label><input type="text" name="tel"  id="tel" autocomplete="off" />
+            <p style="margin-top: 20px;"><input type="submit" value="Create" id="Create"></p>
+        </form>
+    </ul>
+
+
+
+{% endblock %}
