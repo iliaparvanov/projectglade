@@ -1,20 +1,23 @@
 {% extends "header.html" %}
 
 {% block content %}
-    <!--TODO: FIX ALL LINKS/STATIC FILES-->
     <nav id="nav">
 
     </nav>
-    <ul style='margin-top: 200px;'>
+    <ul>
+        <a href="/"><button>Начална страница</button></a><br>
         <form action=/addService/ method="post" enctype="multipart/form-data" accept-charset="utf-8"> <!-- action is the url the form data is returned to-->
             {% csrf_token %}
-            <label style="margin-top: 20px;" for="name"> Име на сервиза:</label><input type="text" name="name"  id="name" autocomplete="off" />
-            <label style="margin-top: 20px;" for="city"> Град:</label><input type="text" name="city"  id="city" autocomplete="off" />
-            ned to-->
-            <label style="margin-top: 20px;" for="address"> Адрес:</label><input type="text" name="address"  id="name" autocomplete="off" />
-            <label style="margin-top: 20px;" for="tel"> Телефон:</label><input type="text" name="tel"  id="tel" autocomplete="off" />
-            <label style="margin-top: 20px;" for="img">Снимка</label><input type="file" name="img", id="img">
-            <p style="margin-top: 20px;"><input type="submit" value="Create" id="Create"></p>
+            <label for="name"> Име на обекта:</label><input type="text" name="name"  id="name" autocomplete="off" /><br>
+            <label for="city"> Град:</label><input type="text" name="city"  id="city" autocomplete="off" /><br>
+            <label for="address"> Адрес:</label><input type="text" name="address"  id="name" autocomplete="off" /><br>
+            <label for="tel"> Телефон:</label><input type="text" name="tel"  id="tel" autocomplete="off" /><br>
+            <label for="img">Снимка</label><input type="file" name="img", id="img"><br>
+            <select name='type' id='typeOfSearch' value=typeOfSearch'>
+                <option type='text' name="service"  id="service" value='service' />Сервиз</option>
+                <option type='text' name="cardealer"  id="cardealer" value='cardealer' />Автокъща</option>
+            </select><br>
+            <p><input type="submit" value="Create" id="Create"></p>
         </form>
     </ul>
 

@@ -24,18 +24,22 @@ def addService(request):
 		address = request.POST.get('address', '')
 		tel = request.POST.get('tel', '')
 		img = request.FILES.get('img', False)
-
+		typeOfSearch = request.POST.get('type', '')
 
 		if City.objects.filter(name=cityName):
-			service = Service(name=name, city = City.objects.filter(name=cityName)[0], address=address, tel=tel, image = img)
+			city = City.objects.filter(name=cityName)[0]
 		else:
 			city = City(name=cityName)
 			city.save()
-			service = Service(name=name, city=city, address=address, tel=tel, image = img)
 			
-		service.image = img
-
-		service.save()
+		if typeOfSearch == "service":
+			service = Service(name=name, city=city, address=address, tel=tel, image = img)	
+			service.save()
+		elif typeOfSearch == "cardealer":
+			carDealer = CarDealer(name=name, city=city, address=address, tel=tel, image = img)
+			carDealer.save()
+		else:
+			return HttpResponse("ERROR ^)^")
 
 		return render(request, 'home.html')
 
@@ -49,7 +53,8 @@ def searchService(request):
 		typeOfSearch = request.POST.get('type', '')
 
 		if typeOfSearch == "service":
-			services = Service.objects.all().filter(city=city)
-			return render(request, 'results.html', {'results' : services})
+			obj = Service.objects.all().filter(city=city)
+		elif typeOfSearch == "cardealer":
+			obj = CarDealer.objects.all().filter(city = city)
 
-		return HttpResponse("TAPAK")
+		return render(request, 'results.html', {'results' : obj})

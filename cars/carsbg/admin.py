@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(City)
 admin.site.register(Service)
+admin.site.register(CarDealer)

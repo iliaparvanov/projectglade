@@ -1,13 +1,14 @@
 {% extends "header.html" %}
 
 {% block content %}
+	 <a href="/service/"><button>Добави обект</button></a><br>
      <form action=/searchService/ method="post" accept-charset="utf-8">
-    	<label style="margin-top: 20px;" for="city"></label><input type="text" name="city"  id="city" autocomplete="off" /><br>
-    	<select name='type' id='typeOfSearch' value='Търси:' style="margin-top: 50px">
-            <option type='text' name="service"  id="service" value='service' style="color: white" />Сервизи</option>
-            <option type='text' name="cardealer"  id="cardealer" value='cardealer' style="color: white" />Автокъщи</option>
+    	<label for="city"></label><input type="text" name="city"  id="city" autocomplete="off" /><br>
+    	<select name='type' id='typeOfSearch' value='Търси:'>
+            <option type='text' name="service"  id="service" value='service'>Сервизи</option>
+            <option type='text' name="cardealer"  id="cardealer" value='cardealer'>Автокъщи</option>
     	</select>
-    	<p style="margin-top: 20px;"><input type="submit" value="Търси" id="submit"></p>
+    	<p><input type="submit" value="Търси" id="submit"></p>
     </form>
 
 
