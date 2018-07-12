@@ -6,7 +6,7 @@ from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, authenticate
 from django.views.decorators.csrf import csrf_exempt
-
+import json
 
 def home(request):
      return render(request, 'home.html')
@@ -47,14 +47,31 @@ def addService(request):
 def searchService(request):
 	if request.method == 'POST':
 
-		cityName = request.POST.get('city', '')
-		city = City.objects.filter(name=cityName)[0]
-
+		searchWord = request.POST.get('search', '')
+		if City.objects.filter(name__contains=searchWord):
+			results = City.objects.filter(name__contains=searchWord)[0]
+		
 		typeOfSearch = request.POST.get('type', '')
 
 		if typeOfSearch == "service":
-			obj = Service.objects.all().filter(city=city)
+			obj = Service.objects.all().filter(city=results)
 		elif typeOfSearch == "cardealer":
-			obj = CarDealer.objects.all().filter(city = city)
+			obj = CarDealer.objects.all().filter(city = results)
 
 		return render(request, 'results.html', {'results' : obj})
+
+	if request.is_ajax():
+        
+		term = request.GET.get('term', '')
+		suggestions = City.objects.filter(name__icontains = term)
+		results = []
+		for i in suggestions:
+			suggestions_json = {}
+			suggestions_json = i.name		
+			results.append(suggestions_json)
+			data = json.dumps(results)
+	else:
+		data = 'fail'
+	mimetype = 'application/json'
+	
+	return HttpResponse(data, mimetype)
