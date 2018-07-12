@@ -1,10 +1,45 @@
 {% extends "header.html" %}
 
 {% block content %}
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $.widget( "custom.catcomplete", $.ui.autocomplete, {
+      _create: function() {
+        this._super();
+        this.widget().menu( "option", "items", "> :not(.ui-autocomplete-category)" );
+      },
+      _renderMenu: function( ul, items ) {
+        var that = this,
+          currentCategory = "";
+        $.each( items, function( index, item ) {
+          var li;
+          if ( item.category != currentCategory ) {
+            ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+            currentCategory = item.category;
+          }
+          li = that._renderItemData( ul, item );
+          if ( item.category ) {
+            li.attr( "aria-label", item.category + " : " + item.label );
+          }
+        });
+      }
+    });
+ 
+    $( "#search" ).catcomplete({
+      delay: 0,
+      source: 'searchService'
+    });
+  } );
+  </script>
+ 
+<!-- грозно ама баца -->
+ 
 	 <a href="/service/"><button>Добави обект</button></a><br>
      <form action=/searchService/ method="post" accept-charset="utf-8">
     	<label for="search"></label><input type="text" name="search"  id="search" value="Напишете град, улица или име на обекта"/><br>
-    	<select name='type' id='typeOfSearch' value='Търси:'>
+    	<select name='type' id='typeOfSearch' value='Търси:' style="margin-top: 200px;">
             <option type='text' name="service"  id="service" value='service'>Сервизи</option>
             <option type='text' name="cardealer"  id="cardealer" value='cardealer'>Автокъщи</option>
     	</select>

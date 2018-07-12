@@ -67,7 +67,27 @@ def searchService(request):
 		results = []
 		for i in suggestions:
 			suggestions_json = {}
-			suggestions_json = i.name		
+			suggestions_json['label'] = i.name
+			suggestions_json['category'] = "Градове:"
+
+			results.append(suggestions_json)
+			data = json.dumps(results)
+
+		suggestions = Service.objects.filter(name__icontains = term)
+		for i in suggestions:
+			suggestions_json = {}
+			suggestions_json['label'] = i.name
+			suggestions_json['category'] = "Сервизи:"
+
+			results.append(suggestions_json)
+			data = json.dumps(results)
+
+		suggestions = Service.objects.filter(address__icontains = term)
+		for i in suggestions:
+			suggestions_json = {}
+			suggestions_json['label'] = i.name
+			suggestions_json['category'] = "Местоположение:"
+
 			results.append(suggestions_json)
 			data = json.dumps(results)
 	else:
