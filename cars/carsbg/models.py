@@ -9,6 +9,7 @@ class Service(models.Model):
 	address = models.CharField(max_length = 100)
 	tel = models.CharField(max_length = 100)
 	image = models.ImageField(upload_to='media/', blank = True)
+	typeOfObject = models.CharField(max_length = 100, null = True)
 
 class CarDealer(models.Model):
 	name = models.CharField(max_length = 150, null = True)
@@ -16,6 +17,7 @@ class CarDealer(models.Model):
 	address = models.CharField(max_length = 100, null = True)
 	tel = models.CharField(max_length = 100, null = True)
 	image = models.ImageField(upload_to='media/', blank = True)
+	typeOfObject = models.CharField(max_length = 100, null = True)
 
 class Car(models.Model):
 	dealer = models.ForeignKey(CarDealer, on_delete = models.CASCADE)

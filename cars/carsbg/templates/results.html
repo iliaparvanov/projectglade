@@ -2,14 +2,20 @@
 
 {% block content %}
      {% for i in results %}
+     	{% for j in i %}
+		
 		<div class="result">
-		    <p>{{ i.name }}</p>
-		    <p>{{ i.address }}</p>
-		    <p>{{ i.tel }}</p>
-			{% if i.image.url %}
+		    <p>{{ j.name }}</p>
+		    <p>{{ j.address }}</p>
+		    <p>{{ j.tel }}</p>
+		    <p>{{ j.typeOfObject }}</p>
+		    <p>{{ j.city.name }}</p>
+		    
+			{% if j.image.url %}
 		    	<img src="{{ i.image.url }}" width="240"></p>
 		    {% endif %}
 	    </div>
+     	{% endfor %}
      {% endfor %}
 
 

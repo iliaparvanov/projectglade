@@ -33,10 +33,10 @@ def addService(request):
 			city.save()
 			
 		if typeOfSearch == "service":
-			service = Service(name=name, city=city, address=address, tel=tel, image = img)	
+			service = Service(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img)	
 			service.save()
 		elif typeOfSearch == "cardealer":
-			carDealer = CarDealer(name=name, city=city, address=address, tel=tel, image = img)
+			carDealer = CarDealer(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img)
 			carDealer.save()
 		else:
 			return HttpResponse("ERROR ^)^")
@@ -48,15 +48,24 @@ def searchService(request):
 	if request.method == 'POST':
 
 		searchWord = request.POST.get('search', '')
-		if City.objects.filter(name__contains=searchWord):
-			results = City.objects.filter(name__contains=searchWord)[0]
-		
-		typeOfSearch = request.POST.get('type', '')
+		obj = []
+		if City.objects.filter(name=searchWord):
+			results = Service.objects.all().filter(city=City.objects.filter(name=searchWord)[0])
+			obj.append(results)
 
-		if typeOfSearch == "service":
-			obj = Service.objects.all().filter(city=results)
-		elif typeOfSearch == "cardealer":
-			obj = CarDealer.objects.all().filter(city = results)
+			results = CarDealer.objects.all().filter(city=City.objects.filter(name=searchWord)[0])
+			if results not in obj:
+				obj.append(results)
+
+		if Service.objects.filter(name = searchWord):
+			results = Service.objects.filter(name = searchWord)
+			if results not in obj:
+				obj.append(results)
+
+		if CarDealer.objects.filter(name = searchWord):
+			results = CarDealer.objects.filter(name = searchWord)
+			if results not in obj:
+				obj.append(results)
 
 		return render(request, 'results.html', {'results' : obj})
 
@@ -78,6 +87,15 @@ def searchService(request):
 			suggestions_json = {}
 			suggestions_json['label'] = i.name
 			suggestions_json['category'] = "Сервизи:"
+
+			results.append(suggestions_json)
+			data = json.dumps(results)
+
+		suggestions = CarDealer.objects.filter(name__icontains = term)
+		for i in suggestions:
+			suggestions_json = {}
+			suggestions_json['label'] = i.name
+			suggestions_json['category'] = "Автокъщи:"
 
 			results.append(suggestions_json)
 			data = json.dumps(results)
