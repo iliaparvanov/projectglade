@@ -10,10 +10,20 @@
 		    <p>{{ j.tel }}</p>
 		    <p>{{ j.typeOfObject }}</p>
 		    <p>{{ j.city.name }}</p>
-		    
-			{% if j.image.url %}
+		    {% if j.image.url %}
 		    	<img src="{{ i.image.url }}" width="240"></p>
 		    {% endif %}
+		    <form action=/object/ method="post">
+        		<input type="hidden" name="name" value="{{ j.name }}" id="tests">
+        		<input type="hidden" name="address" value="{{ j.address }}" id="tests">
+        		<input type="hidden" name="tel" value="{{ j.tel }}" id="tests">
+        		<input type="hidden" name="typeOfObject" value="{{ j.typeOfObject }}" id="tests">
+        		<input type="hidden" name="city" value="{{ j.city.name }}" id="tests">
+
+        		<input name="button_more"  type="submit" value="Виж повече" id="button_more">
+    		</form>
+
+			
 	    </div>
      	{% endfor %}
      {% endfor %}

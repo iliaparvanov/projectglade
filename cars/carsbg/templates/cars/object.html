@@ -1,0 +1,35 @@
+{% extends "cars/header.html" %}
+
+{% block content %}
+{% load tests_extras %}
+
+
+	<div class="object">
+	    <p>Име: {{ obj.name }}</p>
+	    <p>Адрес: {{ obj.address }}</p>
+	    <p>Телефон: {{ obj.tel }}</p>
+	    <p>Тип на обекта:{{ obj.typeOfObject }}</p>
+	    <p>Град: {{ obj.city.name }}</p>
+	    {% if obj.image.url %}
+	    	<img src="{{ i.image.url }}" width="240"></p>
+	    {% endif %}
+
+		<!-- Тука ще има какво могат да правят в тоя обект -->
+		{% if user.is_authenticated %}
+		<form action=/addComment/ method="post" accept-charset="utf-8">
+  			<label for="comment">Напиши коментар:<br></label><textarea rows="4" cols="50" type="text" name="comment"  id="comment"/></textarea><br>
+  			<input type="hidden" name="user" value="{{ user.username }}" id="user">
+  			<input type="hidden" name="pk" value="{{ obj.pk }}" id="user">
+  			<input type="hidden" name="typeOfObject" value="{{ obj.typeOfObject }}" id="typeOfObject">
+  			<p><input type="submit" value="Изпрати" id="submit"></p>
+  		</form>
+		{% endif %}
+
+		{% for i in lenOfComments %}
+			<div class="results">
+				<p>{{ users|return_item:i }}: {{ comments|return_item:i }}</p>
+			</div>
+		{% endfor %}
+    </div>
+
+{% endblock %}

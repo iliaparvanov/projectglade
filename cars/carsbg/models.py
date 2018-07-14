@@ -21,9 +21,11 @@ class CarDealer(models.Model):
 	typeOfObject = models.CharField(max_length = 100, null = True)
 
 
-class Comments(models.Model):
+class Comment(models.Model):
 	text = models.CharField(max_length = 300, null = True)
-	user = models.ForeignKey(User, on_delete = models.CASCADE)
+	user = models.ForeignKey(User, on_delete = models.CASCADE, null = True)
+	cardealer = models.ForeignKey(CarDealer, on_delete = models.CASCADE, null = True)
+	service = models.ForeignKey(Service, on_delete = models.CASCADE, null = True)
 
 class Car(models.Model):
 	dealer = models.ForeignKey(CarDealer, on_delete = models.CASCADE)

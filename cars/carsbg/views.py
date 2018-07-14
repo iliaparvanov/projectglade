@@ -145,3 +145,52 @@ def searchService(request):
 	mimetype = 'application/json'
 	
 	return HttpResponse(data, mimetype)
+
+@csrf_exempt
+def viewObject(request):
+	if request.POST:
+		name = request.POST.get('name', '')
+		tel = request.POST.get('tel', '')
+		address = request.POST.get('address', '')
+		city = request.POST.get('city', '')
+		typeOfObject = request.POST.get('typeOfObject', '')
+
+		comments = []
+		users = []
+		if typeOfObject == "Сервиз":
+			result = Service.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0]
+			commentsObj = Comment.objects.filter(service = result)
+
+		elif typeOfObject == "Автокъща":
+			result = CarDealer.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0]
+			commentsObj = Comment.objects.filter(cardealer = result)
+
+		for comment in commentsObj:
+			comments.append(comment.text)
+			users.append(comment.user)
+
+		len1 = len(comments)
+		lenOfComments = list(range(len1))
+		return render(request, 'cars/object.html', {'obj' : result, 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users})
+
+		
+
+@csrf_exempt
+def addComment(request):
+	if request.POST:
+		comment = request.POST.get('comment', '')
+		user = request.POST.get('user', '')
+		typeOfObject = request.POST.get('typeOfObject', '')
+		pk = request.POST.get('pk', '')
+
+		if typeOfObject == "Сервиз":
+			obj = Service.objects.get(pk = pk)
+			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], service = obj)
+			commentObj.save()
+			return HttpResponse("done1")
+
+		elif typeOfObject == "Автокъща":
+			obj = CarDealer.objects.get(pk = pk)
+			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], cardealer = obj)
+			commentObj.save()
+			return HttpResponse("done2")
