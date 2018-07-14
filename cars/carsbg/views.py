@@ -8,9 +8,10 @@ from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.decorators import login_required, permission_required
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.contrib import messages
 
 def home(request):
-     return render(request, 'home.html')
+     return render(request, 'cars/home.html')
 
 @login_required
 def password_change(request):
@@ -20,7 +21,7 @@ def password_change(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return render(request, 'home.html')
+            return render(request, 'cars/home.html')
         else:
             messages.error(request, 'Please correct the error below.')
     else:
@@ -44,7 +45,7 @@ def signup(request):
 	return render(request, 'registration/signup.html', {'form': form})
 
 def service(request):
-    return render(request, 'serviceCreate.html')
+    return render(request, 'cars/serviceCreate.html')
 
 @csrf_exempt
 def addService(request):
@@ -72,7 +73,7 @@ def addService(request):
 		else:
 			return HttpResponse("ERROR ^)^")
 
-		return render(request, 'home.html')
+		return render(request, 'cars/home.html')
 
 @csrf_exempt
 def searchService(request):
@@ -98,7 +99,7 @@ def searchService(request):
 			if results not in obj:
 				obj.append(results)
 
-		return render(request, 'results.html', {'results' : obj})
+		return render(request, 'cars/results.html', {'results' : obj})
 
 	if request.is_ajax():
         

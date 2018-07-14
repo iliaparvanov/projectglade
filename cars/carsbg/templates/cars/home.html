@@ -38,8 +38,8 @@
     Потребител:{{ user.username }}<br>
     <a href="/service/"><button>Добави обект</button></a>
     {% if user.is_authenticated %}
-      <a href="/logout/"><button>Изход</button></a><br>
-      <a href="/password_change/"><button>Смени парола</button></a><br>
+      <a href="/password-change/"><button>Смени парола</button></a>
+      <a href="/logout/"><button>Изход</button></a>
    
     {% else %}
         <a href="/login/"><button>Вход</button></a>
