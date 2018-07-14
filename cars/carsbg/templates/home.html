@@ -35,13 +35,22 @@
   </script>
  
 <!-- грозно ама баца -->
- 
-	 <a href="/service/"><button>Добави обект</button></a><br>
-     <form action=/searchService/ method="post" accept-charset="utf-8">
-    	<label for="search"></label><input type="text" name="search"  id="search" value="Напишете град, улица или име на обекта"/><br>
+    Потребител:{{ user.username }}<br>
+    {% if user.is_authenticated %}
+      <a href="/logout/"><button>Изход</button></a><br>
+   
+    {% else %}
+        <a href="/login/"><button>Вход</button></a><br>
+        <a href="/signup/"><button>Регистрирай се</button></a><br>
+    {% endif %}
 
-    	<p><input type="submit" value="Търси" id="submit"></p>
-    </form>
+    <a href="/service/"><button>Добави обект</button></a><br>
+
+   <form action=/searchService/ method="post" accept-charset="utf-8">
+  	<label for="search"></label><input type="text" name="search"  id="search" value="Напишете град, улица или име на обекта"/><br>
+
+  	<p><input type="submit" value="Търси" id="submit"></p>
+  </form>
 
 
 {% endblock %}

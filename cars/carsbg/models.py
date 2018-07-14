@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class City(models.Model):
 	name = models.CharField(max_length = 15)
@@ -18,6 +19,11 @@ class CarDealer(models.Model):
 	tel = models.CharField(max_length = 100, null = True)
 	image = models.ImageField(upload_to='media/', blank = True)
 	typeOfObject = models.CharField(max_length = 100, null = True)
+
+
+class Comments(models.Model):
+	text = models.CharField(max_length = 300, null = True)
+	user = models.ForeignKey(User, on_delete = models.CASCADE)
 
 class Car(models.Model):
 	dealer = models.ForeignKey(CarDealer, on_delete = models.CASCADE)
