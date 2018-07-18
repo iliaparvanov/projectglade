@@ -10,8 +10,9 @@
 		    <p>{{ j.tel }}</p>
 		    <p>{{ j.typeOfObject }}</p>
 		    <p>{{ j.city.name }}</p>
+
 		    {% if j.image.url %}
-		    	<img src="{{ i.image.url }}" width="240"></p>
+		    	<img src="{{ j.image.url }}" width="240"></p>
 		    {% endif %}
 		    <form action=/object/ method="post">
         		<input type="hidden" name="name" value="{{ j.name }}" id="tests">
