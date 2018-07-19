@@ -146,34 +146,46 @@ def searchService(request):
 	
 	return HttpResponse(data, mimetype)
 
-@csrf_exempt
-def viewObject(request):
-	if request.POST:
+
+def objectCreate(request, comments, users, result, lenOfComments):
+	
 		name = request.POST.get('name', '')
 		tel = request.POST.get('tel', '')
 		address = request.POST.get('address', '')
 		city = request.POST.get('city', '')
 		typeOfObject = request.POST.get('typeOfObject', '')
 
-		comments = []
-		users = []
 		if typeOfObject == "Сервиз":
-			result = Service.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0]
-			commentsObj = Comment.objects.filter(service = result)
+			result.append(Service.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
+			commentsObj = Comment.objects.filter(service = result[0])
 
 		elif typeOfObject == "Автокъща":
-			result = CarDealer.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0]
-			commentsObj = Comment.objects.filter(cardealer = result)
+			result.append(CarDealer.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
+			commentsObj = Comment.objects.filter(cardealer = result[0])
 
 		for comment in commentsObj:
 			comments.append(comment.text)
 			users.append(comment.user)
 
 		len1 = len(comments)
-		lenOfComments = list(range(len1))
-		return render(request, 'cars/object.html', {'obj' : result, 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users})
+		for i in range(len1):
+			lenOfComments.append(i)
 
+
+@csrf_exempt
+def viewObject(request):
+	if request.POST:
+		comments = []
+		users = []
+		result = list()
+		lenOfComments = list()
 		
+		objectCreate(request, comments, users, result, lenOfComments)
+
+		print(comments, users, result, lenOfComments)
+
+		return render(request, 'cars/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users})
+
 
 @csrf_exempt
 def addComment(request):
@@ -183,14 +195,25 @@ def addComment(request):
 		typeOfObject = request.POST.get('typeOfObject', '')
 		pk = request.POST.get('pk', '')
 
+
+
 		if typeOfObject == "Сервиз":
 			obj = Service.objects.get(pk = pk)
 			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], service = obj)
 			commentObj.save()
-			return HttpResponse("done1")
+			
 
 		elif typeOfObject == "Автокъща":
 			obj = CarDealer.objects.get(pk = pk)
 			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], cardealer = obj)
 			commentObj.save()
-			return HttpResponse("done2")
+		
+		comments = []
+		users = []
+		result = list()
+		lenOfComments = list()
+		
+		objectCreate(request, comments, users, result, lenOfComments)
+
+		return render(request, 'cars/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users})
+

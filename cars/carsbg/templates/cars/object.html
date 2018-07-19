@@ -21,6 +21,12 @@
   			<input type="hidden" name="user" value="{{ user.username }}" id="user">
   			<input type="hidden" name="pk" value="{{ obj.pk }}" id="user">
   			<input type="hidden" name="typeOfObject" value="{{ obj.typeOfObject }}" id="typeOfObject">
+  			<input type="hidden" name="name" value="{{ obj.name }}" id="tests">
+    		<input type="hidden" name="address" value="{{ obj.address }}" id="tests">
+    		<input type="hidden" name="tel" value="{{ obj.tel }}" id="tests">
+    		<input type="hidden" name="typeOfObject" value="{{ obj.typeOfObject }}" id="tests">
+    		<input type="hidden" name="city" value="{{ obj.city.name }}" id="tests">
+ 			
   			<p><input type="submit" value="Изпрати" id="submit"></p>
   		</form>
 		{% endif %}
