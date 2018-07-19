@@ -1,4 +1,4 @@
-{% extends "cars/header.html" %}
+{% extends "cars/base.html" %}
 
 {% block content %}
 {% load tests_extras %}
@@ -26,7 +26,7 @@
     		<input type="hidden" name="tel" value="{{ obj.tel }}" id="tests">
     		<input type="hidden" name="typeOfObject" value="{{ obj.typeOfObject }}" id="tests">
     		<input type="hidden" name="city" value="{{ obj.city.name }}" id="tests">
- 			
+
   			<p><input type="submit" value="Изпрати" id="submit"></p>
   		</form>
 		{% endif %}

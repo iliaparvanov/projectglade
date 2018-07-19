@@ -1,9 +1,9 @@
-{% extends "cars/header.html" %}
+{% extends "cars/base.html" %}
 
 {% block content %}
      {% for i in results %}
      	{% for j in i %}
-		
+
 		<div class="result">
 		    <p>{{ j.name }}</p>
 		    <p>{{ j.address }}</p>
@@ -24,7 +24,7 @@
         		<input name="button_more"  type="submit" value="Виж повече" id="button_more">
     		</form>
 
-			
+
 	    </div>
      	{% endfor %}
      {% endfor %}

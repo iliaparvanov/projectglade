@@ -1,3 +1,17 @@
+#header {
+  background: #050507;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.sticky + .content {
+  padding-top: 102px;
+}
+
 #search input[type=text] {
   margin-left: 20vw;
   margin-right: 20vw;
