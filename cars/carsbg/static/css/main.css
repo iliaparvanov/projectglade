@@ -46,3 +46,9 @@
     margin-bottom: 1em;
   }
 }
+
+<style>
+.checked {
+    color: orange;
+}
+</style>

@@ -194,6 +194,8 @@ def addComment(request):
 		user = request.POST.get('user', '')
 		typeOfObject = request.POST.get('typeOfObject', '')
 		pk = request.POST.get('pk', '')
+		rating = request.POST.get('rating', '')
+		rating = int(rating)
 
 
 
@@ -215,5 +217,8 @@ def addComment(request):
 		
 		objectCreate(request, comments, users, result, lenOfComments)
 
+		result[0].rating += rating
+		result[0].rating /= len(comments)
+		print(len(comments), result[0].rating, rating)
 		return render(request, 'cars/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users})
 

@@ -16,6 +16,23 @@ function stickToTop() {
   }
 }
 
+function stars(num) {
+  for(var i = 1; i <= 5; i++)
+  {
+    var j = (i).toString()
+    
+    if(i <= num)
+    {
+      document.getElementById("star" + j).className = "fa fa-star checked";
+    }
+    else
+    {
+      document.getElementById("star" +  j).className = "fa fa-star";
+    }
+  }
+  document.getElementById("rating").value = num;
+}
+
 $( function() {
     $.widget( "custom.catcomplete", $.ui.autocomplete, {
       _create: function() {
