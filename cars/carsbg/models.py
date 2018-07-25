@@ -11,8 +11,7 @@ class Service(models.Model):
 	tel = models.CharField(max_length = 100)
 	image = models.ImageField(upload_to='media/', blank = True)
 	typeOfObject = models.CharField(max_length = 100, null = True)
-	rating = models.IntegerField(default=0)
-
+	rating = models.IntegerField()
 
 class CarDealer(models.Model):
 	name = models.CharField(max_length = 150, null = True)
@@ -21,8 +20,7 @@ class CarDealer(models.Model):
 	tel = models.CharField(max_length = 100, null = True)
 	image = models.ImageField(upload_to='media/', blank = True)
 	typeOfObject = models.CharField(max_length = 100, null = True)
-	rating = models.IntegerField(default=0)
-
+	rating = models.IntegerField()
 
 class Comment(models.Model):
 	text = models.CharField(max_length = 300, null = True)

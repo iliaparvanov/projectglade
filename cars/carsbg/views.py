@@ -65,10 +65,10 @@ def addService(request):
 			city.save()
 			
 		if typeOfSearch == "service":
-			service = Service(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img)	
+			service = Service(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0)	
 			service.save()
 		elif typeOfSearch == "cardealer":
-			carDealer = CarDealer(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img)
+			carDealer = CarDealer(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0)
 			carDealer.save()
 		else:
 			return HttpResponse("ERROR ^)^")
@@ -216,9 +216,10 @@ def addComment(request):
 		lenOfComments = list()
 		
 		objectCreate(request, comments, users, result, lenOfComments)
-
-		result[0].rating += rating
-		result[0].rating /= len(comments)
+		print(result[0].rating)
+		result[0].rating = result[0].rating + rating
+		rating = result[0].rating / len(comments)
+		result[0].save()
 		print(len(comments), result[0].rating, rating)
-		return render(request, 'cars/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users})
+		return render(request, 'cars/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users, 'rating' : rating})
 
