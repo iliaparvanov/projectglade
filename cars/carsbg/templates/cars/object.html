@@ -20,7 +20,7 @@
 	    	<img src="{{ obj.image.url }}" width="240"></p>
 	    {% endif %}
 	    <p>Оценка: {{ rating }}</p>
-
+	    
 		<!-- Тука ще има какво могат да правят в тоя обект -->
 		{% if user.is_authenticated %}
 		<h2>Star Rating</h2>
@@ -58,5 +58,6 @@
 			</div>
 		{% endfor %}
     </div>
+
 
 {% endblock %}
