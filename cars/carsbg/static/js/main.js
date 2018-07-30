@@ -2,17 +2,17 @@
 window.onscroll = function() {stickToTop()};
 
 // Get the header
-var header = document.getElementById("myHeader");
+var navbar = document.getElementById("navbar");
 
 // Get the offset position of the navbar
-var sticky = header.offsetTop;
+var sticky = navbar.offsetTop;
 
 // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
 function stickToTop() {
   if (window.pageYOffset > sticky) {
-    header.classList.add("sticky");
+    navbar.classList.add("sticky");
   } else {
-    header.classList.remove("sticky");
+    navbar.classList.remove("sticky");
   }
 }
 
@@ -20,7 +20,7 @@ function stars(num) {
   for(var i = 1; i <= 5; i++)
   {
     var j = (i).toString()
-    
+
     if(i <= num)
     {
       document.getElementById("star" + j).className = "fa fa-star checked";

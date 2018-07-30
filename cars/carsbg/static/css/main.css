@@ -1,5 +1,19 @@
-#header {
+#navbar {
+  overflow: hidden;
   background: #050507;
+
+}
+
+#navbar a {
+  font-family: 'Montserrat', sans-serif;
+  float: right;
+  margin: 1em;
+  color: #f2f2f2;
+  text-decoration: none;
+}
+
+#content p {
+  font-family: 'Montserrat', sans-serif;
 }
 
 .sticky {
@@ -8,7 +22,7 @@
   width: 100%
 }
 
-.sticky + .content {
+.sticky + #content {
   padding-top: 102px;
 }
 
