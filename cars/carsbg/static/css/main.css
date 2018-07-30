@@ -7,10 +7,26 @@
 #navbar a {
   font-family: 'Montserrat', sans-serif;
   float: right;
+  padding: 1em 1em .8em 1em;
+  color: #f2f2f2;
+  text-decoration: none;
+  font-size: .8em;
+}
+
+#navbar p {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
   margin: 1em;
   color: #f2f2f2;
   text-decoration: none;
+  font-size: 1em;
 }
+
+#navbar a:hover {
+  color: #c4c4c4;
+}
+
+
 
 #content p {
   font-family: 'Montserrat', sans-serif;
