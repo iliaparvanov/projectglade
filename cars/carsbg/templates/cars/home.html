@@ -35,17 +35,17 @@
   </script>
 
 <!-- грозно ама баца -->
+  {% if user.is_authenticated %}
     Потребител:{{ user.username }}<br>
-    <a href="/service/"><button>Добави обект</button></a>
-
-
-
-
-   <form action=/searchService/ method="post" accept-charset="utf-8">
-  	<label for="search"></label><input type="text" name="search"  id="search" value="Напишете град, улица или име на обекта"/><br>
-
-  	<p><input type="submit" value="Търси" id="submit"></p>
-  </form>
+  {% endif %}
+  <a href="/service/"><button>Добави обект</button></a>
+  <div class="search-container">
+    <form action=/searchService/ method="post" accept-charset="utf-8">
+    	<!--<label for="search"></label>-->
+      <input type="text" name="search"  id="search" placeholder="Търсете по град, улица или име на обекта"/>
+    	<button type="submit" id="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
   <script>
     var map;
 function initMap() {

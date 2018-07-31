@@ -26,10 +26,20 @@
   color: #c4c4c4;
 }
 
-
-
 #content p {
   font-family: 'Montserrat', sans-serif;
+  margin-left: 20vw;
+  margin-right: 20vw;
+  width: 60vw;
+}
+
+#content .search-container input {
+  margin-left: 32vw;
+  width: 30vw;
+}
+
+#content .search-container button {
+  width: 5vw;
 }
 
 .sticky {
@@ -40,6 +50,12 @@
 
 .sticky + #content {
   padding-top: 102px;
+}
+
+#search-container {
+  margin-left: 20vw;
+  margin-right: 20vw;
+  width: 60vw;
 }
 
 #search input[type=text] {
@@ -70,10 +86,19 @@
 }
 
 @media screen and (max-width: 800px) {
-  .result, #search input[type=text] {
+  .result, #search input[type=text], #content p {
     margin: 0 0 0 0;
     width: 100%;
     margin-bottom: 1em;
+  }
+
+  #content .search-container input {
+    margin-left: 8vw;
+    width: 70vw;
+  }
+
+  #content .search-container button {
+    width: 10vw;
   }
 }
 
