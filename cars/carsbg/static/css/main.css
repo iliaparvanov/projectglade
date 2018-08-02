@@ -33,6 +33,11 @@
   width: 60vw;
 }
 
+#content h1 {
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+}	
+
 #content .search-container input {
   margin-left: 32vw;
   width: 30vw;
