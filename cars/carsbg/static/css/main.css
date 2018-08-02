@@ -1,7 +1,13 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
 #navbar {
   overflow: hidden;
   background: #050507;
-
+ /* opacity: 0.9;*/
+  margin-top: 0;
 }
 
 #navbar a {
@@ -34,8 +40,12 @@
 }
 
 #content h1 {
-	font-family: 'Montserrat', sans-serif;
-	text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 4em;
+  text-align: center;
+  padding-top: 15vh;
+  padding-bottom: 50vh;
+  margin: 0;
 }	
 
 #content .search-container input {
@@ -50,17 +60,30 @@
 .sticky {
   position: fixed;
   top: 0;
-  width: 100%
+  width: 100%;
+  opacity: 0.9;
 }
 
 .sticky + #content {
-  padding-top: 102px;
+
+}
+
+#bg-1 {
+  background-image: url('/static/images/bg-1.jpg');
+  height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  margin-top: 0;
 }
 
 #search-container {
   margin-left: 20vw;
   margin-right: 20vw;
   width: 60vw;
+  margin-top: 0;
+  padding-bottom: 10vh;
 }
 
 #search input[type=text] {
@@ -105,6 +128,14 @@
   #content .search-container button {
     width: 10vw;
   }
+  
+  #content h1 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 2em;
+	text-align: center;
+	padding-top: 15vh;
+	padding-bottom: 50vh;
+  }	
 }
 
 <style>
