@@ -5,6 +5,7 @@ body, html {
   margin: 0;
 }
 
+
 #navbar {
   overflow: hidden;
   background: #050507;
@@ -43,20 +44,50 @@ body, html {
 
 #content h1 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 4em;
+  font-size: 3.5em;
   text-align: center;
   padding-top: 15vh;
   padding-bottom: 50vh;
   margin: 0;
 }	
 
+#content .search-container {
+  width: 100%;
+  position: relative
+}
+
 #content .search-container input {
-  margin-left: 32vw;
-  width: 30vw;
+  float: left;
+  width: 100%;
+  border: 3px solid #474747;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px;
+  outline: none;
+  color: #9DBFAF;
 }
 
 #content .search-container button {
-  width: 5vw;
+  position: absolute;  
+  right: -50px;
+  width: 40px;
+  height: 36px;
+  border: 1px solid #474747;
+  background: #474747;
+  text-align: center;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#content .wrap {
+  width: 40%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 68vh;
 }
 
 .sticky {
@@ -93,7 +124,7 @@ body, html {
   margin-right: 20vw;
   margin-bottom: 1em;
   width: 60vw;
-  border: 1px solid #ccc;
+  border: none;
 }
 
 .result {
@@ -116,21 +147,12 @@ body, html {
 }
 
 @media screen and (max-width: 800px) {
-  .result, #search input[type=text], #content p {
+  .result, #content p {
     margin: 0 0 0 0;
     width: 100%;
     margin-bottom: 1em;
   }
 
-  #content .search-container input {
-    margin-left: 8vw;
-    width: 70vw;
-  }
-
-  #content .search-container button {
-    width: 10vw;
-  }
-  
   #content h1 {
 	font-family: 'Montserrat', sans-serif;
 	font-size: 2em;
@@ -138,6 +160,11 @@ body, html {
 	padding-top: 15vh;
 	padding-bottom: 50vh;
   }	
+ 
+  #content .wrap {
+	width:70%;
+	padding-right: 10vw;
+  }
 }
 
 <style>
