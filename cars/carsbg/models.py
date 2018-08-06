@@ -8,6 +8,9 @@ from django.contrib.auth.models import User
 """
 class City(models.Model):
 	name = models.CharField(max_length = 15)
+	
+	def __str__(self):
+		return self.name
 
 class Service(models.Model):
 	name = models.CharField(max_length = 150)
@@ -18,6 +21,9 @@ class Service(models.Model):
 	typeOfObject = models.CharField(max_length = 100, null = True)
 	rating = models.IntegerField()
 
+	def __str__(self):
+		return self.name
+
 class CarDealer(models.Model):
 	name = models.CharField(max_length = 150, null = True)
 	city = models.ForeignKey(City, on_delete = models.CASCADE)
@@ -27,11 +33,17 @@ class CarDealer(models.Model):
 	typeOfObject = models.CharField(max_length = 100, null = True)
 	rating = models.IntegerField()
 
+	def __str__(self):
+		return self.name
+
 class Comment(models.Model):
 	text = models.CharField(max_length = 300, null = True)
 	user = models.ForeignKey(User, on_delete = models.CASCADE, null = True)
 	cardealer = models.ForeignKey(CarDealer, on_delete = models.CASCADE, null = True)
 	service = models.ForeignKey(Service, on_delete = models.CASCADE, null = True)
 	ip = models.CharField(max_length=15, null = True)
+	date = models.DateField(null=True)
 
+	def __str__(self):
+		return self.text + str(self.date)
 

@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib import messages
 from ipware import get_client_ip
+from django.utils import timezone
 
 def home(request):
      return render(request, 'cars/home.html')
@@ -74,7 +75,7 @@ def addService(request):
 		else:
 			return HttpResponse("ERROR ^)^")
 
-		return render(request, 'cars/home.html')
+		return redirect('home')
 
 @csrf_exempt
 def searchService(request):
@@ -201,26 +202,41 @@ def addComment(request):
 
 		alert = ""
 
+		if typeOfObject == "Автокъща":
+			obj = CarDealer.objects.get(pk = pk)
 
-		if len(Comment.objects.filter(ip = ip)) > 2:
+			if len(Comment.objects.filter(cardealer = obj, ip = ip)) > 1:
+				limitExceeded = 1
+				alert = "Вече оценихте този обект"
+
+		if typeOfObject == "Сервиз":
+			obj = Service.objects.get(pk = pk)
+			
+			if len(Comment.objects.filter(service = obj, ip = ip)) > 1:
+				alert = "Вече оценихте този обект"
+				limitExceeded = 1
+		
+		count = 0
+		for i in Comment.objects.filter(ip = ip):
+				if i.date == timezone.now().date():
+					count += 1
+				print(timezone.now().date(), i.date)
+		
+		if count >= 10:
 			limitExceeded = 1
-		else:
-			limitExceeded = 0
+			alert = "Днес надхвърлихте броя на позволените коментари"
 
-		print(len(Comment.objects.filter(ip = ip)), limitExceeded)
-		if limitExceeded:
-			alert = "Не можете да пишете повече коментари"
+		
 
 
 		if typeOfObject == "Сервиз" and limitExceeded == 0:
-			obj = Service.objects.get(pk = pk)
-			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], service = obj, ip = ip)
+			
+			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], service = obj, ip = ip, date = timezone.now().date())
 			commentObj.save()
 			
 
 		elif typeOfObject == "Автокъща" and limitExceeded == 0:
-			obj = CarDealer.objects.get(pk = pk)
-			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], cardealer = obj, ip = ip)
+			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], cardealer = obj, ip = ip, date = timezone.now().date())
 			commentObj.save()
 		
 		comments = []
