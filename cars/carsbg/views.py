@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.views.decorators.csrf import csrf_exempt
 import json
 from django.contrib import messages
+from ipware import get_client_ip
 
 def home(request):
      return render(request, 'cars/home.html')
@@ -194,20 +195,32 @@ def addComment(request):
 		user = request.POST.get('user', '')
 		typeOfObject = request.POST.get('typeOfObject', '')
 		pk = request.POST.get('pk', '')
-		rating = request.POST.get('rating', '')
-		rating = int(rating)
+		rating = int(request.POST.get('rating', ''))
+		ip, is_routable = get_client_ip(request)
+		limitExceeded = 0
+
+		alert = ""
 
 
+		if len(Comment.objects.filter(ip = ip)) > 2:
+			limitExceeded = 1
+		else:
+			limitExceeded = 0
 
-		if typeOfObject == "Сервиз":
+		print(len(Comment.objects.filter(ip = ip)), limitExceeded)
+		if limitExceeded:
+			alert = "Не можете да пишете повече коментари"
+
+
+		if typeOfObject == "Сервиз" and limitExceeded == 0:
 			obj = Service.objects.get(pk = pk)
-			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], service = obj)
+			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], service = obj, ip = ip)
 			commentObj.save()
 			
 
-		elif typeOfObject == "Автокъща":
+		elif typeOfObject == "Автокъща" and limitExceeded == 0:
 			obj = CarDealer.objects.get(pk = pk)
-			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], cardealer = obj)
+			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], cardealer = obj, ip = ip)
 			commentObj.save()
 		
 		comments = []
@@ -216,10 +229,10 @@ def addComment(request):
 		lenOfComments = list()
 		
 		objectCreate(request, comments, users, result, lenOfComments)
-		print(result[0].rating)
-		result[0].rating = result[0].rating + rating
+		if limitExceeded == 0:
+			result[0].rating = result[0].rating + rating
+			result[0].save()
+		print(ip)
 		rating = result[0].rating / len(comments)
-		result[0].save()
-		print(len(comments), result[0].rating, rating)
-		return render(request, 'cars/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users, 'rating' : rating})
+		return render(request, 'cars/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users, 'rating' : rating, 'alert' : alert})
 

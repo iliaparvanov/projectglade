@@ -25,7 +25,7 @@ SECRET_KEY = 'ow56+gl5qmf$fya*s@d83r7+zgvp(s9v7c(195-_#k!)7*v7(8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyDOZarAyNdL2A9EpaGFsU8hKJ6nieR1VzE'
 

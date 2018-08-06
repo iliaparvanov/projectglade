@@ -11,6 +11,7 @@
 </style>
 
 	<div class="object">
+		
 	    <p>Име: {{ obj.name }}</p>
 	    <p id="address" value="{{ obj.address }}">Адрес: {{ obj.address }}</p>
   		<div id="map" style="height: 400px; width: 400px"></div>
@@ -33,7 +34,7 @@
 		<span class="fa fa-star" id="star5" onclick="stars(5, this)"></span>
 
 		<form action=/addComment/ method="post" accept-charset="utf-8">
-  			<label for="comment">Напиши коментар:<br></label><textarea rows="4" cols="50" type="text" name="comment"  id="comment"/></textarea><br>
+  			<label for="comment">Напиши коментар:<br></label><textarea rows="4" cols="50" type="text" name="comment"  id="comment"/></textarea>{{ alert }}<br>
   			
 
   			<input type="hidden" name="rating" value="3" id="rating">

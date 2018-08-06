@@ -32,6 +32,6 @@ class Comment(models.Model):
 	user = models.ForeignKey(User, on_delete = models.CASCADE, null = True)
 	cardealer = models.ForeignKey(CarDealer, on_delete = models.CASCADE, null = True)
 	service = models.ForeignKey(Service, on_delete = models.CASCADE, null = True)
+	ip = models.CharField(max_length=15, null = True)
 
-class Car(models.Model):
-	dealer = models.ForeignKey(CarDealer, on_delete = models.CASCADE)
+
