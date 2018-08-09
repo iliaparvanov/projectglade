@@ -12,29 +12,31 @@
     async defer></script>
 	</head>
 	<body>
+		<div id="main">
+			<div id="navbar">
+				{% if user.is_authenticated %}
+					<a href="/password-change/">СМЕНИ ПАРОЛА</a>
+					<a href="logout">ИЗХОД</a>
+					<a href="/">НАЧАЛО</a>
+				{% else %}
+					<a href="login">ВХОД</a>
+					<a href="signup">РЕГИСТРАЦИЯ</a>
+					<a href="/">НАЧАЛО</a>
+				<!--	<p>ЛОГО</p>-->
+				{% endif %}
 
-		<div id="navbar">
-			{% if user.is_authenticated %}
-				<a href="/password-change/">СМЕНИ ПАРОЛА</a>
-				<a href="logout">ИЗХОД</a>
-				<a href="/">НАЧАЛО</a>
-			{% else %}
-				<a href="login">ВХОД</a>
-				<a href="signup">РЕГИСТРАЦИЯ</a>
-				<a href="/">НАЧАЛО</a>
-			<!--	<p>ЛОГО</p>-->
-			{% endif %}
+			</div>
 
+			<div id="content">
+				{% block content %}
+					<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+					<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+		  		<!-- изобщо не ги зарежда тея.... -->
+		     	{% endblock %}
+			</div>
 		</div>
 
-		<div id="content">
-			{% block content %}
-				<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-				<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-	  		<!-- изобщо не ги зарежда тея.... -->
-	     	{% endblock %}
-		</div>
 		<div id="footer">
 				<div id="social-icons">
 					<a href="https://www.facebook.com/"><img src="/static/images/facebook.png" alt="Facebook"></a>
