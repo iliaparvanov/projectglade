@@ -127,6 +127,12 @@ body, html {
   padding: 12px;
 }
 
+#copyrights {
+  color: #bfbfbf;
+  text-align: center;
+  margin-top: 50px;
+}
+
 #search-container {
   margin-left: 20vw;
   margin-right: 20vw;
