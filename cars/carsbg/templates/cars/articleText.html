@@ -1,0 +1,20 @@
+{% extends "cars/base.html" %}
+
+{% block content %}
+{% load tests_extras %}
+
+
+<style>
+.checked {
+    color: orange;
+}
+</style>
+
+	<div class="object">
+		
+	    <h2>{{ article.name }} - {{ article.author }}</h2>
+	    <p id="text">{{ article.text }}</p>
+    </div>
+
+
+{% endblock %}

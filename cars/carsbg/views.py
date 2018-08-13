@@ -49,6 +49,10 @@ def signup(request):
 def service(request):
     return render(request, 'cars/serviceCreate.html')
 
+def articlePage(request):
+    return render(request, 'cars/addArticle.html')
+
+
 @csrf_exempt
 def addService(request):
 	if request.method == 'POST':
@@ -252,3 +256,32 @@ def addComment(request):
 		rating = result[0].rating / len(comments)
 		return render(request, 'cars/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users, 'rating' : rating, 'alert' : alert})
 
+def addArticle(request):
+	if request.POST:
+		nameOfArticle = request.POST.get('name', '')
+		text = request.POST.get('text', '')
+		user = request.POST.get('user', '')
+		print(nameOfArticle + "01230143")
+		author =  User.objects.filter(username = user)[0]
+		date = timezone.now().date()
+
+		article = Article(name = nameOfArticle, text = text, author = author, date = date)
+		article.save()
+		alert = "Статията е запазена"
+
+		return render(request, 'cars/addArticle.html', {"alert" : alert})
+
+def displayArticles(request):
+	articles = Article.objects.all()
+	
+	return render(request, 'cars/displayArticles.html', {"articles" : articles})
+
+@csrf_exempt
+def articleText(request):
+	if request.POST:
+		name = request.POST.get('name', '')
+		author = User.objects.get(username = request.POST.get('author'))
+
+		article = Article.objects.get(name = name, author = author)
+
+		return render(request, 'cars/articleText.html', {"article" : article})

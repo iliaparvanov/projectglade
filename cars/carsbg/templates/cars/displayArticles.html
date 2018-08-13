@@ -1,0 +1,21 @@
+{% extends "cars/base.html" %}
+
+{% block content %}
+     {% for i in articles %}
+
+		<div class="result">
+		    <p>{{ i.name }}</p>
+		    <p>{{ i.author }}</p>
+		    <p>{{ i.date }}</p>
+
+		    <form action=/articleText/ method="post">
+        		<input type="hidden" name="name" value="{{ i.name }}" id="name">
+        		<input type="hidden" name="author" value="{{ i.author }}" id="author">
+        		<input type="hidden" name="date" value="{{ i.date }}" id="date">
+        		<input name="button_more"  type="submit" value="Виж повече" id="button_more">
+    		</form>
+	    </div>
+     {% endfor %}
+
+
+{% endblock %}
