@@ -1,33 +1,37 @@
 {% extends "cars/base.html" %}
 
 {% block content %}
-     {% for i in results %}
-     	{% for j in i %}
-
-		<div class="result">
+    <div class="wrap" style="top: 50%;">
+      <div class="search-container">
+      <form action=/searchService/ method="post" accept-charset="utf-8">
+        <!--<label for="search"></label>-->
+        <input type="text" name="search"  id="search" placeholder="Търсете по град, улица или име на обекта"/>
+        <button type="submit" id="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    {% for i in results %}
+    {% for j in i %}
+		<div class="results-container">
 		    <p>{{ j.name }}</p>
 		    <p>{{ j.address }}</p>
 		    <p>{{ j.tel }}</p>
 		    <p>{{ j.typeOfObject }}</p>
 		    <p>{{ j.city.name }}</p>
-
 		    {% if j.image.url %}
 		    	<img src="{{ j.image.url }}" width="240"></p>
 		    {% endif %}
+
 		    <form action=/object/ method="post">
         		<input type="hidden" name="name" value="{{ j.name }}" id="tests">
         		<input type="hidden" name="address" value="{{ j.address }}" id="tests">
         		<input type="hidden" name="tel" value="{{ j.tel }}" id="tests">
         		<input type="hidden" name="typeOfObject" value="{{ j.typeOfObject }}" id="tests">
         		<input type="hidden" name="city" value="{{ j.city.name }}" id="tests">
-
         		<input name="button_more"  type="submit" value="Виж повече" id="button_more">
     		</form>
-
 
 	    </div>
      	{% endfor %}
      {% endfor %}
-
 
 {% endblock %}

@@ -1,4 +1,4 @@
-// When the user scrolls the page, execute stickToTop
+/*// When the user scrolls the page, execute stickToTop
 window.onscroll = function() {stickToTop()};
 
 // Get the header
@@ -14,7 +14,7 @@ function stickToTop() {
   } else {
     navbar.classList.remove("sticky");
   }
-}
+}*/
 
 function stars(num) {
   for(var i = 1; i <= 5; i++)
