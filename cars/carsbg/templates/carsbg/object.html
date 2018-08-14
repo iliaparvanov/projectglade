@@ -1,4 +1,4 @@
-{% extends "cars/base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 {% load tests_extras %}
@@ -11,7 +11,7 @@
 </style>
 
 	<div class="object">
-		
+
 	    <p>Име: {{ obj.name }}</p>
 	    <p id="address" value="{{ obj.address }}">Адрес: {{ obj.address }}</p>
   		<div id="map" style="height: 400px; width: 400px"></div>
@@ -22,7 +22,7 @@
 	    	<img src="{{ obj.image.url }}" width="240"></p>
 	    {% endif %}
 	    <p>Оценка: {{ rating }}</p>
-	    
+
 		<!-- Тука ще има какво могат да правят в тоя обект -->
 		{% if user.is_authenticated %}
 			<h2>Star Rating</h2>
@@ -32,10 +32,10 @@
 			<span class="fa fa-star checked" id="star3" onclick="stars(3, this)"></span>
 			<span class="fa fa-star" id="star4" onclick="stars(4, this)"></span>
 			<span class="fa fa-star" id="star5" onclick="stars(5, this)"></span>
-			
+
 			<form action=/addComment/ method="post" accept-charset="utf-8">
 	  			<label for="comment">Напиши коментар:<br></label><textarea rows="4" cols="50" type="text" name="comment"  id="comment" required/></textarea>{{ alert }}<br>
-	  			
+
 
 	  			<input type="hidden" name="rating" value="3" id="rating">
 

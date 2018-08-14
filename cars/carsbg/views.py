@@ -13,7 +13,7 @@ from ipware import get_client_ip
 from django.utils import timezone
 
 def home(request):
-     return render(request, 'cars/home.html')
+     return render(request, 'carsbg/home.html')
 
 @login_required
 def password_change(request):
@@ -49,14 +49,10 @@ def signup(request):
 def service(request):
     return render(request, 'cars/serviceCreate.html')
 
-def articlePage(request):
-    return render(request, 'cars/addArticle.html')
-
-
 @csrf_exempt
 def addService(request):
 	if request.method == 'POST':
-		
+
 		name = request.POST.get('name', '')
 		cityName = request.POST.get('city', '')
 		address = request.POST.get('address', '')
@@ -69,9 +65,9 @@ def addService(request):
 		else:
 			city = City(name=cityName)
 			city.save()
-			
+
 		if typeOfSearch == "service":
-			service = Service(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0)	
+			service = Service(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0)
 			service.save()
 		elif typeOfSearch == "cardealer":
 			carDealer = CarDealer(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0)
@@ -105,10 +101,10 @@ def searchService(request):
 			if results not in obj:
 				obj.append(results)
 
-		return render(request, 'cars/results.html', {'results' : obj})
+		return render(request, 'carsbg/results.html', {'results' : obj})
 
 	if request.is_ajax():
-        
+
 		term = request.GET.get('term', '')
 		suggestions = City.objects.filter(name__icontains = term)
 		results = []
@@ -149,12 +145,12 @@ def searchService(request):
 	else:
 		data = 'fail'
 	mimetype = 'application/json'
-	
+
 	return HttpResponse(data, mimetype)
 
 
 def objectCreate(request, comments, users, result, lenOfComments):
-	
+
 		name = request.POST.get('name', '')
 		tel = request.POST.get('tel', '')
 		address = request.POST.get('address', '')
@@ -185,12 +181,12 @@ def viewObject(request):
 		users = []
 		result = list()
 		lenOfComments = list()
-		
+
 		objectCreate(request, comments, users, result, lenOfComments)
 
 		print(comments, users, result, lenOfComments)
 
-		return render(request, 'cars/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users})
+		return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users})
 
 
 @csrf_exempt
@@ -215,73 +211,43 @@ def addComment(request):
 
 		if typeOfObject == "Сервиз":
 			obj = Service.objects.get(pk = pk)
-			
+
 			if len(Comment.objects.filter(service = obj, ip = ip)) > 1:
 				alert = "Вече оценихте този обект"
 				limitExceeded = 1
-		
+
 		count = 0
 		for i in Comment.objects.filter(ip = ip):
 				if i.date == timezone.now().date():
 					count += 1
 				print(timezone.now().date(), i.date)
-		
+
 		if count >= 10:
 			limitExceeded = 1
 			alert = "Днес надхвърлихте броя на позволените коментари"
 
-		
+
 
 
 		if typeOfObject == "Сервиз" and limitExceeded == 0:
-			
+
 			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], service = obj, ip = ip, date = timezone.now().date())
 			commentObj.save()
-			
+
 
 		elif typeOfObject == "Автокъща" and limitExceeded == 0:
 			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], cardealer = obj, ip = ip, date = timezone.now().date())
 			commentObj.save()
-		
+
 		comments = []
 		users = []
 		result = list()
 		lenOfComments = list()
-		
+
 		objectCreate(request, comments, users, result, lenOfComments)
 		if limitExceeded == 0:
 			result[0].rating = result[0].rating + rating
 			result[0].save()
 		print(ip)
 		rating = result[0].rating / len(comments)
-		return render(request, 'cars/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users, 'rating' : rating, 'alert' : alert})
-
-def addArticle(request):
-	if request.POST:
-		nameOfArticle = request.POST.get('name', '')
-		text = request.POST.get('text', '')
-		user = request.POST.get('user', '')
-		print(nameOfArticle + "01230143")
-		author =  User.objects.filter(username = user)[0]
-		date = timezone.now().date()
-
-		article = Article(name = nameOfArticle, text = text, author = author, date = date)
-		article.save()
-		alert = "Статията е запазена"
-
-		return render(request, 'cars/addArticle.html', {"alert" : alert})
-
-def displayArticles(request):
-	articles = Article.objects.all()
-	
-	return render(request, 'cars/displayArticles.html', {"articles" : articles})
-
-@csrf_exempt
-def articleText(request):
-	if request.POST:
-		name = request.POST.get('name', '')
-		author = User.objects.get(username = request.POST.get('author'))
-
-		article = Article.objects.get(name = name, author = author)
-
-		return render(request, 'cars/articleText.html', {"article" : article})
+		return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users, 'rating' : rating, 'alert' : alert})

@@ -1,11 +1,11 @@
-{% extends "cars/base.html" %}
+{% extends "base.html" %}
 
 {% block content %}
     <nav id="nav">
 
     </nav>
     <ul>
-        <form action=/addArticle/ method="post" enctype="multipart/form-data" accept-charset="utf-8"> <!-- action is the url the form data is returned to-->
+        <form action="/articles/addArticle/" method="post" enctype="multipart/form-data" accept-charset="utf-8"> <!-- action is the url the form data is returned to-->
             {% csrf_token %}
             <br>
             {{ alert }}<br>
@@ -15,7 +15,5 @@
             <p><input type="submit" value="Create" id="Create"></p>
         </form>
     </ul>
-
-
 
 {% endblock %}
