@@ -54,6 +54,12 @@ a:hover {
   opacity: 0.9;
 }
 
+.standart-container {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #slogan {
   width: 80%;
   margin-top: 0;
@@ -103,7 +109,7 @@ a:hover {
   font-size: 20px;
 }
 
-#bg-1 {
+#whole-screen-bg-1 {
   background-image: url('/static/images/bg-1.jpg');
   height: 100vh;
   background-position: center center;
@@ -111,11 +117,6 @@ a:hover {
   background-size: cover;
   background-attachment: fixed;
   margin-top: 0;
-}
-
-.text-container {
-  width: 60%;
-  margin: auto;
 }
 
 .home-p {
@@ -144,6 +145,18 @@ a:hover {
   padding-top: 50px;
 }
 
+.form-standart .form-group {
+  padding-bottom: 1em;
+}
+
+.form-standart label {
+  display: block;
+}
+
+.form-standart input[type="text"], .form-general textarea {
+  width: 100%;
+}
+
 /*
 #search input[type=text] {
   margin-left: 20vw;
@@ -169,7 +182,7 @@ a:hover {
 */
 
 @media screen and (max-width: 800px) {
-  .text-container {
+  .standart-container {
     margin: auto;
     width: 90%;
   }

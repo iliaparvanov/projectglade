@@ -1,26 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <nav id="nav">
-
-    </nav>
+  <div class="standart-container">
     <ul>
-        <a href="/"><button>Начална страница</button></a><br>
-        <form action=/addService/ method="post" enctype="multipart/form-data" accept-charset="utf-8"> <!-- action is the url the form data is returned to-->
+        <form action=/addService/ method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form-standart"> <!-- action is the url the form data is returned to-->
             {% csrf_token %}
-            <label for="name"> Име на обекта:</label><input type="text" name="name"  id="name" autocomplete="off" required/><br>
-            <label for="city"> Град:</label><input type="text" name="city"  id="city" autocomplete="off" required/><br>
-            <label for="address"> Адрес:</label><input type="text" name="address"  id="name" autocomplete="off" required/><br>
-            <label for="tel"> Телефон:</label><input type="text" name="tel"  id="tel" autocomplete="off" required/><br>
-            <label for="img">Снимка</label><input type="file" name="img", id="img"><br>
-            <select name='type' id='typeOfSearch' value=typeOfSearch'>
+            <div class="form-group">
+              <label for="name"> Име на обекта:</label>
+              <input type="text" name="name"  id="name" autocomplete="off" required/><br>
+            </div>
+            <div class="form-group">
+              <label for="city"> Град:</label>
+              <input type="text" name="city"  id="city" autocomplete="off" required/><br>
+            </div>
+            <div class="form-group">
+              <label for="address"> Адрес:</label>
+              <input type="text" name="address"  id="name" autocomplete="off" required/><br>
+            </div>
+            <div class="form-group">
+              <label for="tel"> Телефон:</label>
+              <input type="text" name="tel"  id="tel" autocomplete="off" required/><br>
+            </div>
+            <div class="form-group">
+              <label for="img">Снимка</label>
+              <input type="file" name="img", id="img"><br>
+            </div>
+            <select name='type' id='typeOfSearch' value='typeOfSearch'>
                 <option type='text' name="service"  id="service" value='service' />Сервиз</option>
                 <option type='text' name="cardealer"  id="cardealer" value='cardealer' />Автокъща</option>
             </select><br>
             <p><input type="submit" href="/" value="Create" id="Create"></p>
         </form>
     </ul>
-
+  </div>
 
 
 {% endblock %}

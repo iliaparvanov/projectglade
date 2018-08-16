@@ -1,19 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <nav id="nav">
-
-    </nav>
+  <div class="standart-container">
     <ul>
-        <form action="/articles/addArticle/" method="post" enctype="multipart/form-data" accept-charset="utf-8"> <!-- action is the url the form data is returned to-->
+        <form action="/articles/addArticle/" method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form-standart"> <!-- action is the url the form data is returned to-->
             {% csrf_token %}
             <br>
             {{ alert }}<br>
-            <label for="name"> Име на статията:</label><input type="text" name="name"  id="name" autocomplete="off" required/><br>
-            <label for="text"><br></label><textarea rows="50" cols="100" type="text" name="text"  id="text" required/></textarea>
+            <div class="form-group">
+              <label for="name"> Име на статията:</label>
+              <input type="text" name="name"  id="name" autocomplete="off" required/><br>
+            </div>
+            <div class="form-group">
+              <label for="text"><br></label>
+              <textarea rows="50" cols="100" type="text" name="text"  id="text" required/></textarea>
+            </div>
             <input type="hidden" name="user"  id="user" value="{{ user.username }}"/><br>
             <p><input type="submit" value="Create" id="Create"></p>
         </form>
     </ul>
-
+  </div>
 {% endblock %}
