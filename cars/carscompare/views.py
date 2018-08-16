@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def carsCompare(request):
+	return render(request, "carscompare/home.html")

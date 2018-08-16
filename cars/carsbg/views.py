@@ -23,7 +23,7 @@ def password_change(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return render(request, 'cars/home.html')
+            return render(request, 'carsbg/home.html')
         else:
             messages.error(request, 'Please correct the error below.')
     else:
@@ -47,7 +47,7 @@ def signup(request):
 	return render(request, 'registration/signup.html', {'form': form})
 
 def service(request):
-    return render(request, 'cars/serviceCreate.html')
+    return render(request, 'carsbg/serviceCreate.html')
 
 @csrf_exempt
 def addService(request):

@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('carsbg.urls')),
     url(r'^articles/', include('articles.urls')),
+    url(r'^carscompare/', include('carscompare.urls')),
 ]
