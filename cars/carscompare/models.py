@@ -9,16 +9,16 @@ class ModelOfCar(models.Model):
 
 class Car(models.Model):
 
-	GEAR_CHOICES = [('1', 'AUTOMATIC'), ('2', 'MANUAL'), ('3', 'SEMIAUTO')]
-	UPHOLST_CHOICES = [('1', 'CLOTH'), ('2', 'LEATHER')]
-	ENGINE_CHOICES = [('1', 'DIESEL'), ('2', 'GASOLINE'), ('3', 'ELECTRIC')]
+	# GEAR_CHOICES = [('1', 'AUTOMATIC'), ('2', 'MANUAL'), ('3', 'SEMIAUTO')]
+	# UPHOLST_CHOICES = [('1', 'CLOTH'), ('2', 'LEATHER')]
+	# ENGINE_CHOICES = [('1', 'DIESEL'), ('2', 'GASOLINE'), ('3', 'ELECTRIC')]
 
 
 	brand = models.ForeignKey(Brand, on_delete = models.CASCADE, null = True)
 	model = models.ForeignKey(ModelOfCar, on_delete = models.CASCADE, null = True)
-	gear = models.CharField(max_length = 10, choices = GEAR_CHOICES, default = '1')
-	upholst = models.CharField(max_length = 10, choices = UPHOLST_CHOICES, default = '1')
+	gear = models.CharField(max_length = 10)
+	upholst = models.CharField(max_length = 10)
 	year = models.CharField(max_length = 5)
-	typeOfEngine = models.CharField(max_length = 10, choices = ENGINE_CHOICES, default = '1')
+	typeOfEngine = models.CharField(max_length = 10)
 	price = models.CharField(max_length = 10)
 
