@@ -1,19 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
   <div class="standart-container">
     {% for i in results %}
     {% for j in i %}
-		<div class="results-container">
-		    <p>{{ j.name }}</p>
-		    <p>{{ j.address }}</p>
-		    <p>{{ j.tel }}</p>
-		    <p>{{ j.typeOfObject }}</p>
-		    <p>{{ j.city.name }}</p>
-		    {% if j.image.url %}
-		    	<img src="{{ j.image.url }}" width="240"></p>
-		    {% endif %}
-
+		  <div class="result-container">
+        {% if j.image.url %}
+          <div class='img-container'>
+               <img src="{{ j.image.url }}" width="240">
+          </div>
+        {% endif %}
+        <div class ='right-container'>
+          <div class="top-container">
+    		    <p class="name">{{ j.name }}</p>
+    		    <p>{{ j.typeOfObject }}</p>
+    		    <p>{{ j.city.name }}</p>
+          </div>
+          <div class='bottom-container'>
+            <p>{{ j.tel }}</p>
+            <p class='address'>{{ j.address }}</p>
+          </div>
+        </div>
+	     </div>
 		    <form action=/object/ method="post">
         		<input type="hidden" name="name" value="{{ j.name }}" id="tests">
         		<input type="hidden" name="address" value="{{ j.address }}" id="tests">
@@ -23,7 +33,7 @@
         		<input name="button_more"  type="submit" value="Виж повече" id="button_more">
     		</form>
 
-	    </div>
+
      	{% endfor %}
      {% endfor %}
   </div>

@@ -1,0 +1,52 @@
+.right-container {
+  display: inline-block;
+  width: 80%;
+  float: right;
+  height: 140px;
+  margin: 10px 10px 10px 0px;
+}
+
+.top-container {
+  display: block;
+
+}
+
+.bottom-container {
+  display: block;
+
+}
+
+.img-container {
+  float: left;
+  display: inline-block;
+  height: 140px;
+  margin: 10px;
+  width: 20%;
+}
+
+.img-container img {
+  max-height: 140px;
+}
+
+p {
+  display: inline;
+}
+
+.result-container {
+  border: 1px solid;
+  height: 160px;
+  margin-top: 15px;
+}
+
+.name {
+  padding-top: 10px;
+}
+
+.address {
+  float: right;
+}
+
+
+@media screen and (max-width: 800px) {
+
+}
