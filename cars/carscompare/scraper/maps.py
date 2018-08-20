@@ -10,7 +10,7 @@ yearid = [startingYear]
 for i in range(33):
 	startingYear += 1
 	yearid.append(startingYear)
-print(yearid)
+
 
 gearId = {
 	"Manual" : 1,
@@ -19,15 +19,14 @@ gearId = {
 }
 
 brandId = {
-	"Acura" : 1,
-	"Aixam" : 2,
-	"Alfa Romeo" : 4,
-	"Alpina" : 5,
-	"Аро" : 3,
-	"Asia Motors" : 6,
-	"Aston Martin" : 7,
-	"Audi" : 8,
-	"Bentley" : 9,
+	# "Acura" : 1,
+	# "Aixam" : 2,
+	# "AlfaRomeo" : 4,
+	# "Alpina" : 5,
+	# "AsiaMotors" : 6,
+	# "AstonMartin" : 7,
+	# "Audi" : 8,
+	# "Bentley" : 9,
 	"BMW" : 10,
 	"Bova" : 132,
 	"Buick" : 13,
@@ -1763,4 +1762,3 @@ Zaz = {
 
 
 globalsFromMaps = globals()
-print(globalsFromMaps)

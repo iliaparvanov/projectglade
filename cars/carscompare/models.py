@@ -29,5 +29,5 @@ class Car(models.Model):
 	price = models.CharField(max_length = 10)
 
 	def __str__(self):
-		return self.brand.name
+		return self.brand.name + " - " + self.model.name + " - " + self.year
 
