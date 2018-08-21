@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from django.utils import timezone
@@ -8,7 +8,6 @@ def articlePage(request):
 
 def addArticle(request):
 	if request.POST:
-		print("YES")
 		nameOfArticle = request.POST.get('name', '')
 		text = request.POST.get('text', '')
 		user = request.POST.get('user', '')
@@ -19,12 +18,12 @@ def addArticle(request):
 		article = Article(name = nameOfArticle, text = text, author = author, date = date)
 		article.save()
 		alert = "Статията е запазена"
-
-		return render(request, 'carsbg/home.html', {"alert" : alert})
+		
+		return redirect('displayArticles')
+	
 
 def displayArticles(request):
 	articles = Article.objects.all()
-	print(articles)
 	return render(request, 'articles/displayArticles.html', {"articles" : articles})
 
 @csrf_exempt
