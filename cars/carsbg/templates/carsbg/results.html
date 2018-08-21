@@ -12,16 +12,19 @@
                <img src="{{ j.image.url }}" width="240">
           </div>
         {% endif %}
-        <div class ='right-container'>
-          <div class="top-container">
-    		    <p class="name">{{ j.name }}</p>
-    		    <p>{{ j.typeOfObject }}</p>
-    		    <p>{{ j.city.name }}</p>
-          </div>
-          <div class='bottom-container'>
-            <p>{{ j.tel }}</p>
-            <p class='address'>{{ j.address }}</p>
-          </div>
+        <div class ='rating-container'>
+          *rating here*
+        </div>
+        <div class="name-container">
+  		    <p class="name">{{ j.name }}</p>
+  		    <!--<p>{{ j.typeOfObject }}</p>-->
+        </div>
+        <div class="tel-container">
+          <p>{{ j.tel }}</p>
+        </div>
+        <div class='address-container'>
+          <p>{{ j.city.name }}</p>
+          <p>{{ j.address }}</p>
         </div>
 	     </div>
 		    <form action=/object/ method="post">
@@ -32,7 +35,6 @@
         		<input type="hidden" name="city" value="{{ j.city.name }}" id="tests">
         		<input name="button_more"  type="submit" value="Виж повече" id="button_more">
     		</form>
-
 
      	{% endfor %}
      {% endfor %}
