@@ -212,7 +212,7 @@ def addComment(request):
 		if typeOfObject == "Сервиз":
 			obj = Service.objects.get(pk = pk)
 
-			if len(Comment.objects.filter(service = obj, ip = ip)) > 1:
+			if len(Comment.objects.filter(service = obj, ip = ip)) >= 1:
 				alert = "Вече оценихте този обект"
 				limitExceeded = 1
 
