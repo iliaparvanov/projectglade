@@ -1,7 +1,10 @@
 fuelId = {
-	"Gasoline" : 2,
+	"Gasoline" : 1,
 	"Diesel" : 2,
-	"Electric" : 7
+	"Electric" : 7,
+	"Gasoline/gas" : 3,
+	"Metan/Gasoline" : 4,
+	"Hybrid" : 6,
 }
 
 
@@ -19,14 +22,14 @@ gearId = {
 }
 
 brandId = {
-	# "Acura" : 1,
-	# "Aixam" : 2,
-	# "AlfaRomeo" : 4,
-	# "Alpina" : 5,
-	# "AsiaMotors" : 6,
-	# "AstonMartin" : 7,
-	# "Audi" : 8,
-	# "Bentley" : 9,
+	"Acura" : 1,
+	"Aixam" : 2,
+	"AlfaRomeo" : 4,
+	"Alpina" : 5,
+	"AsiaMotors" : 6,
+	"AstonMartin" : 7,
+	"Audi" : 8,
+	"Bentley" : 9,
 	"BMW" : 10,
 	"Bova" : 132,
 	"Buick" : 13,

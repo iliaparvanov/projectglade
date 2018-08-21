@@ -12,7 +12,7 @@ def is_int(input):
 
 def urlCreate(brandid, modelid, gearid, year, fuelid):
 	
-	url = "https://www.cars.bg/?go=cars&search=1&advanced=&fromhomeu=1&currencyId=1&yearTo=&autotype=1&stateId=1&section=home&categoryId=0&doorId=0&brandId=" + brandid + "&modelId=" + modelid + "&fuelId=" + fuelid + "&gearId=" + gearid + "&yearFrom=" + year + "&yearTo=" + year + "&priceFrom=&priceTo=&man_priceFrom=&man_priceTo=&regionId=0&offersFor4=1&offersFor1=1&filterOrderBy=1"
+	url = "https://www.cars.bg/?go=cars&search=1&advanced=&fromhomeu=1&currencyId=1&autotype=1&stateId=1&section=home&categoryId=0&doorId=0&brandId=" + brandid + "&modelId=" + modelid + "&fuelId=" + fuelid + "&gearId=" + gearid + "&yearFrom=" + year + "&yearTo=" + year + "&priceFrom=&priceTo=&man_priceFrom=&man_priceTo=&regionId=0&offersFor4=1&offersFor1=1&filterOrderBy=1"
 	return url
 
 
@@ -36,7 +36,7 @@ def urlsCreate():
 	return urls
 
 def scraper(url, info):
-
+	print(info)
 	__author__ = "Engine Bai"
 	driver = webdriver.Chrome(executable_path=r"C:/Users/gdemi/Desktop/projectglade/cars/carscompare/scraper/chromedriver.exe")
 	driver.get(url)
