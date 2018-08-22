@@ -8,9 +8,9 @@ fuelId = {
 }
 
 
-startingYear = 1985
+startingYear = 1971
 yearid = [startingYear]
-for i in range(33):
+for i in range(47):
 	startingYear += 1
 	yearid.append(startingYear)
 
@@ -18,12 +18,11 @@ for i in range(33):
 gearId = {
 	"Manual" : 1,
 	"Automatic" : 2,
-	"SemiAuto" : 3,
 }
 
 brandId = {
-	"Acura" : 1,
-	"Aixam" : 2,
+	# "Acura" : 1,
+	# "Aixam" : 2,
 	"AlfaRomeo" : 4,
 	"Alpina" : 5,
 	"AsiaMotors" : 6,
