@@ -3,7 +3,7 @@
 {% block content %}
   <div class="standart-container">
     <ul>
-        <form action="/articles/addArticle/" method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form-standart"> <!-- action is the url the form data is returned to-->
+        <form action="/articles/addArticle/" method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form-standart"> 
             {% csrf_token %}
             <br>
             {{ alert }}<br>

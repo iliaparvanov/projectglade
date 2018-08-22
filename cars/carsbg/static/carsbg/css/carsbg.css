@@ -1,50 +1,71 @@
-.right-container {
-  display: inline-block;
-  width: 80%;
-  float: right;
-  height: 140px;
-  margin: 10px 10px 10px 0px;
+body {
+  background-image: url('/static/carsbg/images/engine-bg.png');
+  height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-.top-container {
-  display: block;
-
-}
-
-.bottom-container {
-  display: block;
-
+.result-container {
+  background-color: white;
+  display: grid;
+  grid-template-columns: 1fr 3fr 2fr;
+  grid-template-rows: 60px 60px 60px;
+  /*grid-gap: 10px;*/
+  border: 1px solid #050507;
+  margin-top: 15px;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
 }
 
 .img-container {
-  float: left;
-  display: inline-block;
-  height: 140px;
-  margin: 10px;
-  width: 20%;
+  grid-column: 1/2;
+  grid-row: 1/4;
 }
 
 .img-container img {
-  max-height: 140px;
+
 }
+
+.name-container {
+  font-size: 20px;
+  font-weight: 600;
+  grid-column: 2/3;
+  grid-row: 1/2;
+  padding-top: 15px;
+}
+
+.rating-container {
+  grid-column: 3/4;
+  grid-row: 1/2;
+  padding-top: 15px;
+  text-align: center;
+  border-left: 1px solid;
+}
+
+.tel-container {
+  grid-column: 2/3;
+  grid-row: 3/4;
+  align-self: end;
+  padding-bottom: 15px;
+}
+
+.address-container {
+  font-size: 24px;
+  grid-column: 3/4;
+  grid-row: 2/4;
+  padding-top: 48px;
+  text-align: center;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+
 
 p {
   display: inline;
 }
 
-.result-container {
-  border: 1px solid;
-  height: 160px;
-  margin-top: 15px;
-}
-
-.name {
-  padding-top: 10px;
-}
-
-.address {
-  float: right;
-}
 
 
 @media screen and (max-width: 800px) {
