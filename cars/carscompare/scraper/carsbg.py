@@ -66,9 +66,9 @@ def scraper(url, info):
 				pricesList.append(a)
 			a = 0
 
-		if info[4] == "Gasoline":
+		if info[4] == "Gasoline" and len(pricesList) > 0:
 			for i in range(len(prices)):
-		
+				
 				if "газ/бензин" in fuel[i].text or "метан/бензин" in fuel[i].text:
 					del pricesList[i]
 				
