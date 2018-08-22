@@ -50,10 +50,10 @@ def scraper(url, info):
 
 	if prices != []:
 
-		for i in range(len(prices)):
-			prices[i] = prices[i].strong
+		
 
 		a = 0
+		fuelList = []
 		pricesList = []
 		for j in range(len(prices)):
 			for i in range(len(prices[j].text)):
@@ -61,16 +61,16 @@ def scraper(url, info):
 					a *= 10
 					a += int(prices[j].text[i])
 
-			
-			else:
-				pricesList.append(a)
+			if info[4] == "Gasoline":
+				if "газ/бензин" in fuel[j].text or "метан/бензин" in fuel[j].text:
+					pass
+				else:
+
+					pricesList.append(a)
+					fuelList.append(fuel[j].text)
 			a = 0
 
-		if info[4] == "Gasoline" and len(pricesList) > 0:
-			for i in range(len(prices)):
-				
-				if "газ/бензин" in fuel[i].text or "метан/бензин" in fuel[i].text:
-					del pricesList[i]
+
 				
 
 		prices = 0
@@ -87,4 +87,4 @@ def scraper(url, info):
 	return prices, info
 
 		
-
+# print(scraper("https://www.cars.bg/?go=cars&search=1&advanced=&fromhomeu=1&currencyId=1&yearTo=&autotype=1&stateId=1&section=home&categoryId=0&doorId=0&brandId=4&modelId=0&fuelId=1&gearId=0&yearFrom=&priceFrom=&priceTo=&man_priceFrom=&man_priceTo=&regionId=0&offersFor4=1&offersFor1=1&filterOrderBy=1", ['AlfaRomeo', '145', 'Manual', '1996', 'Gasoline']))

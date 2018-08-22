@@ -21,8 +21,8 @@ gearId = {
 }
 
 brandId = {
-	# "Acura" : 1,
-	# "Aixam" : 2,
+	"Acura" : 1,
+	"Aixam" : 2,
 	"AlfaRomeo" : 4,
 	"Alpina" : 5,
 	"AsiaMotors" : 6,
