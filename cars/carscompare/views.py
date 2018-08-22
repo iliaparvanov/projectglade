@@ -43,7 +43,7 @@ def addCars(request):
 
 	urls = list()
 	urls = cars.urlsCreate()
-	pool = mpool.ThreadPool(10)
+	pool = mpool.ThreadPool(25)
 	print(len(urls))
 	info = [pool.apply_async(cars.scraper, (url[0], url[1])) for url in urls]
 	try:
