@@ -9,13 +9,9 @@
 </nav>
 
 <ul style='margin-top: 100px;'>
-
     <form action=/login/ method="post" accept-charset="utf-8">
       {% csrf_token %}
       {{ form.as_p }}
       <p><input type="submit" value="Login"></p>
-
-
-
 </ul>
 {% endblock %}
