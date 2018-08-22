@@ -1,9 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'articles/css/articles.css' %}">
   <div class="standart-container">
     <ul>
-        <form action="/articles/addArticle/" method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form-standart"> 
+        <form action="/articles/addArticle/" method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form-standart">
             {% csrf_token %}
             <br>
             {{ alert }}<br>
