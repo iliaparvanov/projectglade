@@ -1,42 +1,40 @@
 {% extends "base.html" %}
-
 {% block content %}
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
-  <div class="standart-container">
-    {% for i in results %}
-    {% for j in i %}
-		  <div class="result-container">
-        {% if j.image.url %}
-          <div class='img-container'>
-               <img src="{{ j.image.url }}" width="240">
-          </div>
-        {% endif %}
-        <div class ='rating-container'>
-          *rating here*
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
+    <div class="standart-container">
+        {% for i in results %} {% for j in i %}
+        <div class="result-container">
+            {% if j.image.url %}
+            <div class='img-container'>
+                <img src="{{ j.image.url }}" width="240">
+            </div>
+            {% endif %}
+            <div class='rating-container'>
+                *rating here*
+            </div>
+            <div class="name-container">
+                <p class="name">{{ j.name }}</p>
+                <!--<p>{{ j.typeOfObject }}</p>-->
+            </div>
+            <div class="tel-container">
+                <p>{{ j.tel }}</p>
+            </div>
+            <div class='address-container'>
+                <p>{{ j.city.name }}</p>
+                <p>{{ j.address }}</p>
+            </div>
         </div>
-        <div class="name-container">
-  		    <p class="name">{{ j.name }}</p>
-  		    <!--<p>{{ j.typeOfObject }}</p>-->
-        </div>
-        <div class="tel-container">
-          <p>{{ j.tel }}</p>
-        </div>
-        <div class='address-container'>
-          <p>{{ j.city.name }}</p>
-          <p>{{ j.address }}</p>
-        </div>
-	     </div>
-		    <form action=/object/ method="post">
-        		<input type="hidden" name="name" value="{{ j.name }}" id="tests">
-        		<input type="hidden" name="address" value="{{ j.address }}" id="tests">
-        		<input type="hidden" name="tel" value="{{ j.tel }}" id="tests">
-        		<input type="hidden" name="typeOfObject" value="{{ j.typeOfObject }}" id="tests">
-        		<input type="hidden" name="city" value="{{ j.city.name }}" id="tests">
-        		<input name="button_more"  type="submit" value="Виж повече" id="button_more">
-    		</form>
+        <form action=/object/ method="post">
+            <input type="hidden" name="name" value="{{ j.name }}" id="tests">
+            <input type="hidden" name="address" value="{{ j.address }}" id="tests">
+            <input type="hidden" name="tel" value="{{ j.tel }}" id="tests">
+            <input type="hidden" name="typeOfObject" value="{{ j.typeOfObject }}" id="tests">
+            <input type="hidden" name="city" value="{{ j.city.name }}" id="tests">
+            <input name="button_more" type="submit" value="Виж повече" id="button_more">
+        </form>
 
-     	{% endfor %}
-     {% endfor %}
-  </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
 {% endblock %}
