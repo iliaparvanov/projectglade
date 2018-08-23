@@ -7,6 +7,10 @@ body {
   background-attachment: fixed;
 }
 
+#main {
+  min-height: calc(100vh - 300px); /*+20px because of margin-top of results-container*/
+}
+
 .result-container {
   background-color: white;
   display: grid;
@@ -14,7 +18,7 @@ body {
   grid-template-rows: 60px 60px 60px;
   /*grid-gap: 10px;*/
   border: 1px solid #050507;
-  margin-top: 15px;
+  margin-top: 20px;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
 }
 
