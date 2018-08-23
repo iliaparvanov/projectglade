@@ -1,38 +1,38 @@
 {% extends "base.html" %}
-
 {% block content %}
-  <div class="standart-container">
-    <ul>
-        <form action=/addService/ method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form-standart"> <!-- action is the url the form data is returned to-->
-            {% csrf_token %}
-            <div class="form-group">
-              <label for="name"> Име на обекта:</label>
-              <input type="text" name="name"  id="name" autocomplete="off" required/><br>
-            </div>
-            <div class="form-group">
-              <label for="city"> Град:</label>
-              <input type="text" name="city"  id="city" autocomplete="off" required/><br>
-            </div>
-            <div class="form-group">
-              <label for="address"> Адрес:</label>
-              <input type="text" name="address"  id="name" autocomplete="off" required/><br>
-            </div>
-            <div class="form-group">
-              <label for="tel"> Телефон:</label>
-              <input type="text" name="tel"  id="tel" autocomplete="off" required/><br>
-            </div>
-            <div class="form-group">
-              <label for="img">Снимка</label>
-              <input type="file" name="img", id="img"><br>
-            </div>
-            <select name='type' id='typeOfSearch' value='typeOfSearch'>
-                <option type='text' name="service"  id="service" value='service' />Сервиз</option>
-                <option type='text' name="cardealer"  id="cardealer" value='cardealer' />Автокъща</option>
-            </select><br>
-            <p><input type="submit" href="/" value="Create" id="Create"></p>
-        </form>
-    </ul>
-  </div>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
+
+        <div class="form-container">
+            <div class="section-title">Добавете обект</div>
+            <ul>
+                <form action=/addService/ method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form-standart">
+                    <!-- action is the url the form data is returned to-->
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="name" id="name" placeholder="Име на обекта" autocomplete="off" required/><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="city" id="city" placeholder="Град" autocomplete="off" required/><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="address" id="name" placeholder="Адрес" autocomplete="off" required/><br>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="tel" id="tel" placeholder="Телефон" autocomplete="off" required/><br>
+                    </div>
+                    <div class="form-group">
+                        <label for="img">Снимка</label>
+                        <input type="file" name="img" , id="img"><br>
+                    </div>
+                    <select name='type' id='typeOfSearch' value='typeOfSearch'>
+                        <option type='text' name="service"  id="service" value='service' />Сервиз</option>
+                        <option type='text' name="cardealer"  id="cardealer" value='cardealer' />Автокъща</option>
+                    </select><br>
+                    <input type="submit" href="/" value="Създай" id="Create">
+                </form>
+            </ul>
+        </div>
 
 
 {% endblock %}

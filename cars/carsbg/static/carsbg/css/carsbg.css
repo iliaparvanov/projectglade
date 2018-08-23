@@ -8,7 +8,10 @@ body {
 }
 
 #main {
-  min-height: calc(100vh - 300px); /*+20px because of margin-top of results-container*/
+    display: grid;
+
+    align-content: center;
+    height: 100vh;
 }
 
 .result-container {
