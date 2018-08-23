@@ -1,23 +1,22 @@
 {% extends "base.html" %}
-
 {% block content %}
-{% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'articles/css/articles.css' %}">
-     {% for i in articles %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'articles/css/articles.css' %}">
 
-		<div class="container">
-		    <p>{{ i.name }}</p>
-		    <p>{{ i.author }}</p>
-		    <p>{{ i.date }}</p>
+    <div class="standart-container">
+        <a href="articles/articlePage/"><button>Добави статия</button></a>
+        {% for i in articles %}
+        <p>{{ i.name }}</p>
+        <p>{{ i.author }}</p>
+        <p>{{ i.date }}</p>
 
-		    <form action=/articles/articleText/ method="post">
-        		<input type="hidden" name="name" value="{{ i.name }}" id="name">
-        		<input type="hidden" name="author" value="{{ i.author }}" id="author">
-        		<input type="hidden" name="date" value="{{ i.date }}" id="date">
-        		<input name="button_more"  type="submit" value="Виж повече" id="button_more">
-    		</form>
-	    </div>
-     {% endfor %}
-
+        <form action=/articles/articleText/ method="post">
+            <input type="hidden" name="name" value="{{ i.name }}" id="name">
+            <input type="hidden" name="author" value="{{ i.author }}" id="author">
+            <input type="hidden" name="date" value="{{ i.date }}" id="date">
+            <input name="button_more" type="submit" value="Виж повече" id="button_more">
+        </form>
+        {% endfor %}
+    </div>
 
 {% endblock %}

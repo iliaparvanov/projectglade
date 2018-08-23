@@ -4,7 +4,7 @@
 }
 
 body, html {
-  height: 100%;
+  height: 100vh;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -23,30 +23,28 @@ a:hover {
 
 #navbar {
   width: 100%;
-  height: 2.8em;
+  height: 3em;
   position: fixed;
   overflow: hidden;
   background: #050507;
-  opacity: 0.9;
+  opacity: 0.8;
   z-index: 8; /*so that it sticks to the front*/
-}
-
-#content {
-  padding-top: 2.8em;
 }
 
 #navbar a {
   float: right;
-  padding: 1em 1em .8em 1em;
+  padding: 1em 2em 1em 0;
   color: #f2f2f2;
-  font-size: .8em;
+  font-size: 1em;
 }
 
 #navbar a:hover {
   color: #c4c4c4;
 }
 
-
+#content {
+  padding-top: 3em;
+}
 
 .standart-container {
   width: 80%;
@@ -126,6 +124,16 @@ input[type=text]:focus {
   margin-top: 0;
 }
 
+#whole-screen-bg-2 {
+    height: 100vh;
+    background-color: #a7414a;
+}
+
+#whole-screen-bg-3 {
+    height: 100vh;
+    background-color: #6a8a82;
+}
+
 .home-p {
   line-height: 1.5em;
 }
@@ -163,30 +171,6 @@ input[type=text]:focus {
 .form-standart input[type="text"], .form-general textarea {
   width: 100%;
 }
-
-/*
-#search input[type=text] {
-  margin-left: 20vw;
-  margin-right: 20vw;
-  margin-bottom: 1em;
-  width: 60vw;
-  border: none;
-}
-
-.result {
-  margin-left: 20vw;
-  margin-right: 20vw;
-  margin-bottom: 1em;
-  width: 60vw;
-  border: 1px solid #ccc;
-}
-
-.result img {
-  max-width: 15%;
-  height: auto;
-  margin: 1em;
-}
-*/
 
 @media screen and (max-width: 800px) {
   .standart-container {

@@ -1,54 +1,54 @@
 {% load static from staticfiles %}
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Carsbg</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		{% load staticfiles %}
-		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOZarAyNdL2A9EpaGFsU8hKJ6nieR1VzE&callback=initMap"
-    async defer></script>
-	</head>
-	<body>
-		<div id="main">
-			<div id="navbar">
-				{% if user.is_authenticated %}
-					<a href="/service/">ДОБАВЕТЕ ОБЕКТ</a>
-					<a href="/password-change/">СМЕНИ ПАРОЛА</a>
-					<a href="logout">ИЗХОД</a>
-					<a href="/">НАЧАЛО</a>
-				{% else %}
-					<a href="/service/">ДОБАВЕТЕ ОБЕКТ</a>
-					<a href="login">ВХОД</a>
-					<a href="signup">РЕГИСТРАЦИЯ</a>
-					<a href="/">НАЧАЛО</a>
-				<!--	<p>ЛОГО</p>-->
-				{% endif %}
 
-			</div>
+<head>
+	<title>Carsbg</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" /> {% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOZarAyNdL2A9EpaGFsU8hKJ6nieR1VzE&callback=initMap" async defer></script>
+</head>
 
-			<div id="content">
-				{% block content %}
-					<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-					<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		  		<!-- изобщо не ги зарежда тея.... -->
-		     {% endblock %}
-			</div>
+<body>
+	<div id="main">
+		<div id="navbar">
+			{% if user.is_authenticated %}
+			<a href="/service/">ДОБАВЕТЕ ОБЕКТ</a>
+			<a href="/password-change/">СМЕНИ ПАРОЛА</a>
+			<a href="/logout">ИЗХОД</a>
+			<a href="/">НАЧАЛО</a>
+			{% else %}
+			<a href="/service/">ДОБАВЕТЕ ОБЕКТ</a>
+			<a href="/carscompare/home/">СРАВНИ ЦЕНИ</a>
+			<a href="/articles/home/">СТАТИИ</a>
+			<a href="/login">ВХОД</a>
+			<a href="/signup">РЕГИСТРАЦИЯ</a>
+			<a href="/">НАЧАЛО</a>
+			<!--	<p>ЛОГО</p>-->
+			{% endif %}
 		</div>
-
-		<div id="footer">
-				<div id="social-icons">
-					<a href="https://www.facebook.com/"><img src="/static/images/facebook.png" alt="Facebook"></a>
-					<a href="https://twitter.com/"><img src="/static/images/twitter.png" alt="Twitter"></a>
-					<a href="https://www.linkedin.com"><img src="/static/images/linkedin.png" alt="LinkedIn"></a>
-				</div>
-				<div id="copyrights">
-					<p>© 2018 Carsbg<br>Всички права запазени.</p>
-				</div>
+		<div id="content">
+			{% block content %}
+			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			<!-- изобщо не ги зарежда тея.... -->
+			{% endblock %}
 		</div>
-		<script src="{% static 'js/main.js' %}"></script>
-	</body>
+	</div>
+	<div id="footer">
+		<div id="social-icons">
+			<a href="https://www.facebook.com/"><img src="/static/images/facebook.png" alt="Facebook"></a>
+			<a href="https://twitter.com/"><img src="/static/images/twitter.png" alt="Twitter"></a>
+			<a href="https://www.linkedin.com"><img src="/static/images/linkedin.png" alt="LinkedIn"></a>
+		</div>
+		<div id="copyrights">
+			<p>© 2018 Carsbg<br>Всички права запазени.</p>
+		</div>
+	</div>
+	<script src="{% static 'js/main.js' %}"></script>
+</body>
+
 </html>
