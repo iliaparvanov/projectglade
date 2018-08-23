@@ -21,7 +21,7 @@ gearId = {
 }
 
 brandId = {
-	"Acura" : 1,
+	#"Acura" : 1,
 	"Aixam" : 2,
 	"AlfaRomeo" : 4,
 	"Alpina" : 5,
@@ -111,11 +111,11 @@ brandId = {
 
 
 #models
-Acura = {
-	"MDX" : 2,
-	"RDX" : 5,
-	"TL"  : 7,
-}
+#Acura = {
+#	"MDX" : 2,
+#	"RDX" : 5,
+#	"TL"  : 7,
+#}
 Aixam = {
 	"400" : 9
 }

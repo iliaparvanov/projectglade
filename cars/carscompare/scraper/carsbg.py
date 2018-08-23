@@ -38,7 +38,7 @@ def urlsCreate():
 def scraper(url, info):
 	#print(info)
 	__author__ = "Engine Bai"
-	driver = webdriver.Chrome(executable_path=r"C:/Users/gdemi/Desktop/projectglade/cars/carscompare/scraper/chromedriver.exe")
+	driver = webdriver.Chrome(executable_path=r"C:/Users/PC-Admin/Desktop/work2/projectglade/cars/carscompare/scraper/chromedriver.exe")
 	driver.get(url)
 	content_element = driver.find_element_by_tag_name("body")
 	content_html = content_element.get_attribute("innerHTML")

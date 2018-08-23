@@ -6047,3 +6047,22 @@
 [0823/004240.549:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
 [0823/004240.549:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
 [0823/004240.549:ERROR:exception_snapshot_win.cc(88)] thread ID 26200 not found in process
+[0823/020543.567:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: The specified information record length does not match the length required for the specified information class. (0xc0000004)
+[0823/020826.887:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0823/020828.140:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0823/020832.261:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0823/020903.420:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: The specified information record length does not match the length required for the specified information class. (0xc0000004)
+[0823/021005.436:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0823/021021.229:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: The specified information record length does not match the length required for the specified information class. (0xc0000004)
+[0823/021059.629:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: The specified information record length does not match the length required for the specified information class. (0xc0000004)
+[0823/021323.975:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: The specified information record length does not match the length required for the specified information class. (0xc0000004)
+[0823/021357.724:ERROR:process_info.cc(375)] NtQuerySystemInformation SystemExtendedHandleInformation: The specified information record length does not match the length required for the specified information class. (0xc0000004)
+[0823/023602.922:ERROR:crash_report_database_win.cc(569)] CreateDirectory C:\Users\PC-Admin\AppData\Local\Temp\scoped_dir50200_12469\Crashpad: The system cannot find the path specified. (0x3)
+[0823/033657.350:ERROR:process_info.cc(359)] UncheckedAllocate
+[0823/033657.418:ERROR:process_info.cc(359)] UncheckedAllocate
+[0823/033953.785:ERROR:process_info.cc(359)] UncheckedAllocate
+[0823/033954.412:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\PC-Admin\AppData\Local\Temp\scoped_dir89996_19887\Crashpad\reports\3a8c8e73-2d2d-4efb-a118-303ad581fc52.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0823/033954.556:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\PC-Admin\AppData\Local\Temp\scoped_dir48080_20668\Crashpad\reports\34cd2db1-e304-4b93-97f3-fca9ea2f7ccd.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0823/033954.622:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\PC-Admin\AppData\Local\Temp\scoped_dir72468_17408\Crashpad\reports\0e6cfd14-0fc6-486e-a1b1-817fb80661e7.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0823/033954.641:ERROR:filesystem_win.cc(148)] DeleteFile C:\Users\PC-Admin\AppData\Local\Temp\scoped_dir72468_17408\Crashpad\reports\aef7d235-9dd1-4b03-8133-ce068b07cbcb.dmp: The process cannot access the file because it is being used by another process. (0x20)
+[0823/034655.088:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
