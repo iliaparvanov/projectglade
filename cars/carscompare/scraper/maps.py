@@ -1,30 +1,30 @@
 fuelId = {
-	# "Gasoline" : 1,
+	"Gasoline" : 1,
 	"Diesel" : 2,
 	# "Electric" : 7,
-	# "Gasoline/gas" : 3,
+	"Gasoline/gas" : 3,
 	# "Metan/Gasoline" : 4,
 	# "Hybrid" : 6,
 }
 
 
-startingYear = 2006
+startingYear = 1983
 yearid = [startingYear]
-for i in range(1):
+for i in range(35):
 	startingYear += 1
 	yearid.append(startingYear)
 
 
 gearId = {
 	"Manual" : 1,
-	# "Automatic" : 2,
+	"Automatic" : 2,
 }
 
 brandId = {
 	#"Acura" : 1,
 	# "Aixam" : 2,
-	# "AlfaRomeo" : 4,
-	"Alpina" : 5,
+	"AlfaRomeo" : 4,
+	# "Alpina" : 5,
 	# "AsiaMotors" : 6,
 	# "AstonMartin" : 7,
 	# "Audi" : 8,
@@ -117,13 +117,13 @@ brandId = {
 #	"TL"  : 7,
 #}
 
-Aixam = {
-	"400" : 9
-}
+# Aixam = {
+# 	"400" : 9
+# }
 
 AlfaRomeo = {
-	# "145" : 23,
-	# "146" : 24,
+	"145" : 23,
+	"146" : 24,
 	"147" : 25,
 	"149" : 21,
 	"155" : 26,
