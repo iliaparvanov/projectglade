@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
- 	url(r'home/$', views.carsCompare, name='home'),
+ 	url(r'home/$', views.displayCarsProperties, name='displayCarsProperties'),
  	url(r'^addCars/$', views.addCars, name='addCars'),
- 	url(r'^ajax/displayModels/$', views.displayModels, name='addCars'),
+ 	url(r'^home/ajax/displayModels/$', views.displayModels, name='displayModels'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

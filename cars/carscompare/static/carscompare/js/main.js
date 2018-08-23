@@ -1,8 +1,8 @@
-$("#brandId").change(function () {
+$("#brandsId").change(function () {
   var brand = $(this).val();
 
   $.ajax({
-    url: '/ajax/displayModels/',
+    url: 'ajax/displayModels/',
     data: {
       'brand': brand
     },
@@ -11,12 +11,13 @@ $("#brandId").change(function () {
   }).then(function(responce){
         response=toJSON(response);
          
-        var select = document.getElementById("model"),
+        var select = document.getElementById("modelsId");
         for (var model in response) {
             opt = document.createElement("option");
             opt.value = model.name;
             opt.textContent = model.name;
             select.appendChild(opt);
+        }
     }
 });
     

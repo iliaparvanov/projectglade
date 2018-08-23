@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from . import carsbg as cars
-
+import json
 from .models import *
 from django.views.decorators.csrf import csrf_exempt
 import time
 import threading
 import queue
 import multiprocessing.pool as mpool
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 
 
 def carsCompare(request):
@@ -58,12 +59,15 @@ def addCars(request):
 def displayCarsProperties(request):
 	brands = Brand.objects.all()
 
-	return render(request, "carscompare/home", {"brands" : brands})
+	return render(request, "carscompare/home.html", {"brands" : brands})
 
 def displayModels(request):
-	if request.POST:
+	
+	brand = request.GET.get('brand')
+	models = ModelOfCar.objects.filter(brand = Brand.objects.filter(name = brand)[0])
+	modelsList = []
 
-		brands = request.POST.get('brand')
-		models = ModelOfCar.objects.filter(brand = Brand.objects.filter(name = brand))
-		
-		return render(request, "carscompare/home.html", {"models" : models})	
+	for i in models:
+		modelsList.append(i.name)
+
+	return JsonResponse({"models" : modelsList}, safe = False)

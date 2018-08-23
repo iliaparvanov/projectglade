@@ -1,9 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
- 	<select>
- 		for i in brands
- 		<option></option>
+
+	
+ 	<select style = "width: 100px;" id = "brandsId">
+ 		{% for i in brands %}
+ 			
+ 			<option value= "{{ i.name }}" ">{{ i.name }}</option>
+ 		{% endfor %}
+ 	</select>
+ 	<select id = "modelsId" style = "width: 100px;>
+ 		
  	</select>
   
 {% endblock %}
