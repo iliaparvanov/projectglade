@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .scraper import carsbg as cars
+from . import carsbg as cars
 
 from .models import *
 from django.views.decorators.csrf import csrf_exempt
@@ -43,14 +43,12 @@ def addCars(request):
 
 	urls = list()
 	urls = cars.urlsCreate()
-	pool = mpool.ThreadPool(10)
+	pool = mpool.ThreadPool(5)
 	print(len(urls))
 	info = [pool.apply_async(cars.scraper, (url[0], url[1])) for url in urls]
-	try:
-		pool.join()
-	except:
-		print("Dont have pool")
-	print("done update")	
+	
+	pool.close()
+	pool.join()	
 
 	for i in info:
 		addCarToDb(i)
