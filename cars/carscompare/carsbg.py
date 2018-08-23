@@ -1,7 +1,8 @@
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
-from . import maps
+from . import views
+from .scraper import maps 
 
 def is_int(input):
 	try:
@@ -38,7 +39,7 @@ def urlsCreate():
 def scraper(url, info):
 	#print(info)
 	__author__ = "Engine Bai"
-	driver = webdriver.Chrome(executable_path=r"C:/Users/PC-Admin/Desktop/work2/projectglade/cars/carscompare/scraper/chromedriver.exe")
+	driver = webdriver.Chrome(executable_path=r"C:/Users/gdemi/Desktop/projectglade/cars/carscompare/scraper/chromedriver.exe")
 	driver.get(url)
 	content_element = driver.find_element_by_tag_name("body")
 	content_html = content_element.get_attribute("innerHTML")
@@ -68,6 +69,10 @@ def scraper(url, info):
 
 					pricesList.append(a)
 					fuelList.append(fuel[j].text)
+			else:
+				pricesList.append(a)
+				fuelList.append(fuel[j].text)
+			
 			a = 0
 
 
@@ -84,7 +89,7 @@ def scraper(url, info):
 			prices = []
 
 	driver.close()
+	print(info)
 	return prices, info
-
 		
-# print(scraper("https://www.cars.bg/?go=cars&search=1&advanced=&fromhomeu=1&currencyId=1&yearTo=&autotype=1&stateId=1&section=home&categoryId=0&doorId=0&brandId=4&modelId=0&fuelId=1&gearId=0&yearFrom=&priceFrom=&priceTo=&man_priceFrom=&man_priceTo=&regionId=0&offersFor4=1&offersFor1=1&filterOrderBy=1", ['AlfaRomeo', '145', 'Manual', '1996', 'Gasoline']))
+# print(scraper("https://www.cars.bg/?go=cars&search=1&advanced=0&fromhomeu=1&publishedTime=0&filterOrderBy=1&showPrice=0&autotype=1&stateId=1&section=cars&categoryId=0&doorId=0&brandId=5&modelId=0&models%5B%5D=55&fuelId=2&gearId=1&yearFrom=2006&yearTo=2006&priceFrom=&priceTo=&currencyId=1&man_priceFrom=0&man_priceTo=0&man_currencyId=1&regionId=0&offersFor4=1&offersFor1=1", ['Alpina', 'D3', 'Manual', '2006', 'Diesel']))
