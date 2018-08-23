@@ -1,23 +1,23 @@
 fuelId = {
 	"Gasoline" : 1,
-	"Diesel" : 2,
+	# "Diesel" : 2,
 	# "Electric" : 7,
-	"Gasoline/gas" : 3,
+	# "Gasoline/gas" : 3,
 	# "Metan/Gasoline" : 4,
 	# "Hybrid" : 6,
 }
 
 
-startingYear = 1983
+startingYear = 1998
 yearid = [startingYear]
-for i in range(35):
+for i in range(2):
 	startingYear += 1
 	yearid.append(startingYear)
 
 
 gearId = {
 	"Manual" : 1,
-	"Automatic" : 2,
+	# "Automatic" : 2,
 }
 
 brandId = {
@@ -123,27 +123,27 @@ brandId = {
 
 AlfaRomeo = {
 	"145" : 23,
-	"146" : 24,
-	"147" : 25,
-	"149" : 21,
-	"155" : 26,
-	"156" : 27,
-	"156 Sportwagon" : 1694,
-	"159" : 28,
-	"159 SW" : 1529,
-	"164" : 29,
-	"166" : 30,
-	"33" : 31, 
-	"Arna" : 2091,
-	"Brera" : 36, 
-	"Crosswagon" : 37,
-	"Giulia" : 38, 
-	"Giulietta" : 39, 
-	"GT" : 40,
-	"GTV" : 41,
-	"MiTo" : 43,
-	"Spider" : 45,
-	"Stelvio" : 2129
+	# "146" : 24,
+	# "147" : 25,
+	# "149" : 21,
+	# "155" : 26,
+	# "156" : 27,
+	# "156 Sportwagon" : 1694,
+	# "159" : 28,
+	# "159 SW" : 1529,
+	# "164" : 29,
+	# "166" : 30,
+	# "33" : 31, 
+	# "Arna" : 2091,
+	# "Brera" : 36, 
+	# "Crosswagon" : 37,
+	# "Giulia" : 38, 
+	# "Giulietta" : 39, 
+	# "GT" : 40,
+	# "GTV" : 41,
+	# "MiTo" : 43,
+	# "Spider" : 45,
+	# "Stelvio" : 2129
 
 
 }

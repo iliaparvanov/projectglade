@@ -55,6 +55,15 @@ def addCars(request):
 
 	return render(request, "carscompare/home.html")
 
+def displayCarsProperties(request):
+	brands = Brand.objects.all()
 
+	return render(request, "carscompare/home", {"brands" : brands})
 
-	
+def displayModels(request):
+	if request.POST:
+
+		brands = request.POST.get('brand')
+		models = ModelOfCar.objects.filter(brand = Brand.objects.filter(name = brand))
+		
+		return render(request, "carscompare/home.html", {"models" : models})	
