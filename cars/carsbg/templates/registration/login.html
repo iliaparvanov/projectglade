@@ -1,17 +1,26 @@
 {% extends "base.html" %}
-
 {% block content %}
-<nav id="nav">
-  <ul>
-    <li><a href="/">Introduction</a></li>
-    <li><a href="/signup">Sign up</a></li>
-  </ul>
-</nav>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
+    <div class="form-container">
+        <ul>
+            <form action=/login/ method="post" accept-charset="utf-8" class="form-standart">
+              {% csrf_token %}
+              {{ form.as_p }}
+             <input type="submit" value="ВХОД">
+        </ul>
+        <p id="register-now-text">Нямате акаунт? <a href="/signup/">Регистрирайте се сега!</a></p>
+    </div>
 
-<ul style='margin-top: 100px;'>
-    <form action=/login/ method="post" accept-charset="utf-8">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <p><input type="submit" value="Login"></p>
-</ul>
+<style>
+#main {
+    display: grid;
+    align-content: center;
+    height: calc(100vh - 280px);
+}
+
+.form-container {
+    width: 40%;
+}
+</style>
 {% endblock %}

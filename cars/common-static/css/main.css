@@ -200,7 +200,6 @@ input[type=text]:focus {
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-
 }
 
 .form-standart .form-group {
@@ -215,7 +214,7 @@ input[type=text]:focus {
     width: 100%;
 }
 
-.form-standart input[type="text"], .form-standart textarea  {
+.form-standart input[type="text"], .form-standart textarea, .form-standart input[type="password"]  {
     width: 100%;
     -webkit-transition: all 0.30s ease;
     -moz-transition: all 0.30s ease;
@@ -240,6 +239,12 @@ input[type=text]:focus {
      color: transparent;
  }
 
+.submit-container {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
  .form-standart input[type="submit"] {
     width: 100%;
     margin-left: auto;
@@ -253,6 +258,7 @@ input[type=text]:focus {
     color: #ffffff;
     background: #a7414b;
     font: 95% Arial, Helvetica, sans-serif;
+    border-radius: 10px;
  }
 
  .form-standart input[type="submit"]:hover {
@@ -260,20 +266,32 @@ input[type=text]:focus {
     cursor: pointer;
  }
 
+
+
 @media screen and (max-width: 800px) {
     .standart-container {
         margin: auto;
         width: 90%;
     }
+
     #slogan {
         padding-top: 115px;
         font-size: 2.5em;
         font-weight: 600;
         width: 90%;
     }
+
     .wrap {
         width: 70%;
         padding-right: 10vw;
+    }
+
+    .form-container {
+        width: 90% !important;
+    }
+
+    .form-standart {
+        width: 80% !important;
     }
 }
 
