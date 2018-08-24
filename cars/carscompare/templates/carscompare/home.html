@@ -4,22 +4,22 @@
 
 	 <form action=/carscompare/displayCars/ method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form-standart">
 	 	{% csrf_token %}	
-	 	<select  id = "brandsId" name = "brandsId" value='brandsId'>
+	 	Марка:<select  id = "brandsId" name = "brandsId" value='brandsId'>
 	  		<option type = "text" name="Всички" value="Всички">Всички</option>
 	 		{% for i in brands %}
 	 			
 	 			<option type = "text" id="{{ i.name }}" value= "{{ i.name }}" ">{{ i.name }}</option>
 	 		{% endfor %}
 	 	</select>
-	 	<select id = "modelsId" name="modelsId">
+	 	Модел:<select id = "modelsId" name="modelsId">
 	  		<option type = "text" name="Всички" value="Всички">Всички</option>
 	 	</select>
-	  	<select name = "gearId">
+	  	Скорости<select name = "gearId">
 	  		<option type = "text" name="Всички" value="Всички">Всички</option>
 	  		<option type = "text" name="Автоматична" value="Автоматична">Автоматична</option>
 	  		<option type = "text" name="Ръчна" value="Ръчна">Ръчна</option>
 	  	</select>
-	  	<select name = "fuelId">
+	  	Двигател<select name = "fuelId">
 
 	  		<option type = "text" name="Всички" value="Всички">Всички</option>
 	  		<option type = "text" name="Бензин" value="Бензин">Бензин</option>
@@ -29,7 +29,7 @@
 	  		<option type = "text" name="Електричество" value="Електричество">Електричество</option>
 	  		<option type = "text" name="Хибрид" value="Хибрид">Хибрид</option>
 	  	</select>
-	  	<select name = "year">
+	  	Година:<select name = "year">
 	  		<option type = "text" name="Всички" value="Всички">Всички</option>
 
 	  		{% for i in range %}
