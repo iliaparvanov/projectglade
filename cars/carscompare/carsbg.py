@@ -53,9 +53,7 @@ def scraper(url, info):
 	
 
 	if prices != []:
-		print(info)
-		searchTerm = str(info[0] + " " + info[3])
-		print(searchTerm)
+		searchTerm = str(info[0] + " " + str(info[1]) + " " +  info[3])
 		startIndex = '1'
 		key = 'AIzaSyBtiM-AgV1S9y4V0d1HKwAYT_YUZFtg_K8'
 		cx = '001807663827775318675:yg9wv96v1nc'
