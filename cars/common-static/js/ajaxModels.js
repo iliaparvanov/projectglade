@@ -12,6 +12,11 @@ $("#brandsId").change(function () {
             var select = document.getElementById("modelsId");
             var length = select.options.length;
             $(select).children('option').remove();
+
+            opt = document.createElement("option");
+            opt.value = "Всички";
+            opt.textContent = "Всички";
+            select.appendChild(opt);
             for (model in response.models) 
             {
                 opt = document.createElement("option");
@@ -19,6 +24,8 @@ $("#brandsId").change(function () {
                 opt.textContent = response.models[model];
                 select.appendChild(opt);
             }
+            
+            
         },
     
   })

@@ -1,14 +1,14 @@
 fuelId = {
-	"Gasoline" : 1,
-	# "Diesel" : 2,
-	# "Electric" : 7,
-	# "Gasoline/gas" : 3,
-	# "Metan/Gasoline" : 4,
-	# "Hybrid" : 6,
+	# "Бензин" : 1,
+	# "Дизел" : 2,
+	# "Електричество" : 7,
+	"Газ/Бензин" : 3,
+	# "Газ/Метан" : 4,
+	# "Хибрид" : 6,
 }
 
 
-startingYear = 1998
+startingYear = 2007
 yearid = [startingYear]
 for i in range(2):
 	startingYear += 1
@@ -16,8 +16,8 @@ for i in range(2):
 
 
 gearId = {
-	"Manual" : 1,
-	# "Automatic" : 2,
+	"Ръчна" : 1,
+	# "Автоматична" : 2,
 }
 
 brandId = {
@@ -122,9 +122,9 @@ brandId = {
 # }
 
 AlfaRomeo = {
-	"145" : 23,
+	# "145" : 23,
 	# "146" : 24,
-	# "147" : 25,
+	"147" : 25,
 	# "149" : 21,
 	# "155" : 26,
 	# "156" : 27,

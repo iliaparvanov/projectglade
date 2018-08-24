@@ -184,8 +184,6 @@ def viewObject(request):
 
 		objectCreate(request, comments, users, result, lenOfComments)
 
-		print(comments, users, result, lenOfComments)
-
 		return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users})
 
 

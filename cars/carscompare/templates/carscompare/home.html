@@ -2,15 +2,41 @@
 
 {% block content %}
 
-	
- 	<select style = "width: 100px;" id = "brandsId">
- 		{% for i in brands %}
- 			
- 			<option value= "{{ i.name }}" ">{{ i.name }}</option>
- 		{% endfor %}
- 	</select>
- 	<select id = "modelsId" style = "width: 100px;>
- 		
- 	</select>
-  
+	 <form action=/carscompare/displayCars/ method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form-standart">
+	 	{% csrf_token %}	
+	 	<select  id = "brandsId" name = "brandsId" value='brandsId'>
+	  		<option type = "text" name="Всички" value="Всички">Всички</option>
+	 		{% for i in brands %}
+	 			
+	 			<option type = "text" id="{{ i.name }}" value= "{{ i.name }}" ">{{ i.name }}</option>
+	 		{% endfor %}
+	 	</select>
+	 	<select id = "modelsId" name="modelsId">
+	  		<option type = "text" name="Всички" value="Всички">Всички</option>
+	 	</select>
+	  	<select name = "gearId">
+	  		<option type = "text" name="Всички" value="Всички">Всички</option>
+	  		<option type = "text" name="Автоматична" value="Автоматична">Автоматична</option>
+	  		<option type = "text" name="Ръчна" value="Ръчна">Ръчна</option>
+	  	</select>
+	  	<select name = "fuelId">
+
+	  		<option type = "text" name="Всички" value="Всички">Всички</option>
+	  		<option type = "text" name="Бензин" value="Бензин">Бензин</option>
+	  		<option type = "text" name="Дизел" value="Дизел">Дизел</option>
+	  		<option type = "text" name="Газ/Бензин" value="Газ/Бензин">Газ/Бензин</option>
+	  		<option type = "text" name="Газ/Метан" value="Газ/Метан">Газ/Метан</option>
+	  		<option type = "text" name="Електричество" value="Електричество">Електричество</option>
+	  		<option type = "text" name="Хибрид" value="Хибрид">Хибрид</option>
+	  	</select>
+	  	<select name = "year">
+	  		<option type = "text" name="Всички" value="Всички">Всички</option>
+
+	  		{% for i in range %}
+	  			<option type = "text" name="{{ i }}" value="{{ i }}">{{ i }}</option type = "text" >
+	  		{% endfor %}
+	  	</select>
+
+	  	<input type="submit" href="/" value="Търси" name="Create">
+	</form>
 {% endblock %}

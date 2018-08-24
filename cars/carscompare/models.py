@@ -27,7 +27,8 @@ class Car(models.Model):
 	year = models.CharField(max_length = 5)
 	typeOfEngine = models.CharField(max_length = 10 	)
 	price = models.CharField(max_length = 10)
-
+	image = models.CharField(max_length = 100, null = True)
+ 
 	def __str__(self):
-		return self.brand.name + " - " + self.model.name + " - " + self.year + " - " + self.gear + " - " + self.year +" - " + self.price + " - " + self.typeOfEngine 
+		return self.brand.name + " - " + self.model.name + " - " + self.year + " - " + self.gear + " - " + self.price + " - " + self.typeOfEngine 
 

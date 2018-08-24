@@ -3,6 +3,8 @@ from bs4 import BeautifulSoup
 import time
 from . import views
 from .scraper import maps 
+import requests
+import json
 
 def is_int(input):
 	try:
@@ -48,9 +50,23 @@ def scraper(url, info):
 	prices = soup.find_all(name = "span", attrs = {"class" : "ver20black"})
 	fuel = soup.find_all(name = "td", attrs = {"style" : "border-left:0px;padding-left:0px;"})
 	
+	
 
 	if prices != []:
-
+		print(info)
+		searchTerm = str(info[0] + " " + info[3])
+		print(searchTerm)
+		startIndex = '1'
+		key = 'AIzaSyBtiM-AgV1S9y4V0d1HKwAYT_YUZFtg_K8'
+		cx = '001807663827775318675:yg9wv96v1nc'
+		searchUrl = "https://www.googleapis.com/customsearch/v1?q=" + \
+	    	searchTerm + "&start=" + startIndex + "&key=" + key + "&cx=" + cx + \
+	    	"&searchType=image"
+		r = requests.get(searchUrl)
+		response = r.content.decode('utf-8')
+		result = json.loads(response)
+		image = result["items"][0]["link"]
+		info.append(str(image))
 		
 
 		a = 0

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load tests_extras %}
+
+
+<style>
+.checked {
+    color: orange;
+}
+</style>
+
+	<div class="object">
+
+	    <p>{{ car.brand }}</p>
+	    <p>{{ car.model }}</p>
+	    <p>{{ car.gear }}</p>
+	    <p>{{ car.typeOfEngine }}</p>
+	    {% if car.image %}
+	    	<img src="{{ car.image}}" width="240"></p>
+	    {% endif %}
+	    <p>Средна цена за България: {{ car.price }}</p>
+
+		<!-- Тука ще има какво могат да правят в тоя обект -->
+		
+    </div>
+
+
+{% endblock %}

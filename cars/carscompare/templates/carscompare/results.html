@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
+    <div class="standart-container">
+        {% for j in results %}
+        <div class="result-container">
+            {% if j.image %}
+            <div class='img-container'>
+                <img src="{{ j.image }}" width="240">
+            </div>
+            {% endif %}
+            <div class='rating-container'>
+                Средна цена: {{ j.price }}
+            </div>
+            <div class="name-container">
+                <p class="name">{{ j.brand }} - {{ j.model }}</p>
+                <!--<p>{{ j.typeOfObject }}</p>-->
+            </div>
+            <div class="tel-container">
+                <p>{{ j.year }}</p>
+            </div>
+            <div class='address-container'>
+                <p>{{ j.typeOfEngine }}</p><br>
+                <p>{{ j.gear }}</p>
+            </div>
+        </div>
+        <form action=/carscompare/displayMore/ method="post">
+            {% csrf_token %}    
+            <input type="hidden" name="brand" value="{{ j.brand }}" id="brand">
+            <input type="hidden" name="model" value="{{ j.model }}" id="model">
+            <input type="hidden" name="year" value="{{ j.year }}" id="year">
+            <input type="hidden" name="fuel" value="{{ j.typeOfEngine }}" id="fuel">
+            <input type="hidden" name="gear" value="{{ j.gear }}" id="gear">
+            <input type="hidden" name="price" value="{{ j.price }}" id="price">
+            <input name="button_more" type="submit" value="Виж повече" id="button_more">
+        </form>
+
+        {% endfor %}
+    </div>
+{% endblock %}
