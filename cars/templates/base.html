@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="{% static 'css/main.css' %}" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOZarAyNdL2A9EpaGFsU8hKJ6nieR1VzE&callback=initMap" async defer></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -17,19 +18,19 @@
 	<div id="main">
 		<div id="navbar">
 			{% if user.is_authenticated %}
-			<a href="/service/">ДОБАВЕТЕ ОБЕКТ</a>
-			<a href="/carscompare/home/">СРАВНИ ЦЕНИ</a>
-			<a href="/articles/home/">СТАТИИ</a>
-			<a href="/password-change/">СМЕНИ ПАРОЛА</a>
-			<a href="/logout">ИЗХОД</a>
-			<a href="/">НАЧАЛО</a>
+			<a href="/service/">Добавете обект</a>
+			<a href="/carscompare/home/">Сравни цени</a>
+			<a href="/articles/home/">Статии</a>
+			<a href="/password-change/">Смени парола</a>
+			<a href="/logout">Изход</a>
+			<a href="/">Начало</a>
 			{% else %}
-			<a href="/service/">ДОБАВЕТЕ ОБЕКТ</a>
-			<a href="/carscompare/home/">СРАВНИ ЦЕНИ</a>
-			<a href="/articles/home/">СТАТИИ</a>
-			<a href="/login">ВХОД</a>
-			<a href="/signup">РЕГИСТРАЦИЯ</a>
-			<a href="/">НАЧАЛО</a>
+			<a href="/service/">Добавете обект</a>
+			<a href="/carscompare/home/">Сравни цени</a>
+			<a href="/articles/home/">Статии</a>
+			<a href="/login">Вход</a>
+			<a href="/signup">Регистрация</a>
+			<a href="/">Начало</a>
 			<!--	<p>ЛОГО</p>-->
 			{% endif %}
 		</div>
