@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+#glyph{
+    width: 25px;
+}
+
 body, html {
     height: 100vh;
     font-family: 'Montserrat', sans-serif;
@@ -81,12 +85,12 @@ a:hover {
     transform: translate(-50%, -50%);
 }
 
-.search-container {
+/*.search-container {
     width: 100%;
     position: relative
-}
+}*/
 
-.search-container input {
+/*.search-container input {
     float: left;
     width: 100%;
     border: 3px solid #474747;
@@ -109,7 +113,7 @@ a:hover {
     border-radius: 5px;
     cursor: pointer;
     font-size: 20px;
-}
+}*/
 
 ::placeholder {
     color: grey;
@@ -120,7 +124,7 @@ input:focus::placeholder {
     color: transparent;
 }
 
-input[type=text]:focus {
+input[type="glowinginwhite"]:focus {
     box-shadow: 0 0 15px white;
     -webkit-transition: all 0.30s ease-in-out;
     -moz-transition: all 0.30s ease-in-out;
