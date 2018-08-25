@@ -7,6 +7,10 @@ body {
   background-attachment: fixed;
 }
 
+p {
+  color: black;
+}
+
 #main {
     display: grid;
     align-content: center;
