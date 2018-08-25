@@ -8,6 +8,7 @@
 body, html {
     height: 100vh;
     font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
 }
 
 #main {
@@ -51,11 +52,10 @@ a:hover {
 
 .standart-container {
 
-
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-
+    color: white;
 }
 
 #slogan {
@@ -150,6 +150,9 @@ input[type=text]:focus {
 
 .home-p {
     line-height: 1.5em;
+    font-size: 1.2em;
+    font-weight: 300;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 #footer {
@@ -226,7 +229,8 @@ input[type=text]:focus {
     -moz-box-sizing: border-box;
     padding: 10px;
     border: 1px solid #949494;
-    font: 95% Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 100%;
 }
 
 .form-standart input[type="text"]:focus, .form-standart textarea:focus {
@@ -257,7 +261,8 @@ input[type=text]:focus {
     border-left-style: none;
     color: #ffffff;
     background: #a7414b;
-    font: 95% Arial, Helvetica, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 100%;
     border-radius: 10px;
  }
 
