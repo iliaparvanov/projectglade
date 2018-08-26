@@ -175,14 +175,15 @@ input[type="glowinginwhite"]:focus {
 }
 
 #social-icons img {
-    width: 48px;
-    padding: 12px;
+    width: 7%;
+    padding: 1%;
 }
 
 #copyrights {
     color: #bfbfbf;
     text-align: center;
-    padding-top: 50px;
+    padding-top: 3%;
+    padding-bottom: 2%;
 }
 
 .form-container {
