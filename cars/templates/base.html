@@ -18,33 +18,73 @@
 </head>
 
 <body>
-	<div id="main">
-		<div id="navbar">
-			{% if user.is_authenticated %}
-			<a href="/service/">Добавете обект</a>
-			<a href="/carscompare/home/">Сравни цени</a>
-			<a href="/articles/home/">Статии</a>
-			<a href="/password-change/">Смени парола</a>
-			<a href="/logout">Изход</a>
-			<a href="/">Начало</a>
-			{% else %}
-			<a href="/service/">Добавете обект</a>
-			<a href="/carscompare/home/">Сравни цени</a>
-			<a href="/articles/home/">Статии</a>
-			<a href="/login">Вход</a>
-			<a href="/signup">Регистрация</a>
-			<a href="/">Начало</a>
-			<a href="#" data-toggle="modal" data-target="#Modal">ПОПЪТ</a>
-			<!--	<p>ЛОГО</p>-->
-			{% endif %}
-		</div>
-		<div id="content">
-			{% block content %}
-			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-			<!-- изобщо не ги зарежда тея.... -->
-			{% endblock %}
-		</div>
+	<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">ICON VROOMTATATA</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            	{% if user.is_authenticated %}
+            	<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Profile</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">1</a>
+                        <a class="dropdown-item" href="#">2</a>
+                        <a class="dropdown-item" href="#">3</a>
+                    </div>
+                </li>
+				<li class="nav-item">
+					<a class="nav-link" href="/">Начало</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/logout">Изход</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/password-change/">Смени парола</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/articles/home/">Статии</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/carscompare/home/">Сравни цени</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/service/">Добавете обект</a>
+				</li>
+				{% else %}
+				<li class="nav-item">
+					<a class="nav-link" href="#" data-toggle="modal" data-target="#Modal">ПОПЪТ</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/">Начало</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/signup">Регистрация</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/login">Вход</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/articles/home/">Статии</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/carscompare/home/">Сравни цени</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="/service/">Добавете обект</a>
+				</li>
+				<!--	<p>ЛОГО</p>-->
+				{% endif %}
+            </ul>
+        </div>
+    </nav>
+	<div id="content">
+		{% block content %}
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<!-- изобщо не ги зарежда тея.... -->
+		{% endblock %}
 	</div>
 	<div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
 	    <div class="modal-dialog" role="document">
