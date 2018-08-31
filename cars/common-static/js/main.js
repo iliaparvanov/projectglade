@@ -33,22 +33,7 @@ function stars(num) {
   document.getElementById("rating").value = num;
 }
 
-function commentsRate(num, id) {
-  var div = document.getElementById("rate" + id)
-  for(var i = 1; i <= 5; i++)
-  {
-    var dateSpan = document.createElement('span')
-    if(i <= num)
-    {
-      dateSpan.className = "fa fa-star checked";
-    }
-    else
-    {
-      dateSpan.className = "fa fa-star"
-    }
-    div.appendChild(dateSpan)
-  }
-}
+
 
 // $(function() {
 //     $.widget( "custom.catcomplete", $.ui.autocomplete, {

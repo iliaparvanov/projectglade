@@ -9,7 +9,7 @@
     color: orange;
 }
 </style>
-
+	
 	<div class="object">
 
 	    <p>Име: {{ obj.name }}</p>
@@ -74,6 +74,14 @@
 					commentsRate('{{ i.rate }}', '{{ forloop.counter }}');
 				</script>
 				<p>{{ i.user}}: {{ i.text }}</p>
+
+				<form action="/deleteComment/" method="post" accept-charset="utf-8">
+				{% csrf_token %}	
+					<input type="hidden" name="user" value="{{ user.username }}" id="user">
+	  				<input type="hidden" name="pk" value="{{ obj.pk }}" id="pk">
+	  				<p><input type="submit" value="Изтрий" id="submit"></p>
+
+				</form>
 			</div>
 		{% endfor %}
     </div>

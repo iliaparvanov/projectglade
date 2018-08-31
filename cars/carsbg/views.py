@@ -155,7 +155,7 @@ def searchService(request):
 	return HttpResponse(data, mimetype)
 
 
-def objectCreate(request, comments, users, result, lenOfComments):
+def objectCreate(request, comments, result):
 
 		name = request.POST.get('name', '')
 		tel = request.POST.get('tel', '')
@@ -173,11 +173,8 @@ def objectCreate(request, comments, users, result, lenOfComments):
 
 		for comment in commentsObj:
 			comments.append(comment)
-			users.append(comment.user)
 
-		len1 = len(comments)
-		for i in range(len1):
-			lenOfComments.append(i)
+
 
 
 @csrf_exempt
@@ -187,9 +184,9 @@ def viewObject(request):
 		result = list()
 
 
-		objectCreate(request, comments, users, result, lenOfComments)
+		objectCreate(request, comments, result)
 
-		return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users})
+		return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments})
 
 
 @csrf_exempt
@@ -237,7 +234,7 @@ def addComment(request):
 		result = list()
 		lenOfComments = list()
 
-		objectCreate(request, comments, users, result, lenOfComments)
+		objectCreate(request, comments, result)
 
 		if limitExceeded == 0:
 			result[0].rating = result[0].rating + rating
@@ -247,3 +244,10 @@ def addComment(request):
 			rating = result[0].rating / len(comments)
 
 		return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users, 'rating' : rating, 'alert' : alert})
+
+def deleteComment(request):
+	user = request.POST.get('user')
+	pk = request.POST.get('pk')
+
+	comment = Comment.objects.get(obj = Object.objects.get(pk = pk), user = User.objects.get(username = user)).delete()
+	return HttpResponse("done")
