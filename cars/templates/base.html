@@ -79,91 +79,93 @@
             </ul>
         </div>
     </nav>
-	<div id="content">
-		{% block content %}
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		<!-- изобщо не ги зарежда тея.... -->
-		{% endblock %}
-	</div>
-	<div class="modal fade bd-example-modal-lg" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-	    <div class="modal-dialog modal-lg" role="document">
-	        <div class="modal-content">
-	            <div class="modal-header">
-	                <h4 class="modal-title col-md-5" id="exampleModalLabel">Registration</h4>
-	                <h4 class="modal-title col-md-5 ml-auto" id="exampleModalLabel">Log in</h4>
-	                <button id="close_registration" type="button" class="btn btn-danger" data-dismiss="modal">X</button>
-	            </div>
-	            <div class="modal-body">
-	                <div class="container-fluid">
-	                	<div class="row">
-		                	<div class="col-md-6">
-			                    <form onsubmit="return validation()" role="form" class="form-horizontal">
-			                        <div class="form-group">
-			                            <label for="username" class="col-sm-2 control-label">Username</label>
-			                            <div class="col-sm-10">
-			                                <input class="form-control" name="username" id="username" placeholder="8-20 characters" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required>
-			                            </div>
-			                        </div>
-			                        <div class="form-group">
-			                            <label class="col-sm-2 control-label">Email</label>
-			                            <div class="col-sm-10">
-			                                <input class="form-control" id="postEmail" placeholder="Email" required>
-			                            </div>
-			                        </div>
-			                        <div class="form-group">
-			                            <label class="col-sm-5 control-label">Full Name</label>
-			                            <div class="col-sm-10">
-			                                <input class="form-control" id="postFullName" placeholder="Full Name" required>
-			                            </div>
-			                        </div>
-			                        <div class="form-group">
-			                            <label for="password" class="col-sm-2 control-label">Password</label>
-			                            <div class="col-sm-10">
-			                                <input type="password" class="form-control" name="password" id="password"
-			                                       placeholder="10-20 characters"
-			                                       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-			                                       required>
-			                            </div>
-			                        </div>
-			                        <div class="form-group">
-			                            <label class="col-sm-12 control-label">
-			                                Confirm Password</label>
-			                            <div class="col-sm-10">
-			                                <input type="password" class="form-control" id="postConfirmPassword"
-			                                       placeholder="Confirm Password" required>
-			                            </div>
-			                        </div>
-			                    </form>
-			                </div>
-		                	<div class="col-md-6 ml-auto">
-			                    <form onsubmit="return validation()" role="form" class="form-horizontal">
-			                        <div class="form-group">
-			                            <label class="col-sm-2 control-label">Email</label>
-			                            <div class="col-sm-10">
-			                                <input class="form-control" id="postEmail" placeholder="Email" required>
-			                            </div>
-			                        </div>
-			                        <div class="form-group">
-			                            <label for="password" class="col-sm-2 control-label">Password</label>
-			                            <div class="col-sm-10">
-			                                <input type="password" class="form-control" name="password" id="password"
-			                                       placeholder="10-20 characters"
-			                                       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-			                                       required>
-			                            </div>
-			                        </div>
-			                    </form>
-			                </div>
-			            </div>
-			            <div class="modal-footer">
-                            <button type="submit" class="btn btn-warning col-md-2">Register</button>
-                            <button type="submit" class="btn btn-info col-md-2 ml-auto">Log in</button>
-                        </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
+	<div id="main">
+		<div id="content">
+			{% block content %}
+			<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+			<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			<!-- изобщо не ги зарежда тея.... -->
+			{% endblock %}
+		</div>
+		<div class="modal fade bd-example-modal-lg" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+		    <div class="modal-dialog modal-lg" role="document">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <h4 class="modal-title col-md-5" id="exampleModalLabel">Registration</h4>
+		                <h4 class="modal-title col-md-5 ml-auto" id="exampleModalLabel">Log in</h4>
+		                <button id="close_registration" type="button" class="btn btn-danger" data-dismiss="modal">X</button>
+		            </div>
+		            <div class="modal-body">
+		                <div class="container-fluid">
+		                	<div class="row">
+			                	<div class="col-md-6">
+				                    <form onsubmit="return validation()" role="form" class="form-horizontal">
+				                        <div class="form-group">
+				                            <label for="username" class="col-sm-2 control-label">Username</label>
+				                            <div class="col-sm-10">
+				                                <input class="form-control" name="username" id="username" placeholder="8-20 characters" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required>
+				                            </div>
+				                        </div>
+				                        <div class="form-group">
+				                            <label class="col-sm-2 control-label">Email</label>
+				                            <div class="col-sm-10">
+				                                <input class="form-control" id="postEmail" placeholder="Email" required>
+				                            </div>
+				                        </div>
+				                        <div class="form-group">
+				                            <label class="col-sm-5 control-label">Full Name</label>
+				                            <div class="col-sm-10">
+				                                <input class="form-control" id="postFullName" placeholder="Full Name" required>
+				                            </div>
+				                        </div>
+				                        <div class="form-group">
+				                            <label for="password" class="col-sm-2 control-label">Password</label>
+				                            <div class="col-sm-10">
+				                                <input type="password" class="form-control" name="password" id="password"
+				                                       placeholder="10-20 characters"
+				                                       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+				                                       required>
+				                            </div>
+				                        </div>
+				                        <div class="form-group">
+				                            <label class="col-sm-12 control-label">
+				                                Confirm Password</label>
+				                            <div class="col-sm-10">
+				                                <input type="password" class="form-control" id="postConfirmPassword"
+				                                       placeholder="Confirm Password" required>
+				                            </div>
+				                        </div>
+				                    </form>
+				                </div>
+			                	<div class="col-md-6 ml-auto">
+				                    <form onsubmit="return validation()" role="form" class="form-horizontal">
+				                        <div class="form-group">
+				                            <label class="col-sm-2 control-label">Email</label>
+				                            <div class="col-sm-10">
+				                                <input class="form-control" id="postEmail" placeholder="Email" required>
+				                            </div>
+				                        </div>
+				                        <div class="form-group">
+				                            <label for="password" class="col-sm-2 control-label">Password</label>
+				                            <div class="col-sm-10">
+				                                <input type="password" class="form-control" name="password" id="password"
+				                                       placeholder="10-20 characters"
+				                                       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+				                                       required>
+				                            </div>
+				                        </div>
+				                    </form>
+				                </div>
+				            </div>
+				            <div class="modal-footer">
+	                            <button type="submit" class="btn btn-warning col-md-2">Register</button>
+	                            <button type="submit" class="btn btn-info col-md-2 ml-auto">Log in</button>
+	                        </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
 	</div>
 	<div id="footer">
 		<div id="social-icons">

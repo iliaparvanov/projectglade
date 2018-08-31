@@ -14,7 +14,8 @@ p {
 #main {
     display: grid;
     align-content: center;
-    height: 100vh;
+    min-height: calc(100vh - 56px);
+    /* 56px is height of navbar */
 }
 
 .result-container {
