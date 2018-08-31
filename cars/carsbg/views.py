@@ -67,10 +67,10 @@ def addService(request):
 			city.save()
 
 		if typeOfSearch == "service":
-			service = Service(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0)
+			service = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0)
 			service.save()
 		elif typeOfSearch == "cardealer":
-			carDealer = CarDealer(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0)
+			carDealer = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0)
 			carDealer.save()
 		else:
 			return HttpResponse("ERROR ^)^")
@@ -84,23 +84,24 @@ def searchService(request):
 		searchWord = request.POST.get('search', '')
 		obj = []
 		if City.objects.filter(name=searchWord):
-			results = Service.objects.all().filter(city=City.objects.filter(name=searchWord)[0])
-			obj.append(results)
+			results = Object.objects.filter(city=City.objects.filter(name=searchWord)[0])
 
-			results = CarDealer.objects.all().filter(city=City.objects.filter(name=searchWord)[0])
-			if results not in obj:
-				obj.append(results)
+			for i in results:
+				if i not in obj:
+					obj.append(i)
 
-		if Service.objects.filter(name = searchWord):
-			results = Service.objects.filter(name = searchWord)
-			if results not in obj:
-				obj.append(results)
+		if Object.objects.filter(name = searchWord, typeOfObject="Сервиз"):
+			results = Object.objects.filter(name = searchWord, typeOfObject = "Сервиз")
+			for i in results:
+				if i not in obj:
+					obj.append(i)
 
-		if CarDealer.objects.filter(name = searchWord):
-			results = CarDealer.objects.filter(name = searchWord)
-			if results not in obj:
-				obj.append(results)
-
+		if Object.objects.filter(name = searchWord, typeOfObject = "Автокъща"):
+			results = Object.objects.filter(name = searchWord, typeOfObject = "Автокъща")
+			for i in results:
+				if i not in obj:
+					obj.append(i)
+		print(obj)
 		return render(request, 'carsbg/results.html', {'results' : obj})
 
 	if request.is_ajax():
@@ -116,7 +117,7 @@ def searchService(request):
 			results.append(suggestions_json)
 			data = json.dumps(results)
 
-		suggestions = Service.objects.filter(name__icontains = term)
+		suggestions = Object.objects.filter(name__icontains = term, typeOfObject = "Сервиз")
 		for i in suggestions:
 			suggestions_json = {}
 			suggestions_json['label'] = i.name
@@ -125,7 +126,7 @@ def searchService(request):
 			results.append(suggestions_json)
 			data = json.dumps(results)
 
-		suggestions = CarDealer.objects.filter(name__icontains = term)
+		suggestions = Object.objects.filter(name__icontains = term, typeOfObject = "Автокъща")
 		for i in suggestions:
 			suggestions_json = {}
 			suggestions_json['label'] = i.name
@@ -134,7 +135,7 @@ def searchService(request):
 			results.append(suggestions_json)
 			data = json.dumps(results)
 
-		suggestions = Service.objects.filter(address__icontains = term)
+		suggestions = Object.objects.filter(address__icontains = term)
 		for i in suggestions:
 			suggestions_json = {}
 			suggestions_json['label'] = i.name
@@ -158,12 +159,12 @@ def objectCreate(request, comments, users, result, lenOfComments):
 		typeOfObject = request.POST.get('typeOfObject', '')
 
 		if typeOfObject == "Сервиз":
-			result.append(Service.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
-			commentsObj = Comment.objects.filter(service = result[0])
+			result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
+			commentsObj = Comment.objects.filter(obj = result[0])
 
 		elif typeOfObject == "Автокъща":
-			result.append(CarDealer.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
-			commentsObj = Comment.objects.filter(cardealer = result[0])
+			result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
+			commentsObj = Comment.objects.filter(obj = result[0])
 
 		for comment in commentsObj:
 			comments.append(comment.text)
@@ -200,19 +201,13 @@ def addComment(request):
 
 		alert = ""
 
-		if typeOfObject == "Автокъща":
-			obj = CarDealer.objects.get(pk = pk)
+		obj = Object.objects.get(pk = pk, typeOfObject = typeOfObject)
 
-			if len(Comment.objects.filter(cardealer = obj, ip = ip)) > 1:
-				limitExceeded = 1
-				alert = "Вече оценихте този обект"
+		if len(Comment.objects.filter(obj = obj, ip = ip)) >= 1:
+			limitExceeded = 1
+			alert = "Вече оценихте този обект"
 
-		if typeOfObject == "Сервиз":
-			obj = Service.objects.get(pk = pk)
-
-			if len(Comment.objects.filter(service = obj, ip = ip)) >= 1:
-				alert = "Вече оценихте този обект"
-				limitExceeded = 1
+		
 
 		count = 0
 		for i in Comment.objects.filter(ip = ip):
@@ -220,22 +215,18 @@ def addComment(request):
 					count += 1
 				print(timezone.now().date(), i.date)
 
-		if count >= 10:
+		if count >= 3:
 			limitExceeded = 1
 			alert = "Днес надхвърлихте броя на позволените коментари"
 
 
 
 
-		if typeOfObject == "Сервиз" and limitExceeded == 0:
+		if limitExceeded == 0:
 
-			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], service = obj, ip = ip, date = timezone.now().date())
+			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], obj = obj, ip = ip, date = timezone.now().date())
 			commentObj.save()
 
-
-		elif typeOfObject == "Автокъща" and limitExceeded == 0:
-			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], cardealer = obj, ip = ip, date = timezone.now().date())
-			commentObj.save()
 
 		comments = []
 		users = []
@@ -243,9 +234,10 @@ def addComment(request):
 		lenOfComments = list()
 
 		objectCreate(request, comments, users, result, lenOfComments)
+
 		if limitExceeded == 0:
 			result[0].rating = result[0].rating + rating
 			result[0].save()
-		print(ip)
+
 		rating = result[0].rating / len(comments)
 		return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users, 'rating' : rating, 'alert' : alert})

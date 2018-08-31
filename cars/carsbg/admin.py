@@ -9,6 +9,5 @@ from .models import *
     }
 """
 admin.site.register(City)
-admin.site.register(Service)
-admin.site.register(CarDealer)
+admin.site.register(Object)
 admin.site.register(Comment)

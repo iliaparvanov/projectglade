@@ -3,7 +3,7 @@
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
     <div class="standart-container">
-        {% for i in results %} {% for j in i %}
+        {% for j in results %}
         <div class="result-container">
             {% if j.image.url %}
             <div class='img-container'>
@@ -11,7 +11,7 @@
             </div>
             {% endif %}
             <div class='rating-container'>
-                *rating here*
+                {{ j.rating }}
             </div>
             <div class="name-container">
                 <p class="name">{{ j.name }}</p>
@@ -23,6 +23,7 @@
             <div class='address-container'>
                 <p>{{ j.city.name }}</p>
                 <p>{{ j.address }}</p>
+                <p>{{ j.typeOfObject }}</p>
             </div>
         </div>
         <form action=/object/ method="post">
@@ -34,7 +35,6 @@
             <input name="button_more" type="submit" value="Виж повече" id="button_more">
         </form>
 
-        {% endfor %}
         {% endfor %}
     </div>
 {% endblock %}
