@@ -100,7 +100,7 @@ def searchService(request):
 					obj.append(i)
 
 		try:
-			results = Object.objects.filter(city__icontains=City.objects.filter(name=searchWord)[0])
+			results = Object.objects.filter(city__name__icontains=City.objects.filter(name=searchWord)[0])
 
 			for i in results:
 				if i not in obj:
