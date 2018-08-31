@@ -172,7 +172,7 @@ def objectCreate(request, comments, users, result, lenOfComments):
 			commentsObj = Comment.objects.filter(obj = result[0])
 
 		for comment in commentsObj:
-			comments.append(comment.text)
+			comments.append(comment)
 			users.append(comment.user)
 
 		len1 = len(comments)
@@ -183,10 +183,9 @@ def objectCreate(request, comments, users, result, lenOfComments):
 @csrf_exempt
 def viewObject(request):
 	if request.POST:
-		comments = []
-		users = []
+		comments = []	
 		result = list()
-		lenOfComments = list()
+
 
 		objectCreate(request, comments, users, result, lenOfComments)
 
@@ -229,7 +228,7 @@ def addComment(request):
 
 		if limitExceeded == 0:
 
-			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], obj = obj, ip = ip, date = timezone.now().date())
+			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], obj = obj, ip = ip, date = timezone.now().date(), rate = str(rating))
 			commentObj.save()
 
 

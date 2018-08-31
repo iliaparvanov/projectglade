@@ -12,6 +12,9 @@ class City(models.Model):
 	def __str__(self):
 		return self.name
 
+	class Meta:
+		ordering = ["name"]
+
 class Object(models.Model):
 	name = models.CharField(max_length = 150)
 	city = models.ForeignKey(City, on_delete = models.CASCADE, null=True)
@@ -25,7 +28,7 @@ class Object(models.Model):
 		return self.name 
 
 	class Meta:
-		ordering = ["name"]
+		ordering = ["rating", "name"]
 
 # class CarDealer(models.Model):
 # 	name = models.CharField(max_length = 150, null = True)
@@ -45,8 +48,12 @@ class Comment(models.Model):
 	obj = models.ForeignKey(Object, on_delete = models.CASCADE, null = True)
 	ip = models.CharField(max_length=15, null = True)
 	date = models.DateField(null=True)
+	rate = models.CharField(max_length = 6, null = True)
 
 	def __str__(self):
-		return self.text + str(self.date)
+		return str(self.user) + " " + str(self.date)
+
+	class Meta:
+		ordering = ["date", "user"]
 
 	

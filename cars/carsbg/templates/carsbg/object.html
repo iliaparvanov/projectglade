@@ -38,23 +38,42 @@
 	  			<input type="hidden" name="rating" value="3" id="rating">
 
 	  			<input type="hidden" name="user" value="{{ user.username }}" id="user">
-	  			<input type="hidden" name="pk" value="{{ obj.pk }}" id="user">
-	  			<input type="hidden" name="typeOfObject" value="{{ obj.typeOfObject }}" id="typeOfObject">
-	  			<input type="hidden" name="name" value="{{ obj.name }}" id="tests">
-	    		<input type="hidden" name="address" value="{{ obj.address }}" id="tests">
-	    		<input type="hidden" name="tel" value="{{ obj.tel }}" id="tests">
-	    		<input type="hidden" name="typeOfObject" value="{{ obj.typeOfObject }}" id="tests">
-	    		<input type="hidden" name="city" value="{{ obj.city.name }}" id="tests">
+	  			<input type="hidden" name="pk" value="{{ obj.pk }}" id="pk">
+	  			<input type="hidden" name="name" value="{{ obj.name }}" id="name">
+	    		<input type="hidden" name="address" value="{{ obj.address }}" id="address">
+	    		<input type="hidden" name="tel" value="{{ obj.tel }}" id="tel">
+	    		<input type="hidden" name="typeOfObject" value="{{ obj.typeOfObject }}" id="typeOfObject">
+	    		<input type="hidden" name="city" value="{{ obj.city.name }}" id="city">
 
 	  			<p><input type="submit" value="Изпрати" id="submit"></p>
 	  		</form>
 		{% else %}
   			<p> You must register to comment</p>
 		{% endif %}
-
-		{% for i in lenOfComments %}
-			<div class="results">
-				<p>{{ users|return_item:i }}: {{ comments|return_item:i }}</p>
+		{% for i in comments %}
+			<div class="results" id = "rate{{ forloop.counter }}">
+				
+				<script>
+					function commentsRate(num, id) 
+					{
+						var div = document.getElementById("rate" + id)
+						for(var i = 1; i <= 5; i++)
+						{
+							var dateSpan = document.createElement('span')
+							if(i <= num)
+							{
+								dateSpan.className = "fa fa-star checked";
+							}
+							else
+							{
+								dateSpan.className = "fa fa-star"
+							}
+							div.appendChild(dateSpan)
+						}
+					}
+					commentsRate('{{ i.rate }}', '{{ forloop.counter }}');
+				</script>
+				<p>{{ i.user}}: {{ i.text }}</p>
 			</div>
 		{% endfor %}
     </div>
