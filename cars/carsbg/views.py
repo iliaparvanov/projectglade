@@ -83,24 +83,29 @@ def searchService(request):
 
 		searchWord = request.POST.get('search', '')
 		obj = []
-		if City.objects.filter(name=searchWord):
-			results = Object.objects.filter(city=City.objects.filter(name=searchWord)[0])
+		
 
+		if Object.objects.filter(name__icontains = searchWord, typeOfObject="Сервиз"):
+			results = Object.objects.filter(name__icontains = searchWord, typeOfObject = "Сервиз").order_by("name")
 			for i in results:
 				if i not in obj:
 					obj.append(i)
 
-		if Object.objects.filter(name = searchWord, typeOfObject="Сервиз"):
-			results = Object.objects.filter(name = searchWord, typeOfObject = "Сервиз")
+		if Object.objects.filter(name__icontains = searchWord, typeOfObject = "Автокъща"):
+			results = Object.objects.filter(name__icontains = searchWord, typeOfObject = "Автокъща")
 			for i in results:
 				if i not in obj:
 					obj.append(i)
 
-		if Object.objects.filter(name = searchWord, typeOfObject = "Автокъща"):
-			results = Object.objects.filter(name = searchWord, typeOfObject = "Автокъща")
+		try:
+			results = Object.objects.filter(city__icontains=City.objects.filter(name=searchWord)[0])
+
 			for i in results:
 				if i not in obj:
 					obj.append(i)
+		except IndexError:
+			pass
+
 		print(obj)
 		return render(request, 'carsbg/results.html', {'results' : obj})
 

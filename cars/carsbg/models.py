@@ -24,6 +24,9 @@ class Object(models.Model):
 	def __str__(self):
 		return self.name 
 
+	class Meta:
+		ordering = ["name"]
+
 # class CarDealer(models.Model):
 # 	name = models.CharField(max_length = 150, null = True)
 # 	city = models.ForeignKey(City, on_delete = models.CASCADE)
@@ -45,3 +48,5 @@ class Comment(models.Model):
 
 	def __str__(self):
 		return self.text + str(self.date)
+
+	
