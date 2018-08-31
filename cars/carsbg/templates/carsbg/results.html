@@ -27,6 +27,7 @@
             </div>
         </div>
         <form action=/object/ method="post">
+        {% csrf_token %}
             <input type="hidden" name="name" value="{{ j.name }}" id="tests">
             <input type="hidden" name="address" value="{{ j.address }}" id="tests">
             <input type="hidden" name="tel" value="{{ j.tel }}" id="tests">

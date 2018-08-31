@@ -24,24 +24,28 @@ $("#brandsId").change(function () {
                 opt.textContent = response.models[model];
                 select.appendChild(opt);
             }
-            
-            
         },
-    
   })
-  // .then(function(responce)
-  // {
-  //       response=toJSON(response);
+});
+
+$("#delete").on('click', function () {
+  var user = $("#user").val();
+  var pk = $("#pk").val();
+  // alert(user);
+  // alert(pk);
+
+  $.ajax({
+    url: '/ajax/deleteComment/',
+    data: {
+      'user' : user,
+      'pk' : pk,
+    },
+    dataType: 'json',
+    success: function (response, status) {
          
-  //       var select = document.getElementById("modelsId");
-  //       for (var model in response) 
-  //       {
-  //           opt = document.createElement("option");
-  //           opt.value = model.name;
-  //           opt.textContent = model.name;
-  //           select.appendChild(opt);
-  //       }
-  //  });     
+            location.reload();
+        },
+  })
 });
 
     

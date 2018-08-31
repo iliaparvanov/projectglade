@@ -11,6 +11,8 @@ import json
 from django.contrib import messages
 from ipware import get_client_ip
 from django.utils import timezone
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
+
 
 def home(request):
      return render(request, 'carsbg/home.html')
@@ -157,11 +159,14 @@ def searchService(request):
 
 def objectCreate(request, comments, result):
 
-		name = request.POST.get('name', '')
-		tel = request.POST.get('tel', '')
-		address = request.POST.get('address', '')
-		city = request.POST.get('city', '')
-		typeOfObject = request.POST.get('typeOfObject', '')
+	
+		name = request.POST.get('name')
+		tel = request.POST.get('tel')
+		address = request.POST.get('address')
+		city = request.POST.get('city')
+		typeOfObject = request.POST.get('typeOfObject')
+		commentsObj = False
+		print(city)
 
 		if typeOfObject == "Сервиз":
 			result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
@@ -171,22 +176,27 @@ def objectCreate(request, comments, result):
 			result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
 			commentsObj = Comment.objects.filter(obj = result[0])
 
-		for comment in commentsObj:
-			comments.append(comment)
+		if commentsObj:
+			for comment in commentsObj:
+				comments.append(comment)
 
 
 
 
-@csrf_exempt
 def viewObject(request):
-	if request.POST:
-		comments = []	
-		result = list()
 
+	comments = []	
+	result = list()
+	rating = 0
+	alert = ''
+	
+	objectCreate(request, comments, result)
 
-		objectCreate(request, comments, result)
+	if len(comments) > 0:
+		rating = result[0].rating // len(comments)
 
-		return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments})
+	
+	return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, "rating" : rating, 'alert' : alert})
 
 
 @csrf_exempt
@@ -201,7 +211,7 @@ def addComment(request):
 		limitExceeded = 0
 
 		alert = ""
-
+		print(pk)
 		obj = Object.objects.get(pk = pk, typeOfObject = typeOfObject)
 
 		if len(Comment.objects.filter(obj = obj, ip = ip)) >= 1:
@@ -243,11 +253,16 @@ def addComment(request):
 		if len(comments) > 0:
 			rating = result[0].rating / len(comments)
 
-		return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users, 'rating' : rating, 'alert' : alert})
+	
+	return redirect('home')
 
 def deleteComment(request):
-	user = request.POST.get('user')
-	pk = request.POST.get('pk')
-
-	comment = Comment.objects.get(obj = Object.objects.get(pk = pk), user = User.objects.get(username = user)).delete()
-	return HttpResponse("done")
+	user = request.GET.get('user')
+	pk = request.GET.get('pk')
+	print(user, pk)
+	comment = Comment.objects.get(obj = Object.objects.get(pk = pk), user = User.objects.get(username = user))
+	obj = Object.objects.get(pk = pk)
+	obj.rating -= int(comment.rate)
+	obj.save()
+	comment.delete()
+	return JsonResponse("Success", safe = False)
