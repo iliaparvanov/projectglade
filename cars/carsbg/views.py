@@ -215,7 +215,7 @@ def addComment(request):
 					count += 1
 				print(timezone.now().date(), i.date)
 
-		if count >= 3:
+		if count >= 4:
 			limitExceeded = 1
 			alert = "Днес надхвърлихте броя на позволените коментари"
 
@@ -239,5 +239,7 @@ def addComment(request):
 			result[0].rating = result[0].rating + rating
 			result[0].save()
 
-		rating = result[0].rating / len(comments)
+		if len(comments) > 0:
+			rating = result[0].rating / len(comments)
+
 		return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, 'lenOfComments' : lenOfComments, 'users' : users, 'rating' : rating, 'alert' : alert})
