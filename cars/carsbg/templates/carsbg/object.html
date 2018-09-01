@@ -33,7 +33,8 @@
 			
 			<form id = "addCommentForm" accept-charset="utf-8">
 	  			
-	  			<label for="comment">Напиши коментар:<br></label><textarea rows="4" cols="50" type="text" name="comment"  id="comment" required/></textarea>{{ alert }}<br>
+	  			<label for="comment">Напиши коментар:<br></label><textarea rows="4" cols="50" type="text" name="comment"  id="comment" required/></textarea>
+	  			<a id = "alert">{{ alert }}</a>
 
 
 	  			<input type="hidden" name="rating" value="3" id="rating">
@@ -76,8 +77,9 @@
 					commentsRate('{{ i.rate }}', '{{ forloop.counter }}');
 				</script>
 				<p>{{ i.user}}: {{ i.text }}</p>
-	  			<p><input type="submit" value="Изтрий" id="delete"></p>
-
+				{% if  user  == i.user %}
+	  				<p><input type="submit" value="Изтрий" id="delete"></p>
+	  			{% endif %}
 <!-- 
 				<form action="/deleteComment/" method="post" accept-charset="utf-8">
 				{% csrf_token %}	

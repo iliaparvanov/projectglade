@@ -165,6 +165,7 @@ def objectCreate(request, comments, result):
 		address = request.POST.get('address')
 		city = request.POST.get('city')
 		typeOfObject = request.POST.get('typeOfObject')
+		user = request.POST.get('user')
 
 	elif request.GET:
 		name = request.GET.get('name')
@@ -172,20 +173,22 @@ def objectCreate(request, comments, result):
 		address = request.GET.get('address')
 		city = request.GET.get('city')
 		typeOfObject = request.GET.get('typeOfObject')
+		user = request.POST.get('user')
+	
+	result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
+	currentUserComment = Comment.objects.filter(obj = result[0], user = User.objects.filter(username = user)[0])
+	commentsObj = Comment.objects.filter(obj = result[0]).exclude(user = User.objects.filter(username = user)[0])
 
-		commentsObj = False
-	if typeOfObject == "Сервиз":
-		result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
-		commentsObj = Comment.objects.filter(obj = result[0])
+	# elif typeOfObject == "Автокъща":
+	# 	result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city).first(), typeOfObject = typeOfObject).first())
+	# 	commentsObj = Comment.objects.filter(obj = result[0])
 
-	elif typeOfObject == "Автокъща":
-		result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city).first(), typeOfObject = typeOfObject).first())
-		commentsObj = Comment.objects.filter(obj = result[0])
+	for comment in currentUserComment:
+		comments.append(comment)
+	for comment in commentsObj:
+		comments.append(comment)
 
-	if commentsObj:
-		for comment in commentsObj:
-			comments.append(comment)
-
+	print(comments[0])
 
 
 
@@ -197,9 +200,10 @@ def viewObject(request):
 	alert = ''
 	
 	objectCreate(request, comments, result)
-
+	print(comments)
 	if len(comments) > 0:
-		rating = result[0].rating // len(comments)
+		rating = result[0].rating / len(comments)
+		rating = round(rating, 2)
 
 	
 	return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, "rating" : rating, 'alert' : alert})
@@ -259,16 +263,16 @@ def addComment(request):
 			rating = result.rating / len(comments)
 
 	
-	return JsonResponse("Success", safe = False)
+	return JsonResponse({"alert" : alert}, safe = False)
 
 def deleteComment(request):
 	user = request.GET.get('user')
 	pk = request.GET.get('pk')
-	print(user, pk)
+
 	comment = Comment.objects.get(obj = Object.objects.get(pk = pk), user = User.objects.get(username = user))
 	obj = Object.objects.get(pk = pk)
 	obj.rating -= int(comment.rate)
-	
+
 	if obj.rating < 0:
 		obj.rating = 0
 
