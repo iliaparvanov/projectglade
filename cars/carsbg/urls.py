@@ -15,6 +15,6 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
     url(r'^password-change/$', views.password_change, name='password_change'),
     url(r'^object/$', views.viewObject, name='object'),
-    url(r'^addComment/$', views.addComment, name='addComment'),
+    url(r'^ajax/addComment/$', views.addComment, name='addComment'),
     url(r'^ajax/deleteComment/$', views.deleteComment, name='deleteComment'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

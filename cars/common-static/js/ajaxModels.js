@@ -28,11 +28,38 @@ $("#brandsId").change(function () {
   })
 });
 
+$("#addComment").on('click', function () {
+  var comment = $("#comment").val();
+  if (!$("#addCommentForm")[0].checkValidity()) {
+     $("#addCommentForm").find("#hiddenBtn").click();
+     return;
+  }
+  var user = $("#user").val();
+  var typeOfObject = $("#typeOfObject").val();
+  var pk = $("#pk").val();
+  var rating = $("#rating").val();
+
+  $.ajax({
+    url: '/ajax/addComment/',
+    data: {
+      'comment' : comment,
+      'user' : user,
+      'pk' : pk,
+      'typeOfObject' : typeOfObject,
+      'rating' : rating,
+
+    },
+    dataType: 'json',
+    success: function (response, status) {
+         
+            location.reload();
+        },
+  })
+});
+
 $("#delete").on('click', function () {
   var user = $("#user").val();
   var pk = $("#pk").val();
-  // alert(user);
-  // alert(pk);
 
   $.ajax({
     url: '/ajax/deleteComment/',

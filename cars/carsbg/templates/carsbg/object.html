@@ -31,7 +31,8 @@
 			<span class="fa fa-star" id="star4" onclick="stars(4, this)"></span>
 			<span class="fa fa-star" id="star5" onclick="stars(5, this)"></span>
 			
-			<form action=/addComment/ method="post" accept-charset="utf-8">
+			<form id = "addCommentForm" accept-charset="utf-8">
+	  			
 	  			<label for="comment">Напиши коментар:<br></label><textarea rows="4" cols="50" type="text" name="comment"  id="comment" required/></textarea>{{ alert }}<br>
 
 
@@ -44,9 +45,10 @@
 	    		<input type="hidden" name="tel" value="{{ obj.tel }}" id="tel">
 	    		<input type="hidden" name="typeOfObject" value="{{ obj.typeOfObject }}" id="typeOfObject">
 	    		<input type="hidden" name="city" value="{{ obj.city.name }}" id="city">
+  				<input type="submit"  id="hiddenBtn" style="display: none">
 
-	  			<p><input type="submit" value="Изпрати" id="submit"></p>
-	  		</form>
+	    	</form>
+  			<p><input type="submit" value="Изпрати" id="addComment"></p>
 		{% else %}
   			<p> You must register to comment</p>
 		{% endif %}

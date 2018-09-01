@@ -159,26 +159,32 @@ def searchService(request):
 
 def objectCreate(request, comments, result):
 
-	
+	if request.POST:
 		name = request.POST.get('name')
 		tel = request.POST.get('tel')
 		address = request.POST.get('address')
 		city = request.POST.get('city')
 		typeOfObject = request.POST.get('typeOfObject')
+
+	elif request.GET:
+		name = request.GET.get('name')
+		tel = request.GET.get('tel')
+		address = request.GET.get('address')
+		city = request.GET.get('city')
+		typeOfObject = request.GET.get('typeOfObject')
+
 		commentsObj = False
-		print(city)
+	if typeOfObject == "Сервиз":
+		result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
+		commentsObj = Comment.objects.filter(obj = result[0])
 
-		if typeOfObject == "Сервиз":
-			result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
-			commentsObj = Comment.objects.filter(obj = result[0])
+	elif typeOfObject == "Автокъща":
+		result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city).first(), typeOfObject = typeOfObject).first())
+		commentsObj = Comment.objects.filter(obj = result[0])
 
-		elif typeOfObject == "Автокъща":
-			result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
-			commentsObj = Comment.objects.filter(obj = result[0])
-
-		if commentsObj:
-			for comment in commentsObj:
-				comments.append(comment)
+	if commentsObj:
+		for comment in commentsObj:
+			comments.append(comment)
 
 
 
@@ -201,17 +207,19 @@ def viewObject(request):
 
 @csrf_exempt
 def addComment(request):
-	if request.POST:
-		comment = request.POST.get('comment', '')
-		user = request.POST.get('user', '')
-		typeOfObject = request.POST.get('typeOfObject', '')
-		pk = request.POST.get('pk', '')
-		rating = int(request.POST.get('rating', ''))
-		ip, is_routable = get_client_ip(request)
-		limitExceeded = 0
+	if request.GET:
+		comment = request.GET.get('comment', '')
+		user = request.GET.get('user', '')
+		typeOfObject = request.GET.get('typeOfObject', '')
+		pk = request.GET.get('pk', '')
+		rating = int(request.GET.get('rating', ''))
 
+		print(comment, user)
+		print("yeahhh")
+		ip, is_routable = get_client_ip(request)
+
+		limitExceeded = 0
 		alert = ""
-		print(pk)
 		obj = Object.objects.get(pk = pk, typeOfObject = typeOfObject)
 
 		if len(Comment.objects.filter(obj = obj, ip = ip)) >= 1:
@@ -239,22 +247,19 @@ def addComment(request):
 			commentObj.save()
 
 
-		comments = []
-		users = []
-		result = list()
-		lenOfComments = list()
 
-		objectCreate(request, comments, result)
-
+		result = Object.objects.get(pk = pk, typeOfObject = typeOfObject)
+		comments = Comment.objects.filter(obj = result)
+		print(result)
 		if limitExceeded == 0:
-			result[0].rating = result[0].rating + rating
-			result[0].save()
+			result.rating = result.rating + rating
+			result.save()
 
 		if len(comments) > 0:
-			rating = result[0].rating / len(comments)
+			rating = result.rating / len(comments)
 
 	
-	return redirect('home')
+	return JsonResponse("Success", safe = False)
 
 def deleteComment(request):
 	user = request.GET.get('user')
@@ -263,6 +268,10 @@ def deleteComment(request):
 	comment = Comment.objects.get(obj = Object.objects.get(pk = pk), user = User.objects.get(username = user))
 	obj = Object.objects.get(pk = pk)
 	obj.rating -= int(comment.rate)
+	
+	if obj.rating < 0:
+		obj.rating = 0
+
 	obj.save()
 	comment.delete()
 	return JsonResponse("Success", safe = False)
