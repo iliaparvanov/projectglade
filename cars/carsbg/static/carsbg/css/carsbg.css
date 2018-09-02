@@ -1,14 +1,15 @@
 body {
-  background-image: url('/static/carsbg/images/engine-bg.png');
-  height: 100vh;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+    background-image: url('/static/carsbg/images/engine-bg.png');
+    height: 100vh;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 p {
-  color: black;
+    color: black;
+    margin: 0;
 }
 
 #main {
@@ -19,56 +20,65 @@ p {
 }
 
 .result-container {
-  background-color: white;
-  display: grid;
-  grid-template-columns: 1fr 3fr 2fr;
-  grid-template-rows: 60px 60px 60px;
-  /*grid-gap: 10px;*/
-  border: 1px solid #050507;
-  margin-top: 20px;
-  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
+    background-color: #ffffff;
+    display: grid;
+    grid-template-columns: 2fr 3fr 2fr;
+    grid-template-rows: 70px 70px 70px;
+    /*grid-gap: 10px;*/
+    border: 1px solid #7e7e7e;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
 }
 
 .img-container {
-  grid-column: 1/2;
-  grid-row: 1/4;
+    position: relative;
+    grid-column: 1/2;
+    grid-row: 1/4;
 }
 
 .img-container img {
-
+    position: absolute;
+    object-fit: cover;
+    height: 210px;
+    width: 100%;
 }
 
 .name-container {
-  font-size: 20px;
-  font-weight: 600;
-  grid-column: 2/3;
-  grid-row: 1/2;
-  padding-top: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    padding-left: 15px;
 }
 
 .rating-container {
-  grid-column: 3/4;
-  grid-row: 1/2;
-  padding-top: 15px;
-  text-align: center;
-  border-left: 1px solid;
+    grid-column: 3/4;
+    grid-row: 1/2;
+    padding-top: 15px;
+    text-align: center;
+    border-left: #7e7e7e 1px solid;
 }
 
 .tel-container {
-  grid-column: 2/3;
-  grid-row: 3/4;
-  align-self: end;
-  padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+    grid-column: 2/3;
+    grid-row: 3/4;
+    padding-left: 15px;
 }
 
 .address-container {
-  font-size: 24px;
-  grid-column: 3/4;
-  grid-row: 2/4;
-  padding-top: 48px;
-  text-align: center;
-  border-top: 1px solid;
-  border-left: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0;
+    font-size: 24px;
+    grid-column: 3/4;
+    grid-row: 2/4;
+    border-top: #7e7e7e 1px solid;
+    border-left: #7e7e7e 1px solid;
 }
 
 #register-now-text {
@@ -87,5 +97,49 @@ p {
 }
 
 @media screen and (max-width: 800px) {
+    .result-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 4fr 1fr 1fr 2fr 1fr ;
+    }
 
+    .img-container {
+        position: relative;
+        grid-column: 1;
+        grid-row: 1/2;
+    }
+
+    .img-container img {
+        position: absolute;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+
+    .name-container {
+        justify-content: center;
+        padding-left: 0;
+        grid-column: 1;
+        grid-row: 2/3;
+    }
+
+    .tel-container {
+        grid-column: 1;
+        grid-row: 3/4;
+        padding-bottom: 0;
+    }
+
+    .address-container {
+        grid-column: 1;
+        grid-row: 4/5;
+        border-top: #7e7e7e 1px solid;
+        border-bottom: #7e7e7e 1px solid;
+        border-left: 0;
+    }
+
+    .rating-container {
+        grid-column: 1;
+        grid-row: 5/6;
+        border-left: 0;
+    }
 }

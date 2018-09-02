@@ -11,19 +11,17 @@
             </div>
             {% endif %}
             <div class='rating-container'>
-                {{ j.rating }}
+                <p>{{ j.rating }}/10</p>
             </div>
             <div class="name-container">
-                <p class="name">{{ j.name }}</p>
+                <p class="name">{{ j.typeOfObject }} {{ j.name }}</p>
                 <!--<p>{{ j.typeOfObject }}</p>-->
             </div>
             <div class="tel-container">
-                <p>{{ j.tel }}</p>
+                <p>Тел. {{ j.tel }}</p>
             </div>
             <div class='address-container'>
-                <p>{{ j.city.name }}</p>
-                <p>{{ j.address }}</p>
-                <p>{{ j.typeOfObject }}</p>
+                <p>{{ j.city.name }}, {{ j.address }}</p>
             </div>
         </div>
         <form action=/object/ method="post">
