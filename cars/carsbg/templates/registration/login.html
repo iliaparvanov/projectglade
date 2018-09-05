@@ -4,10 +4,11 @@
     <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
     <div class="form-container">
         <ul>
-            <form method="post" accept-charset="utf-8" class="form-standart">
-              {% csrf_token %}
-              {{ form.as_p }}
-             <input type="submit" value="ВХОД">
+            <form action="/login/" method="post" accept-charset="utf-8" class="form-standart">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="ВХОД">
+            </form>
         </ul>
         <p id="register-now-text">Нямате акаунт? <a href="/signup/">Регистрирайте се сега!</a></p>
     </div>

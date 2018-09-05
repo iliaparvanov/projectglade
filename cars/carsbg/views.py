@@ -36,9 +36,11 @@ def password_change(request):
         'form': form
     })
 
+
+
 def signup(request):
 	if request.method == 'POST':
-		form = UserCreationForm(request.POST)
+		form = MyRegistrationForm(request.POST)
 		if form.is_valid():
 			form.save()
 			username = form.cleaned_data.get('username')
@@ -46,28 +48,11 @@ def signup(request):
 			user = authenticate(username=username, password=raw_password)
 			login(request, user)
 			return redirect('/')
-	else:
-		form = UserCreationForm()
-	return render(request, 'registration/signup.html', {'form': form})
-
-def register_user(request):
-	if request.user.is_authenticated:
-		return redirect('/')
-	else:
-		if request.method == 'POST':
-			form = MyRegistrationForm(request.POST)
-			if form.is_valid():
-				form.save()
-				username = form.cleaned_data.get('username')
-				raw_password = form.cleaned_data.get('password1')
-				user = authenticate(username=username, password=raw_password)
-				login(request, user)
-				return redirect('/')
-			else:
-				return render(request, 'registration/signup.html', {'form' : form})
-		else:		
-			form = MyRegistrationForm()
+		else:
 			return render(request, 'registration/signup.html', {'form' : form})
+	else:		
+		form = MyRegistrationForm()
+		return render(request, 'registration/signup.html', {'form' : form})
 
 def service(request):
     return render(request, 'carsbg/serviceCreate.html')
