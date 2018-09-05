@@ -17,7 +17,8 @@ from .forms import *
 
 
 def home(request):
-     return render(request, 'carsbg/home.html')
+	form = MyRegistrationForm()
+	return render(request, 'carsbg/home.html', {"form" : form})
 
 @login_required
 def password_change(request):
@@ -27,7 +28,7 @@ def password_change(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Your password was successfully updated!')
-            return render(request, 'carsbg/home.html')
+            return redirect('/')
         else:
             messages.error(request, 'Please correct the error below.')
     else:
