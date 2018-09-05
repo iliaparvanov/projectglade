@@ -93,7 +93,7 @@
 		                <div class="container-fluid">
 		                	<div class="row">
 		                		<div class="col-md-6 ml-auto">
-				                	<form action="/signup/" method="post" id="register" autocomplete="off" class="form-horizontal">
+				                	<form action="/signup/" method="post" id="register" name="register" autocomplete="off" class="form-horizontal">
 	               					 	{% csrf_token %}
 						                <div class="fieldWrapper">
 						                  <!-- {{ form.email.errors }}
@@ -122,11 +122,10 @@
 						                 	{% endfor %}.
 	               						</div>
 	               						
-	               						<input type="submit" class="btn btn-warning col-md-2" value="Register"/>
 	            					</form>
 	            				</div>
 			                	<div class="col-md-6 ml-auto">
-				                    <form action="/login/" role="form" method="post" class="form-horizontal">
+				                    <form action="/login/" role="form" name="login" id="login" method="post" class="form-horizontal">
 	               					 	{% csrf_token %}
 				                        <div class="form-group">
 				                            <label class="col-sm-2 control-label">Никнейм</label>
@@ -143,12 +142,13 @@
 				                                       required>
 				                            </div>
 				                        </div>
-	                            		<button type="submit" class="btn btn-info col-md-2 ml-auto">Log in</button>
 
 				                    </form>
 				                </div>
 				            </div>
 				            <div class="modal-footer">
+	               				<input type="submit" class="btn btn-warning col-md-2" value="Регистрация" form="register" />
+	                            <button type="submit" class="btn btn-info col-md-2 ml-auto" form="login">Log in</button>
 	                            
 	                        </div>
 		                </div>
