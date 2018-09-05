@@ -119,35 +119,37 @@
 						                            </div>
 						                        {% endif %}
 						                    </div>
-						                 	{% endfor %}
+						                 	{% endfor %}.
 	               						</div>
 	               						
 	               						<input type="submit" class="btn btn-warning col-md-2" value="Register"/>
 	            					</form>
 	            				</div>
 			                	<div class="col-md-6 ml-auto">
-				                    <form onsubmit="return validation()" role="form" class="form-horizontal">
+				                    <form action="/login/" role="form" method="post" class="form-horizontal">
+	               					 	{% csrf_token %}
 				                        <div class="form-group">
-				                            <label class="col-sm-2 control-label">Email</label>
+				                            <label class="col-sm-2 control-label">Никнейм</label>
 				                            <div class="col-sm-10">
-				                                <input class="form-control" id="postEmail" placeholder="Email" required>
+				                                <input class="form-control" id="username" name="username" placeholder="Никнейм" required>
 				                            </div>
 				                        </div>
 				                        <div class="form-group">
-				                            <label for="password" class="col-sm-2 control-label">Password</label>
+				                            <label for="password" class="col-sm-2 control-label">Парола</label>
 				                            <div class="col-sm-10">
 				                                <input type="password" class="form-control" name="password" id="password"
-				                                       placeholder="10-20 characters"
-				                                       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+				                                       placeholder="Парола"
+				                                       
 				                                       required>
 				                            </div>
 				                        </div>
+	                            		<button type="submit" class="btn btn-info col-md-2 ml-auto">Log in</button>
+
 				                    </form>
 				                </div>
 				            </div>
 				            <div class="modal-footer">
 	                            
-	                            <button type="submit" class="btn btn-info col-md-2 ml-auto">Log in</button>
 	                        </div>
 		                </div>
 		            </div>

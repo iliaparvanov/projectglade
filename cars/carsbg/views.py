@@ -20,6 +20,18 @@ def home(request):
 	form = MyRegistrationForm()
 	return render(request, 'carsbg/home.html', {"form" : form})
 
+def login_user(request):
+    if request.POST:
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        print(user)
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                return redirect('/')
+    return redirect('/')
+
 @login_required
 def password_change(request):
     if request.method == 'POST':
