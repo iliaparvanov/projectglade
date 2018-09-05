@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
     <div class="form-container">
         <ul>
-            <form action=/login/ method="post" accept-charset="utf-8" class="form-standart">
+            <form method="post" accept-charset="utf-8" class="form-standart">
               {% csrf_token %}
               {{ form.as_p }}
              <input type="submit" value="ВХОД">

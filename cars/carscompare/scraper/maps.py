@@ -8,9 +8,9 @@ fuelId = {
 }
 
 
-startingYear = 1999
+startingYear = 2000
 yearid = [startingYear]
-for i in range(3):
+for i in range(5):
 	startingYear += 1
 	yearid.append(startingYear)
 
@@ -29,7 +29,7 @@ brandId = {
 	# "AstonMartin" : 7,
 	# "Audi" : 8,
 	# "Bentley" : 9,
-	# "BMW" : 10,
+	"BMW" : 10,
 	# "Bova" : 132,
 	# "Buick" : 13,
 	# "Cadillac" : 14,
@@ -67,7 +67,7 @@ brandId = {
 	# "Maybach" : 52,
 	# "Mazda" : 53,
 	# "McLaren" : 126,
-	"MercedesBenz" : 54,
+	# "MercedesBenz" : 54,
 	# "MG" : 55,
 	# "Microcar" : 105,
 	# "Mini" : 56,
@@ -286,8 +286,8 @@ BMW = {
 	# "X1"  : 1659,
 	# "X3"  : 156,
 	# "X4"  : 1981,
-	"X5"  : 157,
-	# "X6"  : 158,
+	# "X5"  : 157,
+	"X6"  : 158,
 	# "X2"  : 2180,
 	# "Z3"  : 160,
 	# "Z4" : 161

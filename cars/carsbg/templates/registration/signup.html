@@ -6,10 +6,39 @@
     <div class="form-container">
         <div class="section-title">Регистрация</div>
         <ul>
-            <form method="post" accept-charset="utf-8" class="form-standart">
+            <!-- <form action="/login/" method="post" accept-charset="utf-8" class="form-standart">
               {% csrf_token %}
-              {{ form.as_p }}
-            <input type="submit" value="РЕГИСТРИРАНЕ">
+              <label for="id_username">Username</label><input id="id_username" name="username" type="text" class="form-control">
+              <label for="id_password">Password</label><input id="id_password" name="password" type="password" class="form-control">
+
+            <input type="submit" value="РЕГИСТРИРАНЕ"> -->
+            <form action="/signup/" method="post" id="register" autocomplete="off">
+                {% csrf_token %}
+                <div class="fieldWrapper">
+                  <!-- {{ form.email.errors }}
+                  {{ form.email.label_tag }}
+                  {{ form.email }}<br>
+                  {{ form.username.label_tag }}
+                  {{ form.username }}<br>
+                  {{ form.password1.errors }}
+                  {{ form.password1.label_tag }}
+                  {{ form.password1 }}<br>
+                  {{ form.password2.errors }}
+                  {{ form.password2.label_tag }}
+                  {{ form.password2 }} -->
+                  {% for field in form %}
+                        {{ field.label_tag }}
+                        {{ field }}<br>
+                        {% if field.errors %}
+                            <div class="alert alert-danger">
+                                    <strong>{{ field.errors|escape }}</strong>
+                            </div>
+                        {% endif %}
+                  {% endfor %}
+                </div>
+
+                
+                <input type="submit" value="Register"/>
             </form>
         </ul>
     </div>

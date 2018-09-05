@@ -12,6 +12,8 @@ from django.contrib import messages
 from ipware import get_client_ip
 from django.utils import timezone
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
+from django.template.context_processors import csrf
+from .forms import *
 
 
 def home(request):
@@ -47,6 +49,25 @@ def signup(request):
 	else:
 		form = UserCreationForm()
 	return render(request, 'registration/signup.html', {'form': form})
+
+def register_user(request):
+	if request.user.is_authenticated:
+		return redirect('/')
+	else:
+		if request.method == 'POST':
+			form = MyRegistrationForm(request.POST)
+			if form.is_valid():
+				form.save()
+				username = form.cleaned_data.get('username')
+				raw_password = form.cleaned_data.get('password1')
+				user = authenticate(username=username, password=raw_password)
+				login(request, user)
+				return redirect('/')
+			else:
+				return render(request, 'registration/signup.html', {'form' : form})
+		else:		
+			form = MyRegistrationForm()
+			return render(request, 'registration/signup.html', {'form' : form})
 
 def service(request):
     return render(request, 'carsbg/serviceCreate.html')
@@ -188,7 +209,6 @@ def objectCreate(request, comments, result):
 	for comment in commentsObj:
 		comments.append(comment)
 
-	print(comments[0])
 
 
 
