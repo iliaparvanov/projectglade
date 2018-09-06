@@ -31,6 +31,7 @@
 </div>
 		<!-- Тука ще има какво могат да правят в тоя обект -->
 		{% if user.is_authenticated %}
+		<div style="margin-top: 10%">
 			<h3>Рейтинг</h3>
 
 			<span class="fa fa-star checked" id="star1" onclick="stars(1, this)"></span>
@@ -57,24 +58,34 @@
   				<input type="submit"  id="hiddenBtn" style="display: none">
 
 	    	</form>
-  			<p><input type="submit" value="Изпрати" id="addComment"></p><br>
+  			<button type="submit" class="btn btn-danger" id="addComment">Изпрати</button><br>
+  		</div>
 		{% else %}
   			<strong>Трябва да се регистрирате за да коментирате</strong>
 		{% endif %}
 		
+
+
+
+
+
 		{% for i in comments %}
-		<div class="container" style="margin-left: -10px; width: 40%;">
+		<div style=" width: 40%; margin-top: 5%" >
 			<div class="card">
 			    <div class="card-body">
 			        <div class="row">
-		        	    <div class="col-md-2">
+		        	    <div class="col-md-2" >
 		        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
 		        	        <p class="text-secondary text-center">{{ i.date }}</p>
 		        	    </div>
 		        	    <div class="col-md-10">
-		        	        <p>
-		        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>{{ i.user }}</strong></a>
-		        	            <script>
+	        	            <a class="float-left"  href="https://maniruzzaman-akash.blogspot.com/p/contact.html" ><strong>{{ i.user }}</strong></a>
+		        	       
+
+		        	       <div class="clearfix"></div>
+		        	       <div id = "rate{{ forloop.counter }}">
+		        	        </div>
+		        	       <script>
 									function commentsRate(num, id) 
 									{
 										var div = document.getElementById("rate" + id)
@@ -95,40 +106,20 @@
 									}
 									commentsRate('{{ i.rate }}', '{{ forloop.counter }}');
 								</script>
-
-		        	       <div class="clearfix"></div>
 		        	        <p>{{ i.text }}</p>
 		        	        <p>
 		        	            <!-- <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
 		        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a> -->
 		        	       </p>
 		        	    </div>
+
 			        </div>
 			    </div>
 			</div>
 		</div>
-		<br>
 		{% endfor %}
-		</div><!-- /container -->
 				
-					<div class="results" id = "rate{{ forloop.counter }}">
-						<p style="color: red; font-weight: bold">{{ i.user }}</p>
-						<p>{{ i.date }}</p>
-
-						<p>{{ i.text }}</p>
-						{% if  user  == i.user %}
-			  				<p><input type="submit" value="Изтрий" id="delete"></p>
-			  			{% endif %}
-		<!-- 
-						<form action="/deleteComment/" method="post" accept-charset="utf-8">
-						{% csrf_token %}	
-							<input type="hidden" name="user" value="{{ user.username }}" id="user">
-			  				<input type="hidden" name="pk" value="{{ obj.pk }}" id="pk">
-
-						</form> -->
-					</div>
-				
-		    </div>
+		
 
 
 {% endblock %}
