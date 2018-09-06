@@ -18,6 +18,25 @@
 </head>
 
 <body>
+	<script>
+			function openModal() {
+       	 		$("#modalBtn").click();
+			};
+	</script>
+	{% if errorFlagSignup %}
+		<script>
+    		window.onload = function() {
+    			openModal();
+			};
+		</script>
+	{% elif errorFlagLogin %}
+		<script>
+    		window.onload = function() {
+    			$('#Modal').bootstrapToggle();
+			};
+		</script>
+	{% endif %}
+
 	<nav style="background-color: rgb(40, 40, 40)" class="navbar sticky-top navbar-expand-lg navbar-dark">
         <a class="navbar-brand" href="#">ICON VROOMTATATA</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,8 +66,21 @@
 					<a class="nav-link" href="/service/">Добавете обект</a>
 				</li>
 				{% else %}
+				<!-- <style type="text/css">
+					#modalBtn {
+							background:none!important;
+							color:inherit;
+							border:none; 
+							padding:0!important;
+							font: inherit;
+							/*border is optional*/
+							border-bottom:1px solid #444; 
+							cursor: pointer;
+
+							}
+				</style> -->
 				<li class="nav-item">
-					<a class="nav-link" href="#" data-toggle="modal" data-target="#Modal">ПОПЪТ</a>
+					<button class="btn btn-link" class="nav-link" href="#" data-toggle="modal" data-target="#Modal" id="modalBtn" style="color: #949494;">Вход/Регистрация</button>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/">Начало</a>
@@ -130,7 +162,7 @@
 				                        <div class="form-group">
 				                            <label class="col-sm-2 control-label">Никнейм</label>
 				                            <div class="col-sm-10">
-				                                <input class="form-control" id="username" name="username" placeholder="Никнейм" required>
+				                                <input class="form-control" id="username" name="username" placeholder="Никнейм" required >
 				                            </div>
 				                        </div>
 				                        <div class="form-group">
@@ -141,8 +173,13 @@
 				                                       
 				                                       required>
 				                            </div>
+				                            
 				                        </div>
-
+				                        {% if errorFlagLogin %}
+					                        <div class="alert alert-danger">
+		           					 			<strong>Грешен потребител или парола</strong>
+		    								</div>
+		    							{% endif %}
 				                    </form>
 				                </div>
 				            </div>
@@ -169,6 +206,7 @@
 	</div>
 	<script src="{% static 'js/main.js' %}"></script>
 	<script src="{% static 'js/ajaxModels.js' %}"></script>
+
 </body>
 
 </html>

@@ -25,13 +25,15 @@ def login_user(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-        print(user)
         if user is not None:
             if user.is_active:
                 login(request, user)
                 return redirect('/')
-    return redirect('/')
-
+        else:
+            print("pussy")
+            return render(request, "carsbg/home.html", {"errorFlagLogin" : 1})
+    else:
+    	return redirect('/')
 @login_required
 def password_change(request):
     if request.method == 'POST':
@@ -62,10 +64,10 @@ def signup(request):
 			login(request, user)
 			return redirect('/')
 		else:
-			return render(request, 'registration/signup.html', {'form' : form})
+			return render(request, 'carsbg/home.html', {'form' : form, 'errorFlagSignup' : 1})
 	else:		
 		form = MyRegistrationForm()
-		return render(request, 'registration/signup.html', {'form' : form})
+		return render(request, 'carsbg/home.html', {'form' : form})
 
 def service(request):
     return render(request, 'carsbg/serviceCreate.html')
