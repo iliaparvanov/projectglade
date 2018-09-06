@@ -2,8 +2,8 @@
 {% block content %}
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
-    <div class="standart-container">
-        {% for j in results %}
+   <!--  <div class="standart-container">
+        
         <div class="result-container">
             {% if j.image.url %}
             <div class='img-container'>
@@ -15,7 +15,7 @@
             </div>
             <div class="name-container">
                 <p class="name">{{ j.typeOfObject }} {{ j.name }}</p>
-                <!--<p>{{ j.typeOfObject }}</p>-->
+                <p>{{ j.typeOfObject }}</p>
             </div>
             <div class="tel-container">
                 <p>Тел. {{ j.tel }}</p>
@@ -23,16 +23,47 @@
             <div class='address-container'>
                 <p>{{ j.city.name }}, {{ j.address }}</p>
             </div>
-        </div>
-        <form action=/object/ method="post">
+        </div> -->
+        <script type="text/javascript">
+            function submitForm()
+            {
+                document.getElementById("objectForm").submit();
+            }
+        </script>
+        {% for j in results %}
+            <div class="container py-3" onclick="submitForm()">
+                <div class="card">
+                  <div class="row ">
+                    <div class="col-md-4">
+                        <img src="{{ j.image.url }}" class="w-100" style="height: 100%">
+                      </div>
+                      <div class="col-md-8 px-3">
+                        <div class="card-block px-3">
+                          <h4 class="card-title">{{ j.name }}</h4>
+                          <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 150%; color: #a7414b; height: 50px;"></i>
+                          {{ j.city.name }}, {{ j.address }}<br>
+                          <i class="fa fa-phone" style="font-size:20px; color: #a7414b; height: 50px;"></i>
+                          {{ j.tel }}<br>
+                          <i class="fa fa-star checked" style="font-size: 20px; height: 50px; color: yellow"></i>
+
+                          {{ j.rating }}<br>
+                          <i class="fa fa-car" style="font-size:20px;"></i>
+                          {{ j.typeOfObject }}<br>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+        <form action=/object/ method="post" name="object" id="objectForm">
         {% csrf_token %}
-            <input type="hidden" name="name" value="{{ j.name }}" id="tests">
-            <input type="hidden" name="address" value="{{ j.address }}" id="tests">
-            <input type="hidden" name="tel" value="{{ j.tel }}" id="tests">
-            <input type="hidden" name="typeOfObject" value="{{ j.typeOfObject }}" id="tests">
-            <input type="hidden" name="city" value="{{ j.city.name }}" id="tests">
+            <input type="hidden" name="name" value="{{ j.name }}" id="name">
+            <input type="hidden" name="address" value="{{ j.address }}" id="address">
+            <input type="hidden" name="tel" value="{{ j.tel }}" id="tel">
+            <input type="hidden" name="typeOfObject" value="{{ j.typeOfObject }}" id="typeOfObject">
+            <input type="hidden" name="city" value="{{ j.city.name }}" id="city">
             <input type="hidden" name="user" value="{{ user.username }}" id="user">
-            <input name="button_more" type="submit" value="Виж повече" id="button_more">
         </form>
 
         {% endfor %}
