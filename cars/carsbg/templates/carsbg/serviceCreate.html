@@ -10,22 +10,33 @@
                     <!-- action is the url the form data is returned to-->
                     {% csrf_token %}
                     <div class="form-group">
-                        <input type="text" name="name" id="name" placeholder="Име на обекта" autocomplete="off" required/><br>
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Име на обекта" autocomplete="off" required/><br>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="city" id="city" placeholder="Град" autocomplete="off" required/><br>
+                        <input type="text" class="form-control" name="city" id="city" placeholder="Град" autocomplete="off" required/><br>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="address" id="name" placeholder="Адрес" autocomplete="off" required/><br>
+                        <input type="text" class="form-control" name="address" id="name" placeholder="Адрес" autocomplete="off" required/><br>
                     </div>
                     <div class="form-group">
-                        <input type="text" name="tel" id="tel" placeholder="Телефон" autocomplete="off" required/><br>
+                        <input type="text" class="form-control" name="tel" id="tel" placeholder="Телефон" autocomplete="off" required/><br>
                     </div>
-                    <div class="form-group">
-                        <label for="img">Снимка</label>
-                        <input type="file" name="img" , id="img"><br>
+                    <!-- <div class="form-group" >
+                        <label for="img" class="custom-file-label">Снимка</label>
+                        <input type="file" name="img" class="custom-file-input" id="img"><br>
+                    
+                    </div> -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Снимка</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="img" name="img" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Избери файл</label>
+                        </div>
                     </div>
-                    <select name='type' id='typeOfSearch' value='typeOfSearch'>
+                    
+                    <select name='type' class="custom-select" id='typeOfSearch' value='typeOfSearch'>
                         <option type='text' name="service"  id="service" value='service' />Сервиз</option>
                         <option type='text' name="cardealer"  id="cardealer" value='cardealer'>Автокъща</option>
                     </select><br>

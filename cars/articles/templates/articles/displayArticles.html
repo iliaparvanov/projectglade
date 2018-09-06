@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'articles/css/articles.css' %}">
 
     <div class="standart-container">
-        <a href="articles/articlePage/"><button>Добави статия</button></a>
+        <a href="articles/articlePage/"><button type="button" class="btn btn-primary btn-lg btn-block">Добави статия</button></a>
         {% for i in articles %}
         <p>{{ i.name }}</p>
         <p>{{ i.author }}</p>
