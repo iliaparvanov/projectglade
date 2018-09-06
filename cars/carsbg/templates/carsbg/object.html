@@ -10,20 +10,28 @@
 }
 </style>
 	
-	<div class="object">
+	<div class="object" style="color: white;">
+		<style type="text/css">
+			.object {
+  	 				background-image: url("/static/carsbg/images/object.jpg");
+   					background-color: #cccccc;
+   					background-size: 150%;
+				 }
+		</style>
 		
-	    <p>Име: {{ obj.name }}</p>
-	    <p>Телефон: {{ obj.tel }}</p>
-	    <p>Тип на обекта:{{ obj.typeOfObject }}</p>
-	    <p>Град: {{ obj.city.name }}</p>
-	    {% if obj.image.url %}
-	    	<img src="{{ obj.image.url }}" width="240"></p>
-	    {% endif %}
-	    <p>Оценка: {{ rating }}</p>
-
+	    <h2>{{ obj.name }}</h2>
+	    <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 150%; color: #a7414b; height: 50px;"></i>
+	    {{ obj.city.name }}, {{ obj.address }}<br>
+	    
+	    <i class="fa fa-phone" style="font-size:20px; color: #a7414b; height: 50px;"></i>
+	    {{ obj.tel }}<br>
+	    
+	    <i class="fa fa-star checked" style="font-size: 20px; height: 50px;"></i>
+	    {{ rating }}<br>
+</div>
 		<!-- Тука ще има какво могат да правят в тоя обект -->
 		{% if user.is_authenticated %}
-			<h2>Star Rating</h2>
+			<h3>Рейтинг</h3>
 
 			<span class="fa fa-star checked" id="star1" onclick="stars(1, this)"></span>
 			<span class="fa fa-star checked" id="star2" onclick="stars(2, this)"></span>
@@ -32,8 +40,8 @@
 			<span class="fa fa-star" id="star5" onclick="stars(5, this)"></span>
 			
 			<form id = "addCommentForm" accept-charset="utf-8">
-	  			
-	  			<label for="comment">Напиши коментар:<br></label><textarea rows="4" cols="50" type="text" name="comment"  id="comment" required/></textarea>
+	  			<h3>Коментар</h3><br>
+	  			<textarea rows="4" cols="50" type="text" name="comment"  id="comment" required/></textarea>
 	  			<a id = "alert">{{ alert }}</a>
 
 
@@ -51,11 +59,12 @@
 	    	</form>
   			<p><input type="submit" value="Изпрати" id="addComment"></p>
 		{% else %}
-  			<p> You must register to comment</p>
+  			<strong>Трябва да се регистрирате за да коментирате</strong>
 		{% endif %}
 		{% for i in comments %}
 			<div class="results" id = "rate{{ forloop.counter }}">
-				
+				<p style="color: red; font-weight: bold">{{ i.user }}</p>
+				<p>{{ i.date }}</p>
 				<script>
 					function commentsRate(num, id) 
 					{
@@ -76,7 +85,7 @@
 					}
 					commentsRate('{{ i.rate }}', '{{ forloop.counter }}');
 				</script>
-				<p>{{ i.user}}: {{ i.text }}</p>
+				<p>{{ i.text }}</p>
 				{% if  user  == i.user %}
 	  				<p><input type="submit" value="Изтрий" id="delete"></p>
 	  			{% endif %}

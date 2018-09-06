@@ -38,13 +38,14 @@
 	{% endif %}
 
 	<nav style="background-color: rgb(40, 40, 40)" class="navbar sticky-top navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">ICON VROOMTATATA</a>
+        <a class="navbar-brand" href="/">ICON VROOMTATATA</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             	{% if user.is_authenticated %}
+            	
             	<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">{{ user.username }}</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -53,9 +54,6 @@
                         <a class="dropdown-item" href="/logout/">Изход</a>
                     </div>
                 </li>
-				<li class="nav-item">
-					<a class="nav-link" href="/">Начало</a>
-				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/articles/home/">Статии</a>
 				</li>
@@ -85,12 +83,7 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/">Начало</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/signup">Регистрация</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/login">Вход</a>
-				</li>
+				 
 				<li class="nav-item">
 					<a class="nav-link" href="/articles/home/">Статии</a>
 				</li>
