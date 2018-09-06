@@ -57,48 +57,78 @@
   				<input type="submit"  id="hiddenBtn" style="display: none">
 
 	    	</form>
-  			<p><input type="submit" value="Изпрати" id="addComment"></p>
+  			<p><input type="submit" value="Изпрати" id="addComment"></p><br>
 		{% else %}
   			<strong>Трябва да се регистрирате за да коментирате</strong>
 		{% endif %}
+		
 		{% for i in comments %}
-			<div class="results" id = "rate{{ forloop.counter }}">
-				<p style="color: red; font-weight: bold">{{ i.user }}</p>
-				<p>{{ i.date }}</p>
-				<script>
-					function commentsRate(num, id) 
-					{
-						var div = document.getElementById("rate" + id)
-						for(var i = 1; i <= 5; i++)
-						{
-							var dateSpan = document.createElement('span')
-							if(i <= num)
-							{
-								dateSpan.className = "fa fa-star checked";
-							}
-							else
-							{
-								dateSpan.className = "fa fa-star"
-							}
-							div.appendChild(dateSpan)
-						}
-					}
-					commentsRate('{{ i.rate }}', '{{ forloop.counter }}');
-				</script>
-				<p>{{ i.text }}</p>
-				{% if  user  == i.user %}
-	  				<p><input type="submit" value="Изтрий" id="delete"></p>
-	  			{% endif %}
-<!-- 
-				<form action="/deleteComment/" method="post" accept-charset="utf-8">
-				{% csrf_token %}	
-					<input type="hidden" name="user" value="{{ user.username }}" id="user">
-	  				<input type="hidden" name="pk" value="{{ obj.pk }}" id="pk">
+		<div class="container" style="margin-left: -10px; width: 40%;">
+			<div class="card">
+			    <div class="card-body">
+			        <div class="row">
+		        	    <div class="col-md-2">
+		        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+		        	        <p class="text-secondary text-center">{{ i.date }}</p>
+		        	    </div>
+		        	    <div class="col-md-10">
+		        	        <p>
+		        	            <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>{{ i.user }}</strong></a>
+		        	            <script>
+									function commentsRate(num, id) 
+									{
+										var div = document.getElementById("rate" + id)
+										for(var i = 1; i <= 5; i++)
+										{
+											var dateSpan = document.createElement('span')
+											dateSpan.className = "float-right"
+											if(i <= num)
+											{
+												dateSpan.className = "text-warning fa fa-star checked";
+											}
+											else
+											{
+												dateSpan.className = "text-warning fa fa-star"
+											}
+											div.appendChild(dateSpan)
+										}
+									}
+									commentsRate('{{ i.rate }}', '{{ forloop.counter }}');
+								</script>
 
-				</form> -->
+		        	       <div class="clearfix"></div>
+		        	        <p>{{ i.text }}</p>
+		        	        <p>
+		        	            <!-- <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+		        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a> -->
+		        	       </p>
+		        	    </div>
+			        </div>
+			    </div>
 			</div>
+		</div>
+		<br>
 		{% endfor %}
-    </div>
+		</div><!-- /container -->
+				
+					<div class="results" id = "rate{{ forloop.counter }}">
+						<p style="color: red; font-weight: bold">{{ i.user }}</p>
+						<p>{{ i.date }}</p>
+
+						<p>{{ i.text }}</p>
+						{% if  user  == i.user %}
+			  				<p><input type="submit" value="Изтрий" id="delete"></p>
+			  			{% endif %}
+		<!-- 
+						<form action="/deleteComment/" method="post" accept-charset="utf-8">
+						{% csrf_token %}	
+							<input type="hidden" name="user" value="{{ user.username }}" id="user">
+			  				<input type="hidden" name="pk" value="{{ obj.pk }}" id="pk">
+
+						</form> -->
+					</div>
+				
+		    </div>
 
 
 {% endblock %}

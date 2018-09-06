@@ -30,8 +30,14 @@
                 document.getElementById("objectForm").submit();
             }
         </script>
+        <style type="text/css">
+            .containerpy-3
+            {
+                cursor: pointer;
+            }
+        </style>
         {% for j in results %}
-            <div class="container py-3" onclick="submitForm()">
+            <div class="container py-3" class="containerpy-3" onclick="submitForm()" style="cursor: pointer;">
                 <div class="card">
                   <div class="row ">
                     <div class="col-md-4">
@@ -51,11 +57,9 @@
                           {{ j.typeOfObject }}<br>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 </div>
-              </div>
         <form action=/object/ method="post" name="object" id="objectForm">
         {% csrf_token %}
             <input type="hidden" name="name" value="{{ j.name }}" id="name">
