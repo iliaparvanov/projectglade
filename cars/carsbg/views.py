@@ -30,7 +30,6 @@ def login_user(request):
                 login(request, user)
                 return redirect('/')
         else:
-            print("pussy")
             return render(request, "carsbg/home.html", {"errorFlagLogin" : 1})
     else:
     	return redirect('/')
