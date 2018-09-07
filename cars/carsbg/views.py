@@ -196,18 +196,37 @@ def objectCreate(request, comments, result):
 		typeOfObject = request.GET.get('typeOfObject')
 		user = request.POST.get('user')
 	
+	currentUserComment = 0
+	commentsObj = 0
+	userFlag = 0
+
 	result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
-	currentUserComment = Comment.objects.filter(obj = result[0], user = User.objects.filter(username = user)[0])
-	commentsObj = Comment.objects.filter(obj = result[0]).exclude(user = User.objects.filter(username = user)[0])
+	
+	try:
+		currentUserComment = Comment.objects.filter(obj = result[0], user = User.objects.filter(username = user)[0])
+		userFlag = 1
+	except IndexError:
+		pass
+	if userFlag:
+		try:
+			commentsObj = Comment.objects.filter(obj = result[0]).exclude(user = User.objects.filter(username = user)[0])
+		except IndexError:
+			pass
+	else:
+		try:
+			commentsObj = Comment.objects.filter(obj = result[0])
+		except IndexError:
+			pass
 
 	# elif typeOfObject == "Автокъща":
 	# 	result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city).first(), typeOfObject = typeOfObject).first())
 	# 	commentsObj = Comment.objects.filter(obj = result[0])
-
-	for comment in currentUserComment:
-		comments.append(comment)
-	for comment in commentsObj:
-		comments.append(comment)
+	if currentUserComment:
+		for comment in currentUserComment:
+			comments.append(comment)
+	if commentsObj:
+		for comment in commentsObj:
+			comments.append(comment)
 
 
 
