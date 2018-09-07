@@ -11,11 +11,11 @@ def addArticle(request):
 		nameOfArticle = request.POST.get('name', '')
 		text = request.POST.get('text', '')
 		user = request.POST.get('user', '')
-		print(nameOfArticle + "01230143")
+		img = request.FILES.get('img', False)
 		author =  User.objects.filter(username = user)[0]
 		date = timezone.now().date()
 
-		article = Article(name = nameOfArticle, text = text, author = author, date = date)
+		article = Article(name = nameOfArticle, text = text, image = img, author = author, date = date)
 		article.save()
 		alert = "Статията е запазена"
 		
