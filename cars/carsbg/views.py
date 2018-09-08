@@ -101,16 +101,14 @@ def addService(request):
 		saturdayStart = request.POST.get('saturdayStart')
 		saturdayEnd = request.POST.get('saturdayEnd')
 		
-
-		
-
+		description = request.POST.get('description')
 
 		workday = str(workdayStart) + ' - ' + str(workdayEnd)
 		saturday = str(saturdayStart) + ' - ' + str(saturdayEnd)
 		sunday = "Затворено"
 		workingTime = WorkingTime(dayWork = workday, sunday = sunday, saturday = saturday)
 		workingTime.save()
-		print(workday, saturday)
+		print(description)
 
 
 		if City.objects.filter(name=cityName):
@@ -120,10 +118,10 @@ def addService(request):
 			city.save()
 
 		if typeOfSearch == "service":
-			service = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0, workingTime = workingTime)
+			service = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0, workingTime = workingTime, description = description)
 			service.save()
 		elif typeOfSearch == "cardealer":
-			carDealer = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0, saturday = saturday, sunday = sunday, workingTime = workingTime)
+			carDealer = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0, saturday = saturday, sunday = sunday, workingTime = workingTime, description = description)
 			carDealer.save()
 		else:
 			return HttpResponse("ERROR ^)^")

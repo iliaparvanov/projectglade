@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
    <!--  <div class="standart-container">
         
-        <div class="result-container">
+        <div class="restrt-container">
             {% if j.image.url %}
             <div class='img-container'>
                 <img src="{{ j.image.url }}" width="240">
@@ -25,9 +25,9 @@
             </div>
         </div> -->
         <script type="text/javascript">
-            function submitForm()
+            function submitForm(id)
             {
-                document.getElementById("objectForm").submit();
+                document.getElementById("objectForm" + id).submit();
             }
         </script>
         <style type="text/css">
@@ -35,18 +35,22 @@
             {
                 cursor: pointer;
             }
+            .glow-button:hover {
+             color: rgba(255, 255, 255, 1);
+             box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+            }
         </style>
         {% for j in results %}
-            <div class="container py-3" class="containerpy-3" onclick="submitForm()" style="cursor: pointer;">
+            <div class="container py-3" class="containerpy-3" class="glow-button" onclick="submitForm('{{ forloop.counter }}')" style="cursor: pointer;">
                 <div class="card">
                   <div class="row ">
-                    <div class="col-md-4">
-                        <img src="{{ j.image.url }}" class="w-100" style="height: 100%">
+                      <div class="col-md-4">
+                        <img src="{{ j.image.url }}" class="w-100" style="height: 250px;">
                       </div>
-                      <div class="col-md-8 px-3">
+                      <div class="col-md-4 px-3">
                         <div class="card-block px-3">
                           <h4 class="card-title">{{ j.name }}</h4>
-                          <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 150%; color: #a7414b; height: 50px;"></i>
+                          <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 140%; color: #a7414b; height: 30px;"></i>
                           {{ j.city.name }}, {{ j.address }}<br>
                           <i class="fa fa-phone" style="font-size:20px; color: #a7414b; height: 50px;"></i>
                           {{ j.tel }}<br>
@@ -57,17 +61,35 @@
                           {{ j.typeOfObject }}<br>
                         </div>
                       </div>
+                      <div class="table-responsive-sm" class="col-md-4">
+                        <h3>Работно време</h3><br>
+                        <table class="table">
+                          <tr>
+                            <td>Понеделник - Петък</td>
+                            <td>{{ j.workingTime.dayWork }}</td>
+                            
+                          </tr>
+                          <tr>
+                            <td>Събота</td>
+                            <td>{{ j.workingTime.saturday }}</td>
+                          </tr>
+                          <tr>
+                            <td>Неделя</td>
+                            <td>{{ j.workingTime.sunday }}</td>
+                          </tr>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>
-        <form action=/object/ method="post" name="object" id="objectForm">
+        <form action=/object/ method="post" name="object" id="objectForm{{ forloop.counter }}" name="objectForm">
         {% csrf_token %}
-            <input type="hidden" name="name" value="{{ j.name }}" id="name">
-            <input type="hidden" name="address" value="{{ j.address }}" id="address">
-            <input type="hidden" name="tel" value="{{ j.tel }}" id="tel">
-            <input type="hidden" name="typeOfObject" value="{{ j.typeOfObject }}" id="typeOfObject">
-            <input type="hidden" name="city" value="{{ j.city.name }}" id="city">
-            <input type="hidden" name="user" value="{{ user.username }}" id="user">
+            <input type="hidden" name="name" value="{{ j.name }}" id="name{{ forloop.counter }}">
+            <input type="hidden" name="address" value="{{ j.address }}" id="address{{ forloop.counter }}">
+            <input type="hidden" name="tel" value="{{ j.tel }}" id="tel{{ forloop.counter }}">
+            <input type="hidden" name="typeOfObject" value="{{ j.typeOfObject }}" id="typeOfObject{{ forloop.counter }}">
+            <input type="hidden" name="city" value="{{ j.city.name }}" id="city{{ forloop.counter }}">
+            <input type="hidden" name="user" value="{{ user.username }}" id="user{{ forloop.counter }}">
         </form>
 
         {% endfor %}

@@ -20,6 +20,8 @@ class WorkingTime(models.Model):
 	saturday = models.CharField(max_length = 30)
 	sunday = models.CharField(max_length = 30)
 
+
+
 class Object(models.Model):
 	name = models.CharField(max_length = 150)
 	city = models.ForeignKey(City, on_delete = models.CASCADE, null=True)
@@ -28,24 +30,14 @@ class Object(models.Model):
 	image = models.ImageField(upload_to='media/', blank = True)
 	typeOfObject = models.CharField(max_length = 100, null = True)
 	rating = models.IntegerField()
+	description = models.CharField(max_length = 600, null = True)
 	workingTime = models.ForeignKey(WorkingTime, on_delete = models.CASCADE, null = True)
+
 	def __str__(self):
 		return self.name 
 
 	class Meta:
 		ordering = ["rating", "name"]
-
-# class CarDealer(models.Model):
-# 	name = models.CharField(max_length = 150, null = True)
-# 	city = models.ForeignKey(City, on_delete = models.CASCADE)
-# 	address = models.CharField(max_length = 100, null = True)
-# 	tel = models.CharField(max_length = 100, null = True)
-# 	image = models.ImageField(upload_to='media/', blank = True)
-# 	typeOfObject = models.CharField(max_length = 100, null = True)
-# 	rating = models.IntegerField()
-
-# 	def __str__(self):
-# 		return self.name
 
 class Comment(models.Model):
 	text = models.CharField(max_length = 300, null = True)
@@ -62,3 +54,13 @@ class Comment(models.Model):
 		ordering = ["date", "user"]
 
 	
+class Service(models.Model):
+	obj = models.ForeignKey(Object, on_delete = models.CASCADE, null = True)
+	name = models.CharField(max_length = 100)
+	description = models.CharField(max_length = 600)
+
+	def __str__(self):
+		return str(self.name)
+
+	class Meta:
+		ordering = ["name"]

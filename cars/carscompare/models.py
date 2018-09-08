@@ -27,6 +27,7 @@ class Car(models.Model):
 	year = models.CharField(max_length = 5)
 	typeOfEngine = models.CharField(max_length = 10 	)
 	price = models.CharField(max_length = 10)
+	priceAbroad = models.CharField(max_length = 10, null = True)
 	image = models.CharField(max_length = 100, null = True)
  
 	def __str__(self):

@@ -10,29 +10,59 @@
 }
 </style>
 	
-	<div class="object" style="color: white;">
-		<style type="text/css">
-			.object {
-  	 				background-image: url("/static/carsbg/images/object.jpg");
-   					background-color: #cccccc;
-   					background-size: 150%;
-   					margin-bottom: 10%;
-				 }
-		</style>
-		
-	    <h2>{{ obj.name }} {{ obj.workingTime.dayWork }}</h2>
-	    <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 150%; color: #B80F0A; height: 50px;"></i>
-	    {{ obj.city.name }}, {{ obj.address }}<br>
-	    
-	    <i class="fa fa-phone" style="font-size:20px; color: #1034A6; height: 50px;"></i>
-	    {{ obj.tel }}<br>
-	    
-	    <i class="fa fa-star checked" style="font-size: 20px; height: 50px;"></i>
-	    {{ rating }}<br>
-	</div>
+		<div class="object" style="color: white; height: 20rem">
+			<style type="text/css">
+				.object {
+	  	 				background-image: url("/static/carsbg/images/object.jpg");
+	   					background-color: #cccccc;
+	   					background-size: 150%;
+	   					margin-bottom: 10%;
+
+					 }
+			</style>
+			
+		    <h2>{{ obj.name }}</h2>
+		    <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 150%; color: #B80F0A; height: 50px;"></i>
+		    {{ obj.city.name }}, {{ obj.address }}<br>
+
+		    <i class="fa fa-phone" style="font-size:20px; color: #1034A6; height: 50px;"></i>
+		    {{ obj.tel }}<br>
+		    
+		    <i class="fa fa-star checked" style="font-size: 20px; height: 50px;"></i>
+		    {{ rating }}<br>
+		    
+		</div>
+		<div class="row">
+			<div class="card" style="width: 45rem;" class="col-md">
+			  <div class="card-body">
+			    <h5 class="card-title">Информация за {{ obj.typeOfObject }}a</h5>
+			    <p class="card-text">{{ obj.description }}</p>
+
+			  </div>
+			</div>
+			<div class="table-responsive-sm" class="col-md" style="margin-left: 200px;">
+                        <h3>Работно време</h3><br>
+                        <table class="table">
+                          <tr>
+                            <td>Понеделник - Петък</td>
+                            <td>{{ obj.workingTime.dayWork }}</td>
+                            
+                          </tr>
+                          <tr>
+                            <td>Събота</td>
+                            <td>{{ obj.workingTime.saturday }}</td>
+                          </tr>
+                          <tr>
+                            <td>Неделя</td>
+                            <td>{{ obj.workingTime.sunday }}</td>
+                          </tr>
+                        </table>
+                      </div>
+		</div>
+
 		<!-- Тука ще има какво могат да правят в тоя обект -->
 		{% if user.is_authenticated %}
-		<div style="margin-top: 10%;">
+		<div style="margin-top: 4rem; margin-bottom: 4rem;">
 			<h3>Рейтинг</h3>
 
 			<span class="fa fa-star checked" id="star1" onclick="stars(1, this)"></span>
@@ -44,8 +74,12 @@
 			<form id = "addCommentForm" accept-charset="utf-8">
 	  			<h3>Коментар</h3><br>
 	  			<textarea rows="4" cols="50" type="text" name="comment"  id="comment" required/></textarea>
-	  			<a id = "alert">{{ alert }}</a>
-
+	  			<a id = "alert"></a>
+	  			{% if alert %}
+		  			<div class="alert alert-danger">
+	  					<strong>{{ alert }}</strong>
+					</div>
+				{% endif %}
 
 	  			<input type="hidden" name="rating" value="3" id="rating">
 
@@ -112,7 +146,10 @@
 		        	        <p>
 		        	            <!-- <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
 		        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a> -->
-		        	       </p>
+		        	        </p>
+		        	        {% if user  == i.user %}
+ 	  							<p><input type="submit" class="btn btn-danger" value="Изтрий" id="delete"></p>
+	  						{% endif %}
 		        	    </div>
 
 			        </div>

@@ -40,12 +40,23 @@
                         <option type='text' name="service"  id="service" value='service' />Сервиз</option>
                         <option type='text' name="cardealer"  id="cardealer" value='cardealer'>Автокъща</option>
                     </select><br>
+                    Описание
+                    <textarea rows="4" cols="50" type="text" name="description"  id="description" required/></textarea>
+                    <a id = "alert"></a>
+                    <strong>Работно време</strong>
                    <div class="container">
-                        <input type="time" name="workdayStart">
-                        <input type="time" name="workdayEnd">
-                        <input type="time" name="saturdayStart">
-                        <input type="time" name="saturdayEnd">
-
+                        <div class="row">
+                            <div class="col">                                
+                                Делник<br>
+                                <input type="time" name="workdayStart">
+                                <input type="time" name="workdayEnd">
+                            </div>
+                            <div class="col">
+                                Уикенд<br>
+                                <input type="time" name="saturdayStart">
+                                <input type="time" name="saturdayEnd">
+                            </div>
+                        </div>
                     
                     
                     <div class="submit-container">
