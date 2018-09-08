@@ -19,7 +19,7 @@
         <div class="row">
             {% for i in articles %}
                 <div class="col-sm-6">
-                    <div class="card" style="width: 18rem;" onclick="submitForm('{{ forloop.counter }}')">
+                    <div class="card" style="width: 18rem;" onclick="submitForm('{{ forloop.counter }}')" >
                         {% if i.image.url %}
                             <img class="card-img-top" src="{{ i.image.url }}" alt="Card image cap" style="width: 280px; height: 200px;" ">
                         {% else %}

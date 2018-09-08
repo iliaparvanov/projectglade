@@ -15,6 +15,11 @@ class City(models.Model):
 	class Meta:
 		ordering = ["name"]
 
+class WorkingTime(models.Model):
+	dayWork = models.CharField(max_length = 30)
+	saturday = models.CharField(max_length = 30)
+	sunday = models.CharField(max_length = 30)
+
 class Object(models.Model):
 	name = models.CharField(max_length = 150)
 	city = models.ForeignKey(City, on_delete = models.CASCADE, null=True)
@@ -23,7 +28,7 @@ class Object(models.Model):
 	image = models.ImageField(upload_to='media/', blank = True)
 	typeOfObject = models.CharField(max_length = 100, null = True)
 	rating = models.IntegerField()
-
+	workingTime = models.ForeignKey(WorkingTime, on_delete = models.CASCADE, null = True)
 	def __str__(self):
 		return self.name 
 

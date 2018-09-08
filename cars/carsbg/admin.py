@@ -11,3 +11,4 @@ from .models import *
 admin.site.register(City)
 admin.site.register(Object)
 admin.site.register(Comment)
+admin.site.register(WorkingTime)

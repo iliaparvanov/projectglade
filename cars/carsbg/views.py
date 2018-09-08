@@ -69,7 +69,21 @@ def signup(request):
 		return render(request, 'carsbg/home.html', {'form' : form})
 
 def service(request):
-    return render(request, 'carsbg/serviceCreate.html')
+	min1 = []
+	hour = []
+
+	for i in range(0, 24):
+		if i < 10:
+			hour.append('0' + str(i))
+		else:
+			hour.append(str(i))
+	for i in range(0, 61):
+		if i < 10:
+			min1.append('0' + str(i))
+		else:
+			min1.append(str(i))
+
+	return render(request, 'carsbg/serviceCreate.html', {'hour' : hour, 'min1' : min1})
 
 @csrf_exempt
 def addService(request):
@@ -82,6 +96,23 @@ def addService(request):
 		img = request.FILES.get('img', False)
 		typeOfSearch = request.POST.get('type', '')
 
+		workdayStart = request.POST.get('workdayStart')
+		workdayEnd = request.POST.get('workdayEnd')
+		saturdayStart = request.POST.get('saturdayStart')
+		saturdayEnd = request.POST.get('saturdayEnd')
+		
+
+		
+
+
+		workday = str(workdayStart) + ' - ' + str(workdayEnd)
+		saturday = str(saturdayStart) + ' - ' + str(saturdayEnd)
+		sunday = "Затворено"
+		workingTime = WorkingTime(dayWork = workday, sunday = sunday, saturday = saturday)
+		workingTime.save()
+		print(workday, saturday)
+
+
 		if City.objects.filter(name=cityName):
 			city = City.objects.filter(name=cityName)[0]
 		else:
@@ -89,10 +120,10 @@ def addService(request):
 			city.save()
 
 		if typeOfSearch == "service":
-			service = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0)
+			service = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0, workingTime = workingTime)
 			service.save()
 		elif typeOfSearch == "cardealer":
-			carDealer = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0)
+			carDealer = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0, saturday = saturday, sunday = sunday, workingTime = workingTime)
 			carDealer.save()
 		else:
 			return HttpResponse("ERROR ^)^")
