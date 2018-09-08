@@ -62,7 +62,7 @@ function stars(num) {
 
 $(function() {
   $("#search").catcomplete({
-    source: "searchService",
+    url: "/searchService/",
     minLength: 1,
   });
 });

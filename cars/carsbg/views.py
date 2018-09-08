@@ -18,7 +18,8 @@ from .forms import *
 
 def home(request):
 	form = MyRegistrationForm()
-	return render(request, 'carsbg/home.html', {"form" : form})
+	flagForBase = 1
+	return render(request, 'carsbg/home.html', {"form" : form, "flagForBase" : flagForBase})
 
 def login_user(request):
     if request.POST:
@@ -36,7 +37,7 @@ def login_user(request):
 @login_required
 def password_change(request):
     if request.method == 'POST':
-        form = PasswordChangeForm(request.user, request.POST)
+        form = MyPasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
@@ -45,7 +46,8 @@ def password_change(request):
         else:
             messages.error(request, 'Please correct the error below.')
     else:
-        form = PasswordChangeForm(request.user)
+        form = MyPasswordChangeForm(request.user)
+        print(form)
     return render(request, 'registration/password_change.html', {
         'form': form
     })
@@ -69,21 +71,8 @@ def signup(request):
 		return render(request, 'carsbg/home.html', {'form' : form})
 
 def service(request):
-	min1 = []
-	hour = []
-
-	for i in range(0, 24):
-		if i < 10:
-			hour.append('0' + str(i))
-		else:
-			hour.append(str(i))
-	for i in range(0, 61):
-		if i < 10:
-			min1.append('0' + str(i))
-		else:
-			min1.append(str(i))
-
-	return render(request, 'carsbg/serviceCreate.html', {'hour' : hour, 'min1' : min1})
+	form = MyRegistrationForm()
+	return render(request, 'carsbg/serviceCreate.html', {'form' : form})
 
 @csrf_exempt
 def addService(request):
@@ -272,8 +261,8 @@ def viewObject(request):
 		rating = result[0].rating / len(comments)
 		rating = round(rating, 2)
 
-	
-	return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, "rating" : rating, 'alert' : alert})
+	form = MyRegistrationForm()
+	return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, "rating" : rating, 'alert' : alert, "form" : form})
 
 
 @csrf_exempt

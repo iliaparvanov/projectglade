@@ -5,51 +5,22 @@
             padding-top: 0;
         }
     </style>
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $(function() {
-            $.widget("custom.catcomplete", $.ui.autocomplete, {
-                _create: function() {
-                    this._super();
-                    this.widget().menu("option", "items", "> :not(.ui-autocomplete-category)");
-                },
-                _renderMenu: function(ul, items) {
-                    var that = this,
-                        currentCategory = "";
-                    $.each(items, function(index, item) {
-                        var li;
-                        if (item.category != currentCategory) {
-                            ul.append("<li class='ui-autocomplete-category'>" + item.category + "</li>");
-                            currentCategory = item.category;
-                        }
-                        li = that._renderItemData(ul, item);
-                        if (item.category) {
-                            li.attr("aria-label", item.category + " : " + item.label);
-                        }
-                    });
-                }
-            });
-
-            $("#search").catcomplete({
-                delay: 0,
-                source: 'searchService'
-            });
-        });
-    </script>
+    
 
     <!-- грозно ама баца -->
     <div id="whole-screen-bg-1">
         <h1 id="slogan">НАМЕРЕТЕ СЕРВИЗ<br>БЛИЗО ДО ВАС</h1>
         <div class="wrap">
-            <form action=/searchService/ method="post" accept-charset="utf-8">
-                <div class="input-group mb-3">
-                    <input style="height: 6vh;" type="glowinginwhite" name="search" class="form-control" placeholder="Търсете по град, улица или име на обекта" aria-describedby="basic-addon2" id = "search">
-                    <div class="input-group-append">
-                        <button type="submit" class="input-group-text" id="basic-addon2"><img id="glyph" src="/static/images/si-glyph-magnifier.svg"></button>
+            {% if flagForBase %}
+                <form action=/searchService/ method="post" accept-charset="utf-8">
+                    <div class="input-group mb-3">
+                        <input style="height: 6vh;" type="glowinginwhite" name="search" class="form-control" placeholder="Търсете по град, улица или име на обекта" aria-describedby="basic-addon2" id = "search">
+                        <div class="input-group-append">
+                            <button type="submit" class="input-group-text" id="basic-addon2"><img id="glyph" src="/static/images/si-glyph-magnifier.svg"></button>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            {% endif %}
         </div>
     </div>
     <div id="whole-screen-bg-2">

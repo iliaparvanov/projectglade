@@ -3,29 +3,41 @@
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
     <div class="standart-container">
+        <script type="text/javascript">
+            function submitForm(id)
+            {
+                document.getElementById("objectForm" + id).submit();
+            }
+        </script>
+        <style type="text/css">
+            .containerpy-3
+            {
+                cursor: pointer;
+        </style>
         {% for j in results %}
-        <div class="result-container">
-            {% if j.image %}
-            <div class='img-container'>
-                <img src="{{ j.image }}" width="240">
-            </div>
-            {% endif %}
-            <div class='rating-container'>
-                Средна цена: {{ j.price }}
-            </div>
-            <div class="name-container">
-                <p class="name">{{ j.brand }} - {{ j.model }}</p>
-                <!--<p>{{ j.typeOfObject }}</p>-->
-            </div>
-            <div class="tel-container">
-                <p>{{ j.year }}</p>
-            </div>
-            <div class='address-container'>
-                <p>{{ j.typeOfEngine }}</p><br>
-                <p>{{ j.gear }}</p>
+        <div class="container py-3" class="containerpy-3" class="glow-button" onclick="submitForm('{{ forloop.counter }}')" style="cursor: pointer; color: black">
+            <div class="card">
+                <div class="row ">
+                    <div class="col-md-4">
+                        <img src="{{ j.image }}" class="w-100" style="height: 250px;">
+                    </div>
+                    <div class="col-md-4 px-3">
+                        <div class="card-block px-3">
+                          <h4 class="card-title">{{ j.brand }} {{ j.model }}</h4>
+                          <img src="/static/carscompare/images/fuel.png" aria-hidden="true" style="font-size: 130%; color: #a7414b; height: 2rem;"></i>
+                          {{ j.typeOfEngine }}<br>
+                          <i class="fa fa-calendar" style="font-size:20px; color: #a7414b; height: 50px;"></i>
+                          {{ j.year }}<br>
+                          <i class="fa fa-dollar" style="font-size: 20px; height: 50px; color: green"></i>
+                          {{ j.price }}<br>
+                          <i class="fa fa-gear fa-spin" style="font-size:20px;"></i>
+                          {{ j.gear }}<br>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <form action=/carscompare/displayMore/ method="post">
+        <form action=/carscompare/displayMore/ method="post" id="objectForm{{ forloop.counter }}">
             {% csrf_token %}    
             <input type="hidden" name="brand" value="{{ j.brand }}" id="brand">
             <input type="hidden" name="model" value="{{ j.model }}" id="model">
@@ -33,7 +45,6 @@
             <input type="hidden" name="fuel" value="{{ j.typeOfEngine }}" id="fuel">
             <input type="hidden" name="gear" value="{{ j.gear }}" id="gear">
             <input type="hidden" name="price" value="{{ j.price }}" id="price">
-            <input name="button_more" type="submit" value="Виж повече" id="button_more">
         </form>
 
         {% endfor %}

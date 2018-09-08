@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from django.utils import timezone
+from .forms import *
+
 
 def articlePage(request):
-    return render(request, 'articles/addArticle.html')
+	form = MyRegistrationForm()
+
+	return render(request, 'articles/addArticle.html', {"form" : form})
 
 def addArticle(request):
 	if request.POST:
@@ -24,7 +28,9 @@ def addArticle(request):
 
 def displayArticles(request):
 	articles = Article.objects.all()
-	return render(request, 'articles/displayArticles.html', {"articles" : articles})
+	form = MyRegistrationForm()
+
+	return render(request, 'articles/displayArticles.html', {"articles" : articles, "form" : form})
 
 @csrf_exempt
 def articleText(request):
