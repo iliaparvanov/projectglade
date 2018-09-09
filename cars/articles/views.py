@@ -26,7 +26,7 @@ def addArticle(request):
 		article.save()
 		alert = "Статията е запазена"
 		
-		return redirect('displayArticles')
+	return redirect('displayArticles')
 	
 
 def displayArticles(request):
