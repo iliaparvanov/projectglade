@@ -19,7 +19,8 @@ from .forms import *
 def home(request):
 	form = MyRegistrationForm()
 	flagForBase = 1
-	return render(request, 'carsbg/home.html', {"form" : form, "flagForBase" : flagForBase})
+	profile = Profile.objects.get(user = request.user)
+	return render(request, 'carsbg/home.html', {"form" : form, "flagForBase" : flagForBase, "profile" : profile})
 
 def login_user(request):
     if request.POST:
@@ -63,12 +64,28 @@ def signup(request):
 			raw_password = form.cleaned_data.get('password1')
 			user = authenticate(username=username, password=raw_password)
 			login(request, user)
+			profile = Profile(user = user)
+			profile.save()
 			return redirect('/')
 		else:
 			return render(request, 'carsbg/home.html', {'form' : form, 'errorFlagSignup' : 1})
 	else:		
 		form = MyRegistrationForm()
 		return render(request, 'carsbg/home.html', {'form' : form})
+
+def profile(request):
+	return render(request, "registration/signup.html")
+
+def setImage(request):
+	if request.method == 'POST':
+		user = request.POST.get('user')
+		image = request.FILES.get('img', False)
+
+		print(image)
+		profile = Profile(user = User.objects.get(username = user), image = image)
+		profile.save()
+
+	return redirect('/')
 
 def service(request):
 	form = MyRegistrationForm()
@@ -84,7 +101,6 @@ def addService(request):
 		tel = request.POST.get('tel', '')
 		img = request.FILES.get('img', False)
 		typeOfSearch = request.POST.get('type', '')
-
 		workdayStart = request.POST.get('workdayStart')
 		workdayEnd = request.POST.get('workdayEnd')
 		saturdayStart = request.POST.get('saturdayStart')
@@ -195,7 +211,7 @@ def searchService(request):
 	return HttpResponse(data, mimetype)
 
 
-def objectCreate(request, comments, result):
+def objectCreate(request, comments, result, users):
 
 	if request.POST:
 		name = request.POST.get('name')
@@ -220,13 +236,13 @@ def objectCreate(request, comments, result):
 	result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
 	
 	try:
-		currentUserComment = Comment.objects.filter(obj = result[0], user = User.objects.filter(username = user)[0])
+		currentUserComment = Comment.objects.filter(obj = result[0], user = Profile.objects.filter(user = User.objects.filter(username = user)[0])[0])
 		userFlag = 1
 	except IndexError:
 		pass
 	if userFlag:
 		try:
-			commentsObj = Comment.objects.filter(obj = result[0]).exclude(user = User.objects.filter(username = user)[0])
+			commentsObj = Comment.objects.filter(obj = result[0]).exclude(user = Profile.objects.filter(user = User.objects.filter(username = user)[0])[0])
 		except IndexError:
 			pass
 	else:
@@ -253,10 +269,10 @@ def viewObject(request):
 	comments = []	
 	result = list()
 	rating = 0
+	users = []
 	alert = ''
 	
-	objectCreate(request, comments, result)
-	print(comments)
+	objectCreate(request, comments, result, users)
 	if len(comments) > 0:
 		rating = result[0].rating / len(comments)
 		rating = round(rating, 2)
@@ -300,10 +316,9 @@ def addComment(request):
 
 
 
-
 		if limitExceeded == 0:
 
-			commentObj = Comment(text = comment, user = User.objects.filter(username = user)[0], obj = obj, ip = ip, date = timezone.now().date(), rate = str(rating))
+			commentObj = Comment(text = comment, user = Profile.objects.filter(user = User.objects.filter(username = user)[0])[0], obj = obj, ip = ip, date = timezone.now().date(), rate = str(rating))
 			commentObj.save()
 
 
@@ -325,7 +340,7 @@ def deleteComment(request):
 	user = request.GET.get('user')
 	pk = request.GET.get('pk')
 
-	comment = Comment.objects.get(obj = Object.objects.get(pk = pk), user = User.objects.get(username = user))
+	comment = Comment.objects.get(obj = Object.objects.get(pk = pk), user = Profile.objects.filter(user = User.objects.filter(username = user)[0])[0])
 	obj = Object.objects.get(pk = pk)
 	obj.rating -= int(comment.rate)
 

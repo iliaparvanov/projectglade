@@ -111,11 +111,11 @@
 			    <div class="card-body">
 			        <div class="row">
 		        	    <div class="col-md-2" style="width: 40%;">
-		        	        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+		        	        <img src="{{ i.user.image.url }}" class="img img-rounded img-fluid"/>
 		        	        <p class="text-secondary text-center">{{ i.date }}</p>
 		        	    </div>
 		        	    <div class="col-md-10">
-	        	            <a class="float-left" style="color: #B80F0A" ><strong>{{ i.user }}</strong></a>
+	        	            <a class="float-left" style="color: #B80F0A" ><strong>{{ i.user.user }}</strong></a>
 		        	       
 
 		        	       <div class="clearfix"></div>
@@ -147,7 +147,7 @@
 		        	            <!-- <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
 		        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a> -->
 		        	        </p>
-		        	        {% if user  == i.user %}
+		        	        {% if user  == i.user.user %}
  	  							<p><input type="submit" class="btn btn-danger" value="Изтрий" id="delete"></p>
 	  						{% endif %}
 		        	    </div>

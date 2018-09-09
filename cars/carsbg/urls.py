@@ -17,4 +17,7 @@ urlpatterns = [
     url(r'^object/$', views.viewObject, name='object'),
     url(r'^ajax/addComment/$', views.addComment, name='addComment'),
     url(r'^ajax/deleteComment/$', views.deleteComment, name='deleteComment'),
+    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^setImage/$', views.setImage, name='setImage'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -12,33 +12,22 @@
               <label for="id_password">Password</label><input id="id_password" name="password" type="password" class="form-control">
 
             <input type="submit" value="РЕГИСТРИРАНЕ"> -->
-            <form action="/signup/" method="post" id="register" autocomplete="off">
+            <form action="/setImage/" method="post" id="setImage" autocomplete="off">
                 {% csrf_token %}
-                <div class="fieldWrapper">
-                  <!-- {{ form.email.errors }}
-                  {{ form.email.label_tag }}
-                  {{ form.email }}<br>
-                  {{ form.username.label_tag }}
-                  {{ form.username }}<br>
-                  {{ form.password1.errors }}
-                  {{ form.password1.label_tag }}
-                  {{ form.password1 }}<br>
-                  {{ form.password2.errors }}
-                  {{ form.password2.label_tag }}
-                  {{ form.password2 }} -->
-                  {% for field in form %}
-                        {{ field.label_tag }}
-                        {{ field }}<br>
-                        {% if field.errors %}
-                            <div class="alert alert-danger">
-                                    <strong>{{ field.errors|escape }}</strong>
-                            </div>
-                        {% endif %}
-                  {% endfor %}
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="img">Снимка</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="img" name="img" aria-describedby="inputGroupFileAddon01">
+                        <label class="custom-file-label" for="inputGroupFile01">Избери файл</label>
+                    </div>
                 </div>
+                <input type="hidden"  id="user" name="user" value="{{ user.username }}">
+
 
                 
-                <input type="submit" value="Register"/>
+                <input type="submit" value="Запази"/>
             </form>
         </ul>
     </div>

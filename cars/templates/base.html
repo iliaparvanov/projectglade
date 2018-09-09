@@ -146,14 +146,7 @@
             <ul class="navbar-nav ml-auto">
             	{% if user.is_authenticated %}
             	
-            	<li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">{{ user.username }}</a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="#">Профил</a>
-                        <a class="dropdown-item" href="/password-change/">Смени парола</a>
-                        <a class="dropdown-item" href="/logout/">Изход</a>
-                    </div>
-                </li>
+            	
 				<li class="nav-item">
 					<a class="nav-link" href="/articles/home/">Статии</a>
 				</li>
@@ -163,6 +156,14 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/service/">Добавете обект</a>
 				</li>
+				<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"  class="img-responsive" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="{{ profile.image.url }}" style="border-radius: 50%" width="40rem"></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="/profile/">Профил</a>
+                        <a class="dropdown-item" href="/password-change/">Смени парола</a>
+                        <a class="dropdown-item" href="/logout/">Изход</a>
+                    </div>
+                </li>
 				{% else %}
 				<!-- <style type="text/css">
 					#modalBtn {

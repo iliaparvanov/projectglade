@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 from django.contrib.auth.models import User
+from .models import Profile
 
 class MyRegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class': 'form-control', 'id' : 'postEmail', 'placeholder' : 'Email'}))
