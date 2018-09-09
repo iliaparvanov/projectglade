@@ -5,22 +5,38 @@
 
 
 <style> .checked {     color: orange; } .object {     background-image:
-url("/static/carsbg/images/object.jpg");     background-color: #cccccc;
-background-size: 150%;     margin-bottom: 10%;     color: white; } </style>
+url("/static/carsbg/images/object.jpg");     background-color:  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; } </style>
 
 	<div class="object">
-		<!-- <img src="{{ car.image }}"> -->
-	    <h4 class="card-title">{{ car.brand }} {{ car.model }}</h4>
-                          <img src="/static/carscompare/images/fuel.png" aria-hidden="true" style="font-size: 130%; color: #a7414b; height: 2rem;"></i>
-                          {{ car.typeOfEngine }}<br>
-                          <i class="fa fa-calendar" style="font-size:20px; color: #a7414b; height: 50px;"></i>
-                          {{ car.year }}<br>
-                          <i class="fa fa-dollar" style="font-size: 20px; height: 50px; color: green"></i>
-                          {{ car.price }}<br>
-                          <i class="fa fa-gear fa-spin" style="font-size:20px;"></i>
-                          {{ car.gear }}<br>
-	    
+		  <div class="row">
+        <div class="col">
+    	    <h4 class="card-title">{{ car.brand }} {{ car.model }}</h4>
+          <img src="/static/carscompare/images/fuel.png" aria-hidden="true" style="font-size: 130%; color: #a7414b; height: 2rem;"></i>
+          {{ car.typeOfEngine }}<br>
+          <i class="fa fa-calendar" style="font-size:20px; color: #a7414b; height: 50px;"></i>
+          {{ car.year }}<br>
+          <i class="fa fa-dollar" style="font-size: 20px; height: 50px; color: green"></i>
+          {{ car.price }}<br>
+          <i class="fa fa-gear fa-spin" style="font-size:20px;"></i>
+          {{ car.gear }}<br>
+        </div>
+        <div class="col">
+          <div class="card" style="width: 18rem;" class="float-right">
+              <img class="card-img-top" src="{{ car.image }}" alt="Card image cap">
+              <div class="card-header">
+                  Сравнения
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Средна цена за България: {{ car.price }}</li>
+                <li class="list-group-item">Средна цена за Чужбина: {{ car.abroadPrice }}</li>
+              </ul>
+          </div>
+        </div>
+	 </div>
     </div>
-    <strong>Средна цена за България: {{ car.price }}</strong>
+
 
 {% endblock %}
