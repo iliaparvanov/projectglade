@@ -8,10 +8,14 @@ import threading
 import queue
 import multiprocessing.pool as mpool
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
+from carsbg.models import *
 
 
 def carsCompare(request):
-	return render(request, "carscompare/home.html")
+	profile = 1
+	if request.user.is_authenticated:
+		profile = Profile.objects.get(user = request.user)
+	return render(request, "carscompare/home.html", {"profile" : profile})
 
 def addCarToDb(info):
 	print(info.get())
@@ -63,7 +67,10 @@ def displayCarsProperties(request):
 		rangeList.append(i)
 	rangeList = list(reversed(rangeList))
 	print(rangeList)
-	return render(request, "carscompare/home.html", {"brands" : brands, "range" : rangeList})
+	profile = 1
+	if request.user.is_authenticated:
+		profile = Profile.objects.get(user = request.user)
+	return render(request, "carscompare/home.html", {"brands" : brands, "range" : rangeList, "profile" : profile})
 
 def displayModels(request):
 	
@@ -107,8 +114,10 @@ def displayCars(request):
 
 	for i in cars:
 		results.append(i)
-
-	return render(request, "carscompare/results.html", {"results" : results})
+	profile = 1
+	if request.user.is_authenticated:
+		profile = Profile.objects.get(user = request.user)
+	return render(request, "carscompare/results.html", {"results" : results, "profile" : profile})
 
 def displayMore(request):
 	brand = request.POST.get('brand')
@@ -119,5 +128,7 @@ def displayMore(request):
 	price = request.POST.get("price")
 
 	car = Car.objects.filter(brand = Brand.objects.get(name = brand), model = ModelOfCar.objects.get(name = model), typeOfEngine = fuel, gear = gear, year = year, price = price)[0]
-	
-	return render(request, "carscompare/car.html", {"car" : car})
+	profile = 1
+	if request.user.is_authenticated:
+		profile = Profile.objects.get(user = request.user)
+	return render(request, "carscompare/car.html", {"car" : car, "profile" : profile})

@@ -19,7 +19,10 @@ from .forms import *
 def home(request):
 	form = MyRegistrationForm()
 	flagForBase = 1
-	profile = Profile.objects.get(user = request.user)
+	profile = 1
+	if request.user.is_authenticated:
+		profile = Profile.objects.get(user = request.user)
+		
 	return render(request, 'carsbg/home.html', {"form" : form, "flagForBase" : flagForBase, "profile" : profile})
 
 def login_user(request):
@@ -74,22 +77,27 @@ def signup(request):
 		return render(request, 'carsbg/home.html', {'form' : form})
 
 def profile(request):
-	return render(request, "registration/signup.html")
+	profile = 1
+	if request.user.is_authenticated:
+		profile = Profile.objects.get(user = request.user)
+	return render(request, "registration/signup.html", {"profile" : profile})
 
 def setImage(request):
 	if request.method == 'POST':
 		user = request.POST.get('user')
 		image = request.FILES.get('img', False)
-
-		print(image)
-		profile = Profile(user = User.objects.get(username = user), image = image)
+		profile = Profile.objects.get(user = User.objects.get(username = user))
+		profile.image = image
 		profile.save()
 
 	return redirect('/')
 
 def service(request):
 	form = MyRegistrationForm()
-	return render(request, 'carsbg/serviceCreate.html', {'form' : form})
+	profile = 1
+	if request.user.is_authenticated:
+		profile = Profile.objects.get(user = request.user)
+	return render(request, 'carsbg/serviceCreate.html', {'form' : form, "profile" : profile})
 
 @csrf_exempt
 def addService(request):
@@ -113,7 +121,6 @@ def addService(request):
 		sunday = "Затворено"
 		workingTime = WorkingTime(dayWork = workday, sunday = sunday, saturday = saturday)
 		workingTime.save()
-		print(description)
 
 
 		if City.objects.filter(name=cityName):
@@ -278,7 +285,10 @@ def viewObject(request):
 		rating = round(rating, 2)
 
 	form = MyRegistrationForm()
-	return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, "rating" : rating, 'alert' : alert, "form" : form})
+	profile = 1
+	if request.user.is_authenticated:
+		profile = Profile.objects.get(user = request.user)
+	return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, "rating" : rating, 'alert' : alert, "form" : form, "profile" : profile})
 
 
 @csrf_exempt

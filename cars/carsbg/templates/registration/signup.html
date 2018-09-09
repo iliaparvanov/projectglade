@@ -12,8 +12,10 @@
               <label for="id_password">Password</label><input id="id_password" name="password" type="password" class="form-control">
 
             <input type="submit" value="РЕГИСТРИРАНЕ"> -->
-            <form action="/setImage/" method="post" id="setImage" autocomplete="off">
+            <form action="/setImage/" method="post" id="setImage" enctype="multipart/form-data" autocomplete="off">
                 {% csrf_token %}
+
+                <input type="hidden"  id="user" name="user" value="{{ user.username }}">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="img">Снимка</span>
@@ -23,7 +25,6 @@
                         <label class="custom-file-label" for="inputGroupFile01">Избери файл</label>
                     </div>
                 </div>
-                <input type="hidden"  id="user" name="user" value="{{ user.username }}">
 
 
                 

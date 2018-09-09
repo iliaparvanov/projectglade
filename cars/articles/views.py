@@ -3,12 +3,15 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from django.utils import timezone
 from .forms import *
+from carsbg.models import *
 
 
 def articlePage(request):
 	form = MyRegistrationForm()
-
-	return render(request, 'articles/addArticle.html', {"form" : form})
+	profile = 1
+	if request.user.is_authenticated:
+		profile = Profile.objects.get(user = request.user)
+	return render(request, 'articles/addArticle.html', {"form" : form, "profile" : profile})
 
 def addArticle(request):
 	if request.POST:
@@ -29,8 +32,10 @@ def addArticle(request):
 def displayArticles(request):
 	articles = Article.objects.all()
 	form = MyRegistrationForm()
-
-	return render(request, 'articles/displayArticles.html', {"articles" : articles, "form" : form})
+	profile = 1
+	if request.user.is_authenticated:
+		profile = Profile.objects.get(user = request.user)
+	return render(request, 'articles/displayArticles.html', {"articles" : articles, "form" : form, "profile" : profile})
 
 @csrf_exempt
 def articleText(request):
@@ -39,5 +44,7 @@ def articleText(request):
 		author = User.objects.get(username = request.POST.get('author'))
 
 		article = Article.objects.get(name = name, author = author)
-
-		return render(request, 'articles/articleText.html', {"article" : article})
+		profile = 1
+		if request.user.is_authenticated:
+			profile = Profile.objects.get(user = request.user)
+		return render(request, 'articles/articleText.html', {"article" : article, "profile" : profile})
