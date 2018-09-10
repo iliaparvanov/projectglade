@@ -12,10 +12,10 @@ url("/static/carsbg/images/object.jpg");     background-color:  -webkit-backgrou
 
 	<div class="object">
 		  <div class="row">
-        <div class="col">
+        <div class="col" style="color: white">
     	    <h4 class="card-title">{{ car.brand }} {{ car.model }}</h4>
-          <img src="/static/carscompare/images/fuel.png" aria-hidden="true" style="font-size: 130%; color: #a7414b; height: 2rem;"></i>
-          {{ car.typeOfEngine }}<br>
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAARKSURBVGhD7ZZvTBNnHMfrjAX1hdmLZb4ye7FXM1tMfLEsskxIZGYvli2jS4bYXhfsNmPwH4Z/194YdNQ7mC4aREP8M2gVlMFUooJKa0MYG7iACIiwQvgrTOYM1RCX/vY81+cuVyjS9rgryfpJviHP77n2+X36PMedJkaMGDHmAU3xCT6ntsLn0raAM65NTtB3uH3OuCPgjt9Avl4dfHe0+9HCPnDFwRLnic8Z/x5ZRlmQxFs+V9y/QZpYkqDdGYQujZYspxxoJwqERafakuHmaBc0jvfIStNwK7xwvy7KPLy5+ROynHKgX+ycsOCvg3VweerpS/Pdpatw8rfOoHPSeDp2iSIldaXDCVVPXyNLKgM6VvaFROrGp2FH1rdQ5RkTa6bvj0BJg0sc5/10Eay118SxEE/n16KItfYcJFV6uxSVeZkITsbRMrBdaRTHPza1QEWPRxzr9uXCiZY/xLEQqQhXWzaZZPcqKzNXxFp3HcpaO8SG8G7UjPwV0KQ0FT1/wi+T/4jjQ6cqoLz9foBIf+OmjKTKGY+iMnNFjt5qhk93ZwYcp1CDP5uSkc1/Viric65K/eD88zcUlQl2tM7e6wv4lUMKuv7n8cfg6Bvix3NF8FqKyix2j4SShp5+aOzuC6gFE8Ek2meyeRFBxv7kVTIlD7kiLncztJ93zKuHJIKSWOm1kil5yBFpd9hhgMnhj9XcuVBFUOxkSh7hipzpfAAXej3wwFYA4+mpUD86FfS6ZS2y54dS2JaaDh+iXPz8M7jROxD0Opyoigx1GKH+0QTKo3mpftgPaZk0pFMm2JX2JezJzQ96Hc61iSHwtrwZVGSrw/vutrMTd7eX93cnnx65l2R/piNT8pCKKBWpCIbKY7+izBwYzGwNKcknGiJGmkvBIpSZdZGSfKKyI+bD7xORMVKSTzRETAyzhqK5WSyjp20bSVke0RDB4GPF3yc0W0BK8oiWiJ5m9URkKmV/yWpSjhw1RCy2A7dR09NoF0bQ3+M6XfVKHcNoDTQ3zMuY2WzSTuSoIZJTdKgZNywE7QKF16ZoNpWv0ezfpizbOr6hSFFD5O6lt/cazMWbUdNn/I1zRf7VYQXaDb8kzeX4axGi5j2CBQJFNBoksgXX8L2SdpBbS8rhE20RDLpX2nEdPyhJKXyWhwhr5XfFzJWSUvgsBxHKwhmISD0phY+qImaukG+YZo/xixMoC6vz17k7pBQ+aooYLNxO/y/PDgr/bhmGeQU9X2pxHe3UKVyLCDVFyDvWkCCDjlIZyu9EYlbPsO/wTUWCmiIY3KwgIwQdKa/RUvwFuSQy1BbB4HcrI82mIYlCYx77jYFh15OpyImGyJKgp4s/Rq8LJiE1pz9qbXIkgJIpPb6zXLrmQsG9kTYXB91kbun5XE7BvZE2FycmokLCEkHv/uXoAdQm5ICVHsu1ZXqVzO78/D7pmgsG9UbajBEjxv8PjeY/kppuc52D1QoAAAAASUVORK5CYII=" aria-hidden="true" style="font-size: 130%; color: #a7414b; height: 1.5rem;"></i>
+          {{ car.typeOfEngine }}<br><br>
           <i class="fa fa-calendar" style="font-size:20px; color: #a7414b; height: 50px;"></i>
           {{ car.year }}<br>
           <i class="fa fa-dollar" style="font-size: 20px; height: 50px; color: green"></i>
@@ -24,18 +24,19 @@ url("/static/carsbg/images/object.jpg");     background-color:  -webkit-backgrou
           {{ car.gear }}<br>
         </div>
         <div class="col">
-          <div class="card" style="width: 18rem;" class="float-right">
+          
+	 </div>
+   <div class="card" style="width: 18rem;" class="float-right">
               <img class="card-img-top" src="{{ car.image }}" alt="Card image cap">
               <div class="card-header">
                   Сравнения
               </div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">Средна цена за България: {{ car.price }}</li>
-                <li class="list-group-item">Средна цена за Чужбина: {{ car.abroadPrice }}</li>
+                <li class="list-group-item">Средна цена за Чужбина: {{ car.priceAbroad }}</li>
               </ul>
           </div>
         </div>
-	 </div>
     </div>
 
 

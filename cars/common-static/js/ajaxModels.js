@@ -51,16 +51,20 @@ $("#addComment").on('click', function () {
     },
     dataType: 'json',
     success: function (response, status) {
-        if(response.alert != "")
-        {
-          alertField = document.getElementById("alert")
-          alertField.text = response.alert
-        }
-        else
-        {
-            location.reload();
-        }
-      },
+            if (response.alert != "")
+            {
+              alertField = document.getElementById("alert")
+              alertField.text = response.alert
+              alertField.className = "alert alert-danger"
+            }
+            else 
+            {
+              location.reload();
+
+            }
+            
+        
+    },
   })
 });
 

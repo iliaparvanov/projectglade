@@ -33,32 +33,51 @@
 		    
 		</div>
 		<div class="row">
-			<div class="card" style="width: 45rem;" class="col-md">
-			  <div class="card-body">
-			    <h5 class="card-title">Информация за {{ obj.typeOfObject }}a</h5>
-			    <p class="card-text">{{ obj.description }}</p>
+			<div class="col-md-6">
+				<div class="card">
+					  <div class="card-body">
+					    <h5 class="card-title">Предлагани услуги</h5>
+					    {% if services %}
+						{% for i in services %}
+							<img src="{{ i.icon.url }}" style="font-size: 130%; color: #a7414b; height: 1.5rem;" 	>
+							<a href="">{{ i.name }}</a>
+							
+							<!-- <img src="{{ i.image.url }}"> -->
+						{% endfor %}
+						<h5 class="card-title" style="margin-top: 30px;">Информация за {{ obj.typeOfObject }}a</h5>
+					    <p class="card-text">{{ obj.description }}</p>
 
-			  </div>
+					  </div>
+					{% endif %}
+
+				</div>
 			</div>
-			<div class="table-responsive-sm" class="col-md" style="margin-left: 200px;">
-                        <h3>Работно време</h3><br>
-                        <table class="table">
-                          <tr>
-                            <td>Понеделник - Петък</td>
-                            <td>{{ obj.workingTime.dayWork }}</td>
-                            
-                          </tr>
-                          <tr>
-                            <td>Събота</td>
-                            <td>{{ obj.workingTime.saturday }}</td>
-                          </tr>
-                          <tr>
-                            <td>Неделя</td>
-                            <td>{{ obj.workingTime.sunday }}</td>
-                          </tr>
-                        </table>
-                      </div>
+			<div class="col-md-3">
+				<div class="table-responsive-sm" style="">
+                    <h5>Работно време</h5><br>
+                    <table class="table">
+                      <tr>
+                        <td>Понеделник - Петък</td>
+                        <td>{{ obj.workingTime.dayWork }}</td>
+                        
+                      </tr>
+                      <tr>
+                        <td>Събота</td>
+                        <td>{{ obj.workingTime.saturday }}</td>
+                      </tr>
+                      <tr>
+                        <td>Неделя</td>
+                        <td>{{ obj.workingTime.sunday }}</td>
+                      </tr>
+                    </table>
+                </div>
+            </div>
 		</div>
+			
+            
+		
+	
+
 
 		<!-- Тука ще има какво могат да правят в тоя обект -->
 		{% if user.is_authenticated %}
@@ -73,13 +92,10 @@
 			
 			<form id = "addCommentForm" accept-charset="utf-8">
 	  			<h3>Коментар</h3><br>
-	  			<textarea rows="4" cols="50" type="text" name="comment"  id="comment" required/></textarea>
-	  			<a id = "alert"></a>
-	  			{% if alert %}
-		  			<div class="alert alert-danger">
-	  					<strong>{{ alert }}</strong>
-					</div>
-				{% endif %}
+	  			<textarea rows="4" cols="50" type="text" name="comment"  id="comment" required/></textarea><br>
+	  			
+	  			<a id="alert"></a>
+				
 
 	  			<input type="hidden" name="rating" value="3" id="rating">
 

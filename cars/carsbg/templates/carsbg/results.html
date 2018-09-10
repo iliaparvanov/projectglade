@@ -35,58 +35,64 @@
             {
                 cursor: pointer;
         </style>
-        {% for j in results %}
-            <div class="container py-3" class="containerpy-3" class="glow-button" onclick="submitForm('{{ forloop.counter }}')" style="cursor: pointer;">
-                <div class="card">
-                  <div class="row ">
-                      <div class="col-md-4">
-                        <img src="{{ j.image.url }}" class="w-100" style="height: 250px;">
-                      </div>
-                      <div class="col-md-4 px-3">
-                        <div class="card-block px-3">
-                          <h4 class="card-title">{{ j.name }}</h4>
-                          <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 140%; color: #a7414b; height: 30px;"></i>
-                          {{ j.city.name }}, {{ j.address }}<br>
-                          <i class="fa fa-phone" style="font-size:20px; color: #a7414b; height: 50px;"></i>
-                          {{ j.tel }}<br>
-                          <i class="fa fa-star checked" style="font-size: 20px; height: 50px; color: yellow"></i>
-
-                          {{ j.rating }}<br>
-                          <i class="fa fa-car" style="font-size:20px;"></i>
-                          {{ j.typeOfObject }}<br>
+        {% if results %}
+          {% for j in results %}
+              <div class="container py-3" class="containerpy-3" class="glow-button" onclick="submitForm('{{ forloop.counter }}')" style="cursor: pointer;">
+                  <div class="card">
+                    <div class="row ">
+                      {% if j.image %}
+                        <div class="col-md-4">
+                          <img src="{{ j.image.url }}" class="w-100" style="height: 250px;">
                         </div>
-                      </div>
-                      <div class="table-responsive-sm" class="col-md-4">
-                        <h3>Работно време</h3><br>
-                        <table class="table">
-                          <tr>
-                            <td>Понеделник - Петък</td>
-                            <td>{{ j.workingTime.dayWork }}</td>
-                            
-                          </tr>
-                          <tr>
-                            <td>Събота</td>
-                            <td>{{ j.workingTime.saturday }}</td>
-                          </tr>
-                          <tr>
-                            <td>Неделя</td>
-                            <td>{{ j.workingTime.sunday }}</td>
-                          </tr>
-                        </table>
+                      {% endif %}
+                        <div class="col-md-4 px-3">
+                          <div class="card-block px-3">
+                            <h4 class="card-title">{{ j.name }}</h4>
+                            <i class="fa fa-map-marker" aria-hidden="true" style="font-size: 140%; color: #a7414b; height: 30px;"></i>
+                            {{ j.city.name }}, {{ j.address }}<br>
+                            <i class="fa fa-phone" style="font-size:20px; color: #a7414b; height: 50px;"></i>
+                            {{ j.tel }}<br>
+                            <i class="fa fa-star checked" style="font-size: 20px; height: 50px; color: yellow"></i>
+
+                            {{ j.rating }}<br>
+                            <i class="fa fa-car" style="font-size:20px;"></i>
+                            {{ j.typeOfObject }}<br>
+                          </div>
+                        </div>
+                        <div class="table-responsive-sm" class="col-md-4">
+                          <h3>Работно време</h3><br>
+                          <table class="table">
+                            <tr>
+                              <td>Понеделник - Петък</td>
+                              <td>{{ j.workingTime.dayWork }}</td>
+                              
+                            </tr>
+                            <tr>
+                              <td>Събота</td>
+                              <td>{{ j.workingTime.saturday }}</td>
+                            </tr>
+                            <tr>
+                              <td>Неделя</td>
+                              <td>{{ j.workingTime.sunday }}</td>
+                            </tr>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-        <form action=/object/ method="post" name="object" id="objectForm{{ forloop.counter }}" name="objectForm">
-        {% csrf_token %}
-            <input type="hidden" name="name" value="{{ j.name }}" id="name{{ forloop.counter }}">
-            <input type="hidden" name="address" value="{{ j.address }}" id="address{{ forloop.counter }}">
-            <input type="hidden" name="tel" value="{{ j.tel }}" id="tel{{ forloop.counter }}">
-            <input type="hidden" name="typeOfObject" value="{{ j.typeOfObject }}" id="typeOfObject{{ forloop.counter }}">
-            <input type="hidden" name="city" value="{{ j.city.name }}" id="city{{ forloop.counter }}">
-            <input type="hidden" name="user" value="{{ user.username }}" id="user{{ forloop.counter }}">
-        </form>
+          <form action=/object/ method="post" name="object" id="objectForm{{ forloop.counter }}" name="objectForm">
+          {% csrf_token %}
+              <input type="hidden" name="name" value="{{ j.name }}" id="name{{ forloop.counter }}">
+              <input type="hidden" name="address" value="{{ j.address }}" id="address{{ forloop.counter }}">
+              <input type="hidden" name="tel" value="{{ j.tel }}" id="tel{{ forloop.counter }}">
+              <input type="hidden" name="typeOfObject" value="{{ j.typeOfObject }}" id="typeOfObject{{ forloop.counter }}">
+              <input type="hidden" name="city" value="{{ j.city.name }}" id="city{{ forloop.counter }}">
+              <input type="hidden" name="user" value="{{ user.username }}" id="user{{ forloop.counter }}">
+          </form>
 
-        {% endfor %}
+          {% endfor %}
+        {% else %}
+            <h3><strong>Нищо не е намерено</strong></h3>
+        {% endif %}
     </div>
 {% endblock %}

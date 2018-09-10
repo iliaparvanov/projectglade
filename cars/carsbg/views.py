@@ -107,7 +107,7 @@ def addService(request):
 		cityName = request.POST.get('city', '')
 		address = request.POST.get('address', '')
 		tel = request.POST.get('tel', '')
-		img = request.FILES.get('img', False)
+		img = request.FILES.get('img')
 		typeOfSearch = request.POST.get('type', '')
 		workdayStart = request.POST.get('workdayStart')
 		workdayEnd = request.POST.get('workdayEnd')
@@ -133,7 +133,7 @@ def addService(request):
 			service = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0, workingTime = workingTime, description = description)
 			service.save()
 		elif typeOfSearch == "cardealer":
-			carDealer = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0, saturday = saturday, sunday = sunday, workingTime = workingTime, description = description)
+			carDealer = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0, workingTime = workingTime, description = description)
 			carDealer.save()
 		else:
 			return HttpResponse("ERROR ^)^")
@@ -169,8 +169,10 @@ def searchService(request):
 		except IndexError:
 			pass
 
-		print(obj)
-		return render(request, 'carsbg/results.html', {'results' : obj})
+		profile = 1
+		if request.user.is_authenticated:
+			profile = Profile.objects.get(user = request.user)
+		return render(request, 'carsbg/results.html', {'results' : obj, "profile" : profile})
 
 	if request.is_ajax():
 
@@ -218,7 +220,7 @@ def searchService(request):
 	return HttpResponse(data, mimetype)
 
 
-def objectCreate(request, comments, result, users):
+def objectCreate(request, comments, result, users, services):
 
 	if request.POST:
 		name = request.POST.get('name')
@@ -239,9 +241,13 @@ def objectCreate(request, comments, result, users):
 	currentUserComment = 0
 	commentsObj = 0
 	userFlag = 0
+	servicesObj = 0
+
+
 
 	result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
 	
+	servicesObj = (Service.objects.filter(obj = result[0]))
 	try:
 		currentUserComment = Comment.objects.filter(obj = result[0], user = Profile.objects.filter(user = User.objects.filter(username = user)[0])[0])
 		userFlag = 1
@@ -267,19 +273,22 @@ def objectCreate(request, comments, result, users):
 	if commentsObj:
 		for comment in commentsObj:
 			comments.append(comment)
+	for service in servicesObj:
+		services.append(service)
 
 
 
 
 def viewObject(request):
 
+	services = []
 	comments = []	
 	result = list()
 	rating = 0
 	users = []
 	alert = ''
 	
-	objectCreate(request, comments, result, users)
+	objectCreate(request, comments, result, users, services)
 	if len(comments) > 0:
 		rating = result[0].rating / len(comments)
 		rating = round(rating, 2)
@@ -288,7 +297,7 @@ def viewObject(request):
 	profile = 1
 	if request.user.is_authenticated:
 		profile = Profile.objects.get(user = request.user)
-	return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, "rating" : rating, 'alert' : alert, "form" : form, "profile" : profile})
+	return render(request, 'carsbg/object.html', {'obj' : result[0], 'comments' : comments, "rating" : rating, 'alert' : alert, "form" : form, "profile" : profile, "services" : services})
 
 
 @csrf_exempt

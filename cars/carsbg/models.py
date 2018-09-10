@@ -66,6 +66,8 @@ class Service(models.Model):
 	obj = models.ForeignKey(Object, on_delete = models.CASCADE, null = True)
 	name = models.CharField(max_length = 100)
 	description = models.CharField(max_length = 600)
+	image = models.ImageField(upload_to='media/', blank = True)
+	icon = models.ImageField(upload_to='media/', blank = True)
 
 	def __str__(self):
 		return str(self.name)
