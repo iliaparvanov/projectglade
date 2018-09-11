@@ -20,6 +20,7 @@ def home(request):
 	form = MyRegistrationForm()
 	flagForBase = 1
 	profile = 1
+	print(request.user.is_authenticated)
 	if request.user.is_authenticated:
 		profile = Profile.objects.get(user = request.user)
 		
@@ -38,6 +39,7 @@ def login_user(request):
             return render(request, "carsbg/home.html", {"errorFlagLogin" : 1})
     else:
     	return redirect('/')
+
 @login_required
 def password_change(request):
     if request.method == 'POST':

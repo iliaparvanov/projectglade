@@ -36,21 +36,21 @@
                             <input type="file" class="custom-file-input" id="img" name="img" aria-describedby="inputGroupFileAddon01">
                             <label class="custom-file-label" for="inputGroupFile01">Избери файл</label>
                         </div>
-                    </div>
+                    </div><br>
                     
                     <select name='type' class="custom-select" id='typeOfSearch' value='typeOfSearch'>
                         <option type='text' name="service"  id="service" value='service' />Сервиз</option>
                         <option type='text' name="cardealer"  id="cardealer" value='cardealer'>Автокъща</option>
-                    </select><br>
+                    </select><br><br>
                     Описание
                     <textarea rows="4" cols="50" type="text" name="description"  id="description" required/></textarea>
-                    <a id = "alert"></a>
+                    <a id = "alert"></a><br><br>
                     Предлагани услуги
                     <select name="multipleSelect" id="multipleSelect" class="form-control"   multiple="multiple" style="display: none;">
                         {% for i in services %}
                             <option type="text" name="serv" value="{{ i }}">{{ i }}</option>
                         {% endfor %}
-                    </select>
+                    </select><br>
                     Работно време
                    <div class="container">
                         <div class="row">
