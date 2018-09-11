@@ -33,17 +33,28 @@
 		    
 		</div>
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-7.5">
 				<div class="card">
 					  <div class="card-body">
 					    <h5 class="card-title">Предлагани услуги</h5>
 					    {% if services %}
-						{% for i in services %}
-							<img src="{{ i.icon.url }}" style="font-size: 130%; color: #a7414b; height: 1.5rem;" 	>
-							<a href="">{{ i.name }}</a>
-							
-							<!-- <img src="{{ i.image.url }}"> -->
-						{% endfor %}
+					    <table class="table">
+					    	<tr>
+							{% for i in services %}
+								
+									<td>
+										<img src="{{ i.icon.url }}" style="font-size: 130%; color: #a7414b; height: 1.5rem;">
+										<a href="/displayService/{{ i.pk }}/">{{ i.name }}</a>
+									</td>
+								{% if forloop.counter|divisibleby:3 %}
+									</tr>
+									<tr>
+								{% endif %}
+								
+								<!-- <img src="{{ i.image.url }}"> -->
+							{% endfor %}
+                    	</table>
+
 						<h5 class="card-title" style="margin-top: 30px;">Информация за {{ obj.typeOfObject }}a</h5>
 					    <p class="card-text">{{ obj.description }}</p>
 

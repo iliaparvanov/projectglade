@@ -92,12 +92,14 @@ def setImage(request):
 
 	return redirect('/')
 
-def service(request):
+def object(request):
 	form = MyRegistrationForm()
 	profile = 1
 	if request.user.is_authenticated:
 		profile = Profile.objects.get(user = request.user)
-	return render(request, 'carsbg/serviceCreate.html', {'form' : form, "profile" : profile})
+
+	services = Service.objects.all()
+	return render(request, 'carsbg/serviceCreate.html', {'form' : form, "profile" : profile, "services" : services})
 
 @csrf_exempt
 def addService(request):
@@ -122,6 +124,8 @@ def addService(request):
 		workingTime = WorkingTime(dayWork = workday, sunday = sunday, saturday = saturday)
 		workingTime.save()
 
+		services = request.POST.getlist('multipleSelect', '')
+
 
 		if City.objects.filter(name=cityName):
 			city = City.objects.filter(name=cityName)[0]
@@ -130,13 +134,19 @@ def addService(request):
 			city.save()
 
 		if typeOfSearch == "service":
-			service = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0, workingTime = workingTime, description = description)
-			service.save()
+			obj1 = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0, workingTime = workingTime, description = description)
+			obj1.save()
 		elif typeOfSearch == "cardealer":
-			carDealer = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0, workingTime = workingTime, description = description)
-			carDealer.save()
+			obj1 = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0, workingTime = workingTime, description = description)
+			obj1.save()
 		else:
 			return HttpResponse("ERROR ^)^")
+
+
+		for i in services:
+			service = Service.objects.get(name = str(i))
+			service.obj.add(obj1)
+			service.save()
 
 		return redirect('home')
 
@@ -169,10 +179,11 @@ def searchService(request):
 		except IndexError:
 			pass
 
+		form = MyRegistrationForm()
 		profile = 1
 		if request.user.is_authenticated:
 			profile = Profile.objects.get(user = request.user)
-		return render(request, 'carsbg/results.html', {'results' : obj, "profile" : profile})
+		return render(request, 'carsbg/results.html', {'results' : obj, "profile" : profile, "form" : form})
 
 	if request.is_ajax():
 
@@ -369,3 +380,13 @@ def deleteComment(request):
 	obj.save()
 	comment.delete()
 	return JsonResponse("Success", safe = False)
+
+
+def displayService(request, pk):
+	service = Service.objects.get(pk = pk)
+
+	form = MyRegistrationForm()
+	profile = 1
+	if request.user.is_authenticated:
+		profile = Profile.objects.get(user = request.user)
+	return render(request, "carsbg/servicePage.html", {"service" : service, "form" : form, "profile" : profile})

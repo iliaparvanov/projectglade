@@ -80,7 +80,7 @@
                       </div>
                     </div>
                   </div>
-          <form action=/object/ method="post" name="object" id="objectForm{{ forloop.counter }}" name="objectForm">
+          <form action=/viewObject/ method="post" name="object" id="objectForm{{ forloop.counter }}" name="objectForm">
           {% csrf_token %}
               <input type="hidden" name="name" value="{{ j.name }}" id="name{{ forloop.counter }}">
               <input type="hidden" name="address" value="{{ j.address }}" id="address{{ forloop.counter }}">

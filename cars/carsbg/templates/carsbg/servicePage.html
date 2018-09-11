@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load tests_extras %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'articles/css/articles.css' %}">
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lora" />
+
+<style>
+.checked {
+    color: orange;
+}
+h1 { font-family: Lora; font-size: 50px; font-style: normal; font-variant: normal; font-weight: 700; } h3 { font-family: Lora; font-size: 14px; font-style: normal; font-variant: normal; font-weight: 700; line-height: 15.4px; } p { font-family: Lora; font-size: 20px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 1.6; } blockquote { font-family: Lora; font-size: 21px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 30px; } pre { font-family: Lora; font-size: 13px; font-style: normal; font-variant: normal; font-weight: 400; line-height: 18.5714px; }
+</style>
+
+	<div class="container">
+	    <h1 class="text-left" style="margin-top: 20px;">{{ service.name }}</h1>
+	    <div>
+  			<div class="text-left">
+				<img src="{{ service.image.url }}">
+
+  				<p>{{ service.description }}</p>
+  			</div>
+  		</div>
+    </div>
+
+{% endblock %}

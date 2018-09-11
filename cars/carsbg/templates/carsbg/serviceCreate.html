@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
     {% load staticfiles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
-
+        <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
+        <script src="/static/bootstrap/dist/js/BsMultiSelect.js"></script>
+        <link rel="stylesheet" href="/static/bootstrap/dist/css/BsMultiSelect.css">
+        
         <div class="form-container">
             <div class="section-title">Добавете обект</div>
             <ul>
@@ -43,7 +45,13 @@
                     Описание
                     <textarea rows="4" cols="50" type="text" name="description"  id="description" required/></textarea>
                     <a id = "alert"></a>
-                    <strong>Работно време</strong>
+                    Предлагани услуги
+                    <select name="multipleSelect" id="multipleSelect" class="form-control"   multiple="multiple" style="display: none;">
+                        {% for i in services %}
+                            <option type="text" name="serv" value="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                    Работно време
                    <div class="container">
                         <div class="row">
                             <div class="col">                                
@@ -57,11 +65,17 @@
                                 <input type="time" name="saturdayEnd">
                             </div>
                         </div>
+                    <style type="text/css">
+                        .selectMultiple { margin: 150px auto; max-width: 350px; }
+                    </style>
                     
+                   
+                 
                     
                     <div class="submit-container">
                             <input type="submit" href="/" value="ДОБАВИ" id="Create">
                     </div>
+                    <script>$("#multipleSelect").bsMultiSelect();</script>
                 </form>
             </ul>
         </div>
