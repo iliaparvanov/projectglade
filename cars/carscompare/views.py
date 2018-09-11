@@ -9,13 +9,7 @@ import queue
 import multiprocessing.pool as mpool
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from carsbg.models import *
-
-
-def carsCompare(request):
-	profile = 1
-	if request.user.is_authenticated:
-		profile = Profile.objects.get(user = request.user)
-	return render(request, "carscompare/home.html", {"profile" : profile})
+from carsbg.forms import *
 
 def addCarToDb(info):
 	print(info.get())
@@ -66,11 +60,11 @@ def displayCarsProperties(request):
 	for i in range(1972, 2018):
 		rangeList.append(i)
 	rangeList = list(reversed(rangeList))
-	print(rangeList)
+	form = MyRegistrationForm()
 	profile = 1
 	if request.user.is_authenticated:
 		profile = Profile.objects.get(user = request.user)
-	return render(request, "carscompare/home.html", {"brands" : brands, "range" : rangeList, "profile" : profile})
+	return render(request, "carscompare/home.html", {"brands" : brands, "range" : rangeList, "profile" : profile, "form" : form})
 
 def displayModels(request):
 	
@@ -114,10 +108,12 @@ def displayCars(request):
 
 	for i in cars:
 		results.append(i)
+
+	form = MyRegistrationForm()
 	profile = 1
 	if request.user.is_authenticated:
 		profile = Profile.objects.get(user = request.user)
-	return render(request, "carscompare/results.html", {"results" : results, "profile" : profile})
+	return render(request, "carscompare/results.html", {"results" : results, "profile" : profile, "form" : form})
 
 def displayMore(request):
 	brand = request.POST.get('brand')
@@ -128,7 +124,8 @@ def displayMore(request):
 	price = request.POST.get("price")
 
 	car = Car.objects.filter(brand = Brand.objects.get(name = brand), model = ModelOfCar.objects.get(name = model), typeOfEngine = fuel, gear = gear, year = year, price = price)[0]
+	form = MyRegistrationForm()
 	profile = 1
 	if request.user.is_authenticated:
 		profile = Profile.objects.get(user = request.user)
-	return render(request, "carscompare/car.html", {"car" : car, "profile" : profile})
+	return render(request, "carscompare/car.html", {"car" : car, "profile" : profile, "form" : form})

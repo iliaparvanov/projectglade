@@ -8,7 +8,7 @@ fuelId = {
 }
 
 
-startingYear = 2000
+startingYear = 2011
 yearid = [startingYear]
 for i in range(5):
 	startingYear += 1
@@ -280,14 +280,14 @@ BMW = {
 	# "M5"  : 152,
 	# "M6"  : 153,
 	# "X5 M"  : 1660,
-	# "X6 M" : 1661,
+	"X6 M" : 1661,
 	# "Z4 M"  : 155,
 	# "M4"  : 2045,
 	# "X1"  : 1659,
 	# "X3"  : 156,
 	# "X4"  : 1981,
 	# "X5"  : 157,
-	"X6"  : 158,
+	# "X6"  : 158,
 	# "X2"  : 2180,
 	# "Z3"  : 160,
 	# "Z4" : 161

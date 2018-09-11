@@ -20,7 +20,6 @@ def home(request):
 	form = MyRegistrationForm()
 	flagForBase = 1
 	profile = 1
-	print(request.user.is_authenticated)
 	if request.user.is_authenticated:
 		profile = Profile.objects.get(user = request.user)
 		
@@ -221,7 +220,7 @@ def searchService(request):
 		suggestions = Object.objects.filter(address__icontains = term)
 		for i in suggestions:
 			suggestions_json = {}
-			suggestions_json['label'] = i.name
+			suggestions_json['label'] = i.address
 			suggestions_json['category'] = "Местоположение:"
 
 			results.append(suggestions_json)
