@@ -3,7 +3,7 @@
 <html>
 
 <head>
-	<title>Carsbg</title>
+	<title>AUTOROOM</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" /> {% load staticfiles %}
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -155,26 +155,38 @@
             	{% if user.is_authenticated %}
             	
             	
-				<li class="nav-item">
-					<a class="nav-link" href="/articles/home/">Статии</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/carscompare/home/">Сравни цени</a>
-				</li>
-				{% if user.is_superuser %}
 					<li class="nav-item">
-						<a class="nav-link" href="/service/">Добавете обект</a>
+						<a class="nav-link" href="/articles/home/">Статии</a>
 					</li>
-				{% endif %}
-				<li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle"  class="img-responsive" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="{{ profile.image.url }}" style="border-radius: 50%" width="40px;" height="40px"></a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/profile/">Профил</a>
-                        <a class="dropdown-item" href="/password-change/">Смени парола</a>
-                        <a class="dropdown-item" href="/logout/">Изход</a>
-                    </div>
-                </li>
+					<li class="nav-item">
+						<a class="nav-link" href="/carscompare/home/">Сравни цени</a>
+					</li>
+					{% if user.is_superuser %}
+						<li class="nav-item">
+							<a class="nav-link" href="/service/">Добавете обект</a>
+						</li>
+					{% endif %}
+					{% if profile.image %}
+						<li class="nav-item dropdown">
+		                    <a class="nav-link dropdown-toggle"  class="img-responsive" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="{{ profile.image.url }}" style="border-radius: 50%" width="40px;" height="40px"></a>
+		                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		                        <a class="dropdown-item" href="/profile/">Профил</a>
+		                        <a class="dropdown-item" href="/password-change/">Смени парола</a>
+		                        <a class="dropdown-item" href="/logout/">Изход</a>
+		                    </div>
+		                </li>
+		            {% else %}
+		            	<li class="nav-item dropdown">
+		                    <a class="nav-link dropdown-toggle"  class="img-responsive" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">{{ profile.user.username }}</a>
+		                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		                        <a class="dropdown-item" href="/profile/">Профил</a>
+		                        <a class="dropdown-item" href="/password-change/">Смени парола</a>
+		                        <a class="dropdown-item" href="/logout/">Изход</a>
+		                    </div>
+		                </li>
+		            {% endif %}
 				{% else %}
+
 				<!-- <style type="text/css">
 					#modalBtn {
 							background:none!important;
@@ -300,7 +312,7 @@
 			<a href="https://www.linkedin.com"><img src="/static/images/linkedin.png" alt="LinkedIn"></a>
 		</div>
 		<div id="copyrights">
-			<p>© 2018 Carsbg<br>Всички права запазени.</p>
+			<p>© 2018 AUTOROOM<br>Всички права запазени.</p>
 		</div>
 	</div>
 	<script src="{% static 'js/main.js' %}"></script>
