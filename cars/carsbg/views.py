@@ -184,6 +184,16 @@ def searchService(request):
 		profile = 1
 		if request.user.is_authenticated:
 			profile = Profile.objects.get(user = request.user)
+
+
+		for i in obj:
+			comments = Comment.objects.filter(obj = i)
+			if len(comments) > 0:
+				i.ratingDisplay = (i.rating / len(comments))
+				i.ratingDisplay = round(i.ratingDisplay, 2)
+			print(len(comments), i.ratingDisplay)
+
+
 		return render(request, 'carsbg/results.html', {'results' : obj, "profile" : profile, "form" : form})
 
 	if request.is_ajax():
@@ -329,21 +339,21 @@ def addComment(request):
 		alert = ""
 		obj = Object.objects.get(pk = pk, typeOfObject = typeOfObject)
 
-		if len(Comment.objects.filter(obj = obj, ip = ip)) >= 1:
-			limitExceeded = 1
-			alert = "Вече оценихте този обект"
+		# if len(Comment.objects.filter(obj = obj, ip = ip)) >= 1:
+		# 	limitExceeded = 1
+		# 	alert = "Вече оценихте този обект"
 
 		
 
-		count = 0
-		for i in Comment.objects.filter(ip = ip):
-				if i.date == timezone.now().date():
-					count += 1
-				print(timezone.now().date(), i.date)
+		# count = 0
+		# for i in Comment.objects.filter(ip = ip):
+		# 		if i.date == timezone.now().date():
+		# 			count += 1
+		# 		print(timezone.now().date(), i.date)
 
-		if count >= 4:
-			limitExceeded = 1
-			alert = "Днес надхвърлихте броя на позволените коментари"
+		# if count >= 4:
+		# 	limitExceeded = 1
+		# 	alert = "Днес надхвърлихте броя на позволените коментари"
 
 
 

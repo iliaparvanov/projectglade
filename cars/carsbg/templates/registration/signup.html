@@ -4,7 +4,7 @@
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
     <div class="form-container">
-        <div class="section-title">Регистрация</div>
+        <div class="section-title">Профилна снимка</div>
         <ul>
             <!-- <form action="/login/" method="post" accept-charset="utf-8" class="form-standart">
               {% csrf_token %}
@@ -21,7 +21,7 @@
                         <span class="input-group-text" id="img">Снимка</span>
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="img" name="img" aria-describedby="inputGroupFileAddon01">
+                        <input type="file" class="custom-file-input" id="img" name="img" aria-describedby="inputGroupFileAddon01" required>
                         <label class="custom-file-label" for="inputGroupFile01">Избери файл</label>
                     </div>
                 </div>

@@ -57,7 +57,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'cars.urls'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_URL = '/media/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'carsbg/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 TEMPLATES = [
     {

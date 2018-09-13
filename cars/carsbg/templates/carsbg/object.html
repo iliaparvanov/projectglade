@@ -63,8 +63,8 @@
 
 				</div>
 			</div>
-			<div class="col-md-3">
-				<div class="table-responsive-sm" style="">
+			<div class="col-md-4">
+				<div class="table-responsive-sm">
                     <h5>Работно време</h5><br>
                     <table class="table">
                       <tr>
@@ -129,16 +129,37 @@
 
 		{% endif %}
 		
-
+		<style type="text/css">
+			.comment
+			{
+				width: 50%;
+			}
+			@media screen and (max-width: 800px)
+			{
+				.col-md-2
+				{
+					width: 150px
+				}
+				.comment 
+				{
+					width: 100%;
+					height: 50%;
+				}
+			}
+		</style>
 		
 
 		{% for i in comments %}
-		<div style=" width: 50%; margin-top: 5%" >
+		<div class="comment" style="margin-top: 5%" >
 			<div class="card">
 			    <div class="card-body">
 			        <div class="row">
-		        	    <div class="col-md-2" style="width: 40%;">
-		        	        <img src="{{ i.user.image.url }}" class="img img-rounded img-fluid"/>
+		        	    <div class="col-md-2">
+		        	    	{% if i.user.image %}
+		        	        	<img src="{{ i.user.image.url }}" style="width: 100px; height: 100px; border-radius: 50%" class="img img-rounded img-fluid"/>
+		        	        {% else %}
+		        	        	<img src="/static/carsbg/images/profilePic.jpg" style="width: 100px; height: 100px; border-radius: 50%" class="img img-rounded img-fluid"/>
+		        	        {% endif %}
 		        	        <p class="text-secondary text-center">{{ i.date }}</p>
 		        	    </div>
 		        	    <div class="col-md-10">
@@ -158,11 +179,11 @@
 											dateSpan.className = "float-right"
 											if(i <= num)
 											{
-												dateSpan.className = "text-warning fa fa-star checked";
+												dateSpan.className = "fa fa-star checked";
 											}
 											else
 											{
-												dateSpan.className = "text-warning fa fa-star"
+												dateSpan.className = "fa fa-star"
 											}
 											div.appendChild(dateSpan)
 										}

@@ -139,22 +139,23 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        {% if flagForBase %}
-        {% else %}
-                <form action="{% url 'searchService' %}" method="post" accept-charset="utf-8">
-                    <div class="input-group mb-3">
-                        <input style="height: 6vh;" type="glowinginwhite" name="search" class="form-control" placeholder="Търсете по град, улица или име на обекта" aria-describedby="basic-addon2" id = "search">
-                        <div class="input-group-append">
-                            <button type="submit" class="input-group-text" id="basic-addon2"><img id="glyph" src="/static/images/si-glyph-magnifier.svg"></button>
-                        </div>
-                    </div>
-                </form>
-        {% endif %}
+        
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             	{% if user.is_authenticated %}
-            	
-            	
+            		
+	        		{% if flagForBase %}
+			        {% else %}
+			        		
+			                <form action="{% url 'searchService' %}" method="post" accept-charset="utf-8">
+			                    <div class="input-group search">
+			                        <input  type="glowinginwhite" style="height: 2rem; width: 15rem;" name="search" class="form-control" placeholder="Търсете по град, улица или име на обекта" aria-describedby="basic-addon2" id = "search">
+			                        <div class="input-group-append" style="width: auto; height: 2rem;">
+			                            <button type="submit" class="input-group-text" id="basic-addon2"><img id="glyph" src="/static/images/si-glyph-magnifier.svg"></button>
+			                        </div>
+			                    </div>
+			                </form>
+			        {% endif %}
 					<li class="nav-item">
 						<a class="nav-link" href="/articles/home/">Статии</a>
 					</li>
@@ -167,7 +168,7 @@
 						</li>
 					{% endif %}
 					{% if profile.image %}
-						<li class="nav-item dropdown">
+						<li class="nav-item dropdown" style="margin-top: -1%">
 		                    <a class="nav-link dropdown-toggle"  class="img-responsive" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><img src="{{ profile.image.url }}" style="border-radius: 50%" width="40px;" height="40px"></a>
 		                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 		                        <a class="dropdown-item" href="/profile/">Профил</a>
@@ -176,8 +177,8 @@
 		                    </div>
 		                </li>
 		            {% else %}
-		            	<li class="nav-item dropdown">
-		                    <a class="nav-link dropdown-toggle"  class="img-responsive" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">{{ profile.user.username }}</a>
+		            	<li class="nav-item dropdown" style="margin-top: -1%">
+		                    <a class="nav-link dropdown-toggle"  class="img-responsive" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">><img src="/static/carsbg/images/profilePic.jpg" style="border-radius: 50%" width="40px;" height="40px"></a>
 		                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 		                        <a class="dropdown-item" href="/profile/">Профил</a>
 		                        <a class="dropdown-item" href="/password-change/">Смени парола</a>
@@ -200,16 +201,27 @@
 
 							}
 				</style> -->
-				<li class="nav-item">
-					<button class="btn btn-link" class="nav-link" href="#" data-toggle="modal" data-target="#Modal" id="modalBtn" style="color: #949494;">Вход/Регистрация</button>
-				</li>
-				 
-				<li class="nav-item">
-					<a class="nav-link" href="/articles/home/">Статии</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/carscompare/home/">Сравни цени</a>
-				</li>
+					{% if flagForBase %}
+			        {% else %}
+			                <form action="{% url 'searchService' %}" method="post" accept-charset="utf-8">
+			                    <div class="input-group mb-3">
+			                        <input style="height: 2rem; width: 21rem" type="glowinginwhite" name="search" class="form-control" placeholder="Търсете по град, улица или име на обекта" aria-describedby="basic-addon2" id = "search">
+			                        <div class="input-group-append" style="width: auto; height: 2rem">
+			                            <button type="submit" class="input-group-text" id="basic-addon2"><img id="glyph" src="/static/images/si-glyph-magnifier.svg"></button>
+			                        </div>
+			                    </div>
+			                </form>
+			        {% endif %}
+					<li class="nav-item">
+						<button class="btn btn-link" class="nav-link" href="#" data-toggle="modal" data-target="#Modal" id="modalBtn" style="color: #949494;">Вход/Регистрация</button>
+					</li>
+					 
+					<li class="nav-item">
+						<a class="nav-link" href="/articles/home/">Статии</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/carscompare/home/">Сравни цени</a>
+					</li>
 				
 				<!--	<p>ЛОГО</p>-->
 				{% endif %}

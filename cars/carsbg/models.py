@@ -38,6 +38,7 @@ class Object(models.Model):
 	image = models.ImageField(upload_to='media/', blank = True)
 	typeOfObject = models.CharField(max_length = 100, null = True)
 	rating = models.IntegerField()
+	ratingDisplay = models.IntegerField(null = True)
 	description = models.CharField(max_length = 600, null = True)
 	workingTime = models.ForeignKey(WorkingTime, on_delete = models.CASCADE, null = True)
 
