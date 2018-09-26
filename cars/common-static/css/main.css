@@ -1,7 +1,7 @@
 /*TODO: Make navbar a slightly move down on hover*/
 
 * {
-    margin: 0;
+    margin: 0; 
     padding: 0;
 }
 
@@ -29,7 +29,7 @@ a:hover {
 }
 
 .whitefont{
-    color: white
+    color: white;
 }
 
 /*#navbar {
@@ -60,11 +60,10 @@ a:hover {
 */
 
 .standart-container {
-
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    color: white;
+    color: black;
 }
 
 #slogan {
@@ -241,7 +240,7 @@ input[type="glowinginwhite"]:focus {
     -moz-box-sizing: border-box;
     padding: 10px;
     border: 1px solid #949494;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', Helvetica, sans-serif;
     font-size: 100%;
 }
 
@@ -273,7 +272,7 @@ input[type="glowinginwhite"]:focus {
     border-left-style: none;
     color: #ffffff;
     background: #a7414b;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', Helvetica, sans-serif;
     font-size: 100%;
     border-radius: 10px;
  }

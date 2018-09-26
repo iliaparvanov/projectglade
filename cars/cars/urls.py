@@ -21,6 +21,6 @@ urlpatterns = [
     url(r'^', include('carsbg.urls')),
     url(r'^articles/', include('articles.urls')),
     url(r'^carscompare/', include('carscompare.urls')),
-    url(r'^oauth/$', include('social_django.urls', namespace='social')), 
-    
+    url(r'^oauth/$', include('social_django.urls', namespace='social')),
+
 ]

@@ -3,7 +3,7 @@
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
    <!--  <div class="standart-container">
-        
+
         <div class="restrt-container">
             {% if j.image.url %}
             <div class='img-container'>
@@ -24,13 +24,7 @@
                 <p>{{ j.city.name }}, {{ j.address }}</p>
             </div>
         </div> -->
-        <script type="text/javascript">
-            function submitForm(id)
-            {
-                document.getElementById("objectForm" + id).submit();
-            }
-        </script>
-        
+
         </style>
         {% if results %}
           {% for j in results %}
@@ -62,7 +56,7 @@
                             <tr>
                               <td>Понеделник - Петък</td>
                               <td>{{ j.workingTime.dayWork }}</td>
-                              
+
                             </tr>
                             <tr>
                               <td>Събота</td>
@@ -92,4 +86,10 @@
             <h3><strong>Нищо не е намерено</strong></h3>
         {% endif %}
     </div>
+    <script type="text/javascript">
+        function submitForm(id)
+        {
+            document.getElementById("objectForm" + id).submit();
+        }
+    </script>
 {% endblock %}

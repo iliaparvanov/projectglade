@@ -1,46 +1,44 @@
 {% extends "base.html" %}
 {% block content %}
-    {% load staticfiles %}
+{% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'articles/css/articles.css' %}">
 
-    <script type="text/javascript">
-            function submitForm(id)
-            {
-                document.getElementById("articleForm" + id).submit();
-            }
-    </script>
     <style type="text/css">
-        .standart-container
-        {
+        .standart-container {
             cursor: pointer;
         }
     </style>
-    <div   style="color: black; margin-top: 10px;" >
-        <div class="row">
-            {% for i in articles %}
-                <div class="col-sm-6">
-                    <div class="card" style="width: 18rem; cursor: pointer;" onclick="submitForm('{{ forloop.counter }}')" >
-                        {% if i.image.url %}
-                            <img class="card-img-top" src="{{ i.image.url }}" alt="Card image cap" style="width: 280px; height: 200px;" ">
-                        {% else %}
-                            <img class="card-img-top" src="/static/images/logo.png" alt="Card image cap">
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{ i.name }}</h5>
-                            <p class="card-text">{{ i.author }} {{ i.date }}</p>
-                        </div>
-                    </div>
-                    <form action=/articles/articleText/ method="post" id="articleForm{{ forloop.counter }}">
-                        <input type="hidden" name="name" value="{{ i.name }}" id="name{{ forloop.counter }}">
-                        <input type="hidden" name="author" value="{{ i.author }}" id="author{{ forloop.counter }}">
-                        <input type="hidden" name="date" value="{{ i.date }}" id="date{{ forloop.counter }}">
-                    </form>
+    <div class="standart-container">
+        {% for i in articles %}
+        <div class="card-container" onclick="submitForm('{{ forloop.counter }}')">
+            {% if i.image.url %}
+                <div class="card-img">
+                    <img src="{{ i.image.url }}" alt="Card image cap">
                 </div>
-                
-                {% endfor %}
+            {% else %}
+                <div class="card-img">
+                    <img src="/static/images/logo.png" alt="Card image cap">
+                </div>
+            {% endif %}
+            <div class="card-title">
+                {{ i.name }}
             </div>
-
+            <div class="card-info">
+                <p>{{ i.author }} {{ i.date }}</p>
+            </div>
         </div>
-        
+        <form action=/articles/articleText/ method="post" id="articleForm{{ forloop.counter }}">
+            <input type="hidden" name="name" value="{{ i.name }}" id="name{{ forloop.counter }}">
+            <input type="hidden" name="author" value="{{ i.author }}" id="author{{ forloop.counter }}">
+            <input type="hidden" name="date" value="{{ i.date }}" id="date{{ forloop.counter }}">
+        </form>
+    {% endfor %}
 
+    </div>
+
+    <script type="text/javascript">
+        function submitForm(id) {
+            document.getElementById("articleForm" + id).submit();
+        }
+    </script>
 {% endblock %}
