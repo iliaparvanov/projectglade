@@ -14,6 +14,54 @@ from django.utils import timezone
 from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.template.context_processors import csrf
 from .forms import *
+from social_django.models import UserSocialAuth
+
+def settings(request):
+    user = request.user
+
+    try:
+        github_login = user.social_auth.get(provider='github')
+    except UserSocialAuth.DoesNotExist:
+        github_login = None
+
+    try:
+        twitter_login = user.social_auth.get(provider='twitter')
+    except UserSocialAuth.DoesNotExist:
+        twitter_login = None
+
+    try:
+        facebook_login = user.social_auth.get(provider='facebook')
+    except UserSocialAuth.DoesNotExist:
+        facebook_login = None
+
+    can_disconnect = (user.social_auth.count() > 1 or user.has_usable_password())
+
+    return render(request, 'carsbg/settings.html', {
+        'github_login': github_login,
+        'twitter_login': twitter_login,
+        'facebook_login': facebook_login,
+        'can_disconnect': can_disconnect
+    })
+
+@login_required
+def password(request):
+    if request.user.has_usable_password():
+        PasswordForm = PasswordChangeForm
+    else:
+        PasswordForm = AdminPasswordChangeForm
+
+    if request.method == 'POST':
+        form = PasswordForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordForm(request.user)
+    return render(request, 'core/password.html', {'form': form})
 
 
 def home(request):
@@ -167,6 +215,18 @@ def searchService(request):
 
 		if Object.objects.filter(name__icontains = searchWord, typeOfObject = "Автокъща"):
 			results = Object.objects.filter(name__icontains = searchWord, typeOfObject = "Автокъща")
+			for i in results:
+				if i not in obj:
+					obj.append(i)
+
+		if Object.objects.filter(address__icontains = searchWord, typeOfObject="Сервиз"):
+			results = Object.objects.filter(address__icontains = searchWord, typeOfObject = "Сервиз").order_by("name")
+			for i in results:
+				if i not in obj:
+					obj.append(i)
+
+		if Object.objects.filter(address__icontains = searchWord, typeOfObject = "Автокъща"):
+			results = Object.objects.filter(address__icontains = searchWord, typeOfObject = "Автокъща")
 			for i in results:
 				if i not in obj:
 					obj.append(i)
@@ -339,21 +399,21 @@ def addComment(request):
 		alert = ""
 		obj = Object.objects.get(pk = pk, typeOfObject = typeOfObject)
 
-		# if len(Comment.objects.filter(obj = obj, ip = ip)) >= 1:
-		# 	limitExceeded = 1
-		# 	alert = "Вече оценихте този обект"
+		if len(Comment.objects.filter(obj = obj, ip = ip)) >= 1:
+			limitExceeded = 1
+			alert = "Вече оценихте този обект"
 
 		
 
-		# count = 0
-		# for i in Comment.objects.filter(ip = ip):
-		# 		if i.date == timezone.now().date():
-		# 			count += 1
-		# 		print(timezone.now().date(), i.date)
+		count = 0
+		for i in Comment.objects.filter(ip = ip):
+				if i.date == timezone.now().date():
+					count += 1
+				print(timezone.now().date(), i.date)
 
-		# if count >= 4:
-		# 	limitExceeded = 1
-		# 	alert = "Днес надхвърлихте броя на позволените коментари"
+		if count >= 4:
+			limitExceeded = 1
+			alert = "Днес надхвърлихте броя на позволените коментари"
 
 
 

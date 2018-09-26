@@ -19,6 +19,8 @@ urlpatterns = [
     url(r'^ajax/deleteComment/$', views.deleteComment, name='deleteComment'),
     url(r'^profile/$', views.profile, name='profile'),
     url(r'^setImage/$', views.setImage, name='setImage'),
-   	url(r'^displayService/(?P<pk>\w{0,50})/$', views.displayService, name='displayService')
+   	url(r'^displayService/(?P<pk>\w{0,50})/$', views.displayService, name='displayService'),
+   	url(r'^settings/$', views.settings, name='settings'),
+    url(r'^settings/password/$', views.password, name='password'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

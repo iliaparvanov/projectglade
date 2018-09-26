@@ -8,7 +8,7 @@ fuelId = {
 }
 
 
-startingYear = 2011
+startingYear = 2010
 yearid = [startingYear]
 for i in range(5):
 	startingYear += 1
@@ -16,7 +16,7 @@ for i in range(5):
 
 
 gearId = {
-	"Ръчна" : 1,
+	# "Ръчна" : 1,
 	"Автоматична" : 2,
 }
 
@@ -277,10 +277,10 @@ BMW = {
 	# "i8"  : 1967,
 	# "M2"  : 2160,
 	# "M3"  : 151,
-	# "M5"  : 152,
+	"M5"  : 152,
 	# "M6"  : 153,
 	# "X5 M"  : 1660,
-	"X6 M" : 1661,
+	# "X6 M" : 1661,
 	# "Z4 M"  : 155,
 	# "M4"  : 2045,
 	# "X1"  : 1659,
