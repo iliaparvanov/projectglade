@@ -1,6 +1,4 @@
 
-
-
 .card-container {
     background-color: #ffffff;
     width: 80%;
@@ -11,7 +9,8 @@
     grid-template-rows: 70px 70px 70px;
     /*grid-gap*/
     border: 1px solid #999999;
-    margin-top: 20px;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -53,8 +52,7 @@
     .card-container {
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 3fr 2fr 1fr;
-        height: 320px;
+        grid-template-rows: 4fr 2fr 1fr;
     }
 
     .card-img {
@@ -71,10 +69,11 @@
     }
 
     .card-title {
+        font-size: 1.1em;
         text-align: center;
         justify-self: center;
-        align-self: center;
-        padding: 0;
+        align-self: end;
+        padding-top: 5%    ;
         grid-column: 1;
         grid-row: 2/4;
     }
