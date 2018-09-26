@@ -81,7 +81,7 @@
 
     .card-info {
         justify-self: center;
-        align-self: end
+        align-self: end;
         grid-column: 1;
         grid-row: 4;
         padding: 0;
