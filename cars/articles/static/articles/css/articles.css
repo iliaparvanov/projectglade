@@ -35,13 +35,14 @@
     grid-row: 1/2;
     padding-left: 15px;
     padding-right: 15px;
-    font-style: 'Montserrat', sans-serif;
+    font-family: Montserrat, Helvetica, sans-serif;
+    letter-spacing: 1px;
 }
 
 .card-info {
-    font-style: 'Roboto', Helvetica, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
+    font-family: Roboto, Helvetica, sans-serif;
+    font-size: 1.2em;
+    font-weight: 300;
     grid-column: 2/4;
     grid-row: 3;
     align-self: end;
@@ -51,13 +52,28 @@
 #article-header {
     position: relative;
     margin-top: 0;
+    overflow: hidden;
+}
+
+#article-header h1 {
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 3em;
+    font-weight: 800;
+    line-height: 140%;
+    letter-spacing: 1px;
+}
+
+#article-header p {
+    font-family: Lora, 'Times New Roman', serif;
+    font-size: 1.5em;
 }
 
 #article-top-img {
+
     object-fit: cover;
     width: 100vw;
-    height: 70vh;
-    filter: brightness(50%);
+    height: 65vh;
+    filter: brightness(40%);
 }
 
 #article-title {
@@ -65,13 +81,31 @@
     top: 40%;
     left: 50%;
     transform: translate(-50%, -40%);
+    width: 70%;
     text-align: center;
     color: white;
 }
 
-#article-title h1 {
-
+#article-info {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+    text-align: center;
+    color: #dadada;
 }
+
+#article-text {
+    font-style: Roboto;
+    font-size: 1.2em;
+    line-height: 160%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 @media screen and (max-width: 800px) {
     .card-container {
@@ -109,5 +143,27 @@
         grid-column: 1;
         grid-row: 4;
         padding: 0;
+    }
+
+
+    #article-header h1 {
+        font-size: 2em;
+        line-height: 120%;
+        letter-spacing: 1px;
+    }
+
+    #article-title {
+        width: 80%;
+    }
+
+    #article-info {
+        top: 85%;
+        left: 50%;
+        transform: translate(-50%, -85%);
+        width: 80%;
+    }
+
+    #article-text {
+        width: 100%;
     }
 }

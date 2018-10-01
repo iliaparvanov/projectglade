@@ -4,20 +4,12 @@
 {% load tests_extras %}
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'articles/css/articles.css' %}">
-<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lora" />
 
 <style>
     .checked {
         color: orange;
     }
 
-    h1 {
-        font-family: Lora;
-        font-size: 50px;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 700;
-    }
 
     h3 {
         font-family: Lora;
@@ -28,14 +20,7 @@
         line-height: 15.4px;
     }
 
-    p {
-        font-family: Lora;
-        font-size: 20px;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: 400;
-        line-height: 1.6;
-    }
+
 
     blockquote {
         font-family: Lora;
@@ -58,16 +43,12 @@
     <div id="article-header">
         <img id="article-top-img" src="{{ article.image.url }}">
         <h1 id="article-title">{{ article.name }}</h1>
+        <p id="article-info">{{ article.author }} | {{ article.date }}</p>
     </div>
     <div class="container">
-
-        <p style="color: grey; margin-top: 15px; ">{{ article.author }} | {{ article.date }}</p>
-        <div>
-            <div class="text-left">
-                <!-- <img src="{{ article.image.url }}"> -->
-
-                <p>{{ article.text }}</p>
-            </div>
+        <div id="article-text">
+            <!-- <img src="{{ article.image.url }}"> -->
+            <p>{{ article.text }}</p>
         </div>
     </div>
 
