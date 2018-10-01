@@ -48,6 +48,31 @@
     padding-left: 15px;
 }
 
+#article-header {
+    position: relative;
+    margin-top: 0;
+}
+
+#article-top-img {
+    object-fit: cover;
+    width: 100vw;
+    height: 70vh;
+    filter: brightness(50%);
+}
+
+#article-title {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    text-align: center;
+    color: white;
+}
+
+#article-title h1 {
+
+}
+
 @media screen and (max-width: 800px) {
     .card-container {
         display: grid;
