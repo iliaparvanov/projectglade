@@ -15,6 +15,7 @@ from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.template.context_processors import csrf
 from .forms import *
 from social_django.models import UserSocialAuth
+from django.contrib.auth import logout
 
 def settings(request):
     user = request.user
@@ -83,9 +84,11 @@ def login_user(request):
                 login(request, user)
                 return redirect('/')
         else:
-            return render(request, "carsbg/home.html", {"errorFlagLogin" : 1})
+            form = MyRegistrationForm()
+            return render(request, "carsbg/home.html", {"errorFlagLogin" : 1, "profile" : profile, "form" : form})
     else:
     	return redirect('/')
+
 
 @login_required
 def password_change(request):
@@ -199,46 +202,59 @@ def addService(request):
 
 		return redirect('home')
 
+def search(request):
+	city = City.objects.all()
+	objects = Object.objects.all()
+	types = []
+	for i in objects:
+		types.append(i.typeOfObject)
+
+	form = MyRegistrationForm()
+	profile = 1
+	if request.user.is_authenticated:
+		profile = Profile.objects.get(user = request.user)
+
+
+	return render(request, "carsbg/search.html", {"city" : city, "types" : types, "form" : form, "profile" : profile})
+
 @csrf_exempt
 def searchService(request):
+	
 	if request.method == 'POST':
 
 		searchWord = request.POST.get('search', '')
+		typeOfObject = request.POST.get('typeOfObject', '')
+		rating = request.POST.get('ratingId', '')
+		city = request.POST.get('cityId', '')
 		obj = []
+		print(rating)
+		
+		if Object.objects.filter(name__icontains = searchWord):
+			results = Object.objects.filter(name__icontains = searchWord).order_by("name")
+			for i in results:
+				if i not in obj:
+					obj.append(i)
+
 		
 
-		if Object.objects.filter(name__icontains = searchWord, typeOfObject="Сервиз"):
-			results = Object.objects.filter(name__icontains = searchWord, typeOfObject = "Сервиз").order_by("name")
+		if Object.objects.filter(address__icontains = searchWord):
+			results = Object.objects.filter(address__icontains = searchWord).order_by("name")
 			for i in results:
 				if i not in obj:
 					obj.append(i)
 
-		if Object.objects.filter(name__icontains = searchWord, typeOfObject = "Автокъща"):
-			results = Object.objects.filter(name__icontains = searchWord, typeOfObject = "Автокъща")
-			for i in results:
-				if i not in obj:
-					obj.append(i)
 
-		if Object.objects.filter(address__icontains = searchWord, typeOfObject="Сервиз"):
-			results = Object.objects.filter(address__icontains = searchWord, typeOfObject = "Сервиз").order_by("name")
-			for i in results:
-				if i not in obj:
-					obj.append(i)
+		if typeOfObject != "Всички":
+			obj = [i for i in obj if i.typeOfObject == typeOfObject]
+				
+		if rating != "Всички":
+			оbj = [i for i in obj if i.ratingDisplay == rating]
 
-		if Object.objects.filter(address__icontains = searchWord, typeOfObject = "Автокъща"):
-			results = Object.objects.filter(address__icontains = searchWord, typeOfObject = "Автокъща")
-			for i in results:
-				if i not in obj:
-					obj.append(i)
+		if city != "Всички":
+			obj = [i for i in obj if i.city.name == city]
 
-		try:
-			results = Object.objects.filter(city__name__icontains=City.objects.filter(name=searchWord)[0])
 
-			for i in results:
-				if i not in obj:
-					obj.append(i)
-		except IndexError:
-			pass
+		
 
 		form = MyRegistrationForm()
 		profile = 1
@@ -249,9 +265,8 @@ def searchService(request):
 		for i in obj:
 			comments = Comment.objects.filter(obj = i)
 			if len(comments) > 0:
-				i.ratingDisplay = (i.rating / len(comments))
-				i.ratingDisplay = round(i.ratingDisplay, 2)
-			print(len(comments), i.ratingDisplay)
+				i.ratingDisplay = (i.rating // len(comments))
+				i.ratingDisplay = round(i.ratingDisplay)
 
 
 		return render(request, 'carsbg/results.html', {'results' : obj, "profile" : profile, "form" : form})
@@ -259,16 +274,8 @@ def searchService(request):
 	if request.is_ajax():
 
 		term = request.GET.get('term', '')
-		suggestions = City.objects.filter(name__icontains = term)
 		results = []
-		for i in suggestions:
-			suggestions_json = {}
-			suggestions_json['label'] = i.name
-			suggestions_json['category'] = "Градове:"
-
-			results.append(suggestions_json)
-			data = json.dumps(results)
-
+		
 		suggestions = Object.objects.filter(name__icontains = term, typeOfObject = "Сервиз")
 		for i in suggestions:
 			suggestions_json = {}
@@ -372,8 +379,8 @@ def viewObject(request):
 	
 	objectCreate(request, comments, result, users, services)
 	if len(comments) > 0:
-		rating = result[0].rating / len(comments)
-		rating = round(rating, 2)
+		rating = result[0].rating // len(comments)
+		rating = round(rating)
 
 	form = MyRegistrationForm()
 	profile = 1
@@ -432,7 +439,7 @@ def addComment(request):
 			result.save()
 
 		if len(comments) > 0:
-			rating = result.rating / len(comments)
+			rating = result.rating // len(comments)
 
 	
 	return JsonResponse({"alert" : alert}, safe = False)

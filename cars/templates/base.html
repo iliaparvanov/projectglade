@@ -149,7 +149,7 @@
 	{% elif errorFlagLogin %}
 		<script>
     		window.onload = function() {
-    			$('#Modal').bootstrapToggle();
+    			openModal();
 			};
 		</script>
 	{% endif %}
@@ -164,20 +164,12 @@
             <ul class="navbar-nav ml-auto">
             	{% if user.is_authenticated %}
 
-	        		{% if flagForBase %}
-			        {% else %}
-
-			                <form action="{% url 'searchService' %}" method="post" accept-charset="utf-8">
-			                    <div class="input-group search">
-			                        <input  type="glowinginwhite" style="height: 2rem; width: 15rem;" name="search" class="form-control" placeholder="Търсете по град, улица или име на обекта" aria-describedby="basic-addon2" id = "search">
-			                        <div class="input-group-append" style="width: auto; height: 2rem;">
-			                            <button type="submit" class="input-group-text" id="basic-addon2"><img id="glyph" src="/static/images/si-glyph-magnifier.svg"></button>
-			                        </div>
-			                    </div>
-			                </form>
-			        {% endif %}
+	        		
 					<li class="nav-item">
 						<a class="nav-link" href="/articles/home/">Статии</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="/search/">Поддръжка</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/carscompare/home/">Сравни цени</a>
@@ -221,21 +213,13 @@
 
 							}
 				</style> -->
-					{% if flagForBase %}
-			        {% else %}
-			                <form action="{% url 'searchService' %}" method="post" accept-charset="utf-8">
-			                    <div class="input-group mb-3">
-			                        <input style="height: 2rem; width: 21rem" type="glowinginwhite" name="search" class="form-control" placeholder="Търсете по град, улица или име на обекта" aria-describedby="basic-addon2" id = "search">
-			                        <div class="input-group-append" style="width: auto; height: 2rem">
-			                            <button type="submit" class="input-group-text" id="basic-addon2"><img id="glyph" src="/static/images/si-glyph-magnifier.svg"></button>
-			                        </div>
-			                    </div>
-			                </form>
-			        {% endif %}
+					
 					<li class="nav-item">
 						<button class="btn btn-link" class="nav-link" href="#" data-toggle="modal" data-target="#Modal" id="modalBtn" style="color: #949494;">Вход/Регистрация</button>
 					</li>
-
+					<li class="nav-item">
+						<a class="nav-link" href="/search/">Поддръжка</a>
+					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="/articles/home/">Статии</a>
 					</li>
