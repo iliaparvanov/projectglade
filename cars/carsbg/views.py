@@ -162,7 +162,7 @@ def addService(request):
 		address = request.POST.get('address', '')
 		tel = request.POST.get('tel', '')
 		img = request.FILES.get('img')
-		typeOfSearch = request.POST.get('type', '')
+		typeOfObject = request.POST.get('type', '')
 		workdayStart = request.POST.get('workdayStart')
 		workdayEnd = request.POST.get('workdayEnd')
 		saturdayStart = request.POST.get('saturdayStart')
@@ -185,14 +185,10 @@ def addService(request):
 			city = City(name=cityName)
 			city.save()
 
-		if typeOfSearch == "service":
-			obj1 = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Сервиз", image = img, rating = 0, workingTime = workingTime, description = description)
-			obj1.save()
-		elif typeOfSearch == "cardealer":
-			obj1 = Object(name=name, city=city, address=address, tel=tel, typeOfObject = "Автокъща", image = img, rating = 0, workingTime = workingTime, description = description)
-			obj1.save()
-		else:
-			return HttpResponse("ERROR ^)^")
+		
+		obj1 = Object(name=name, city=city, address=address, tel=tel, typeOfObject = typeOfObject, image = img, rating = 0, workingTime = workingTime, description = description)
+		obj1.save()
+		
 
 
 		for i in services:
@@ -207,7 +203,8 @@ def search(request):
 	objects = Object.objects.all()
 	types = []
 	for i in objects:
-		types.append(i.typeOfObject)
+		if i.typeOfObject not in types:
+			types.append(i.typeOfObject)
 
 	form = MyRegistrationForm()
 	profile = 1
@@ -243,12 +240,14 @@ def searchService(request):
 				if i not in obj:
 					obj.append(i)
 
+		if (str(obj[3].ratingDisplay) == rating):
+			print(obj[3].ratingDisplay, rating)
 
 		if typeOfObject != "Всички":
 			obj = [i for i in obj if i.typeOfObject == typeOfObject]
 				
 		if rating != "Всички":
-			оbj = [i for i in obj if i.ratingDisplay == rating]
+			оbj = [i for i in obj if i.ratingDisplay == int(rating)]
 
 		if city != "Всички":
 			obj = [i for i in obj if i.city.name == city]
