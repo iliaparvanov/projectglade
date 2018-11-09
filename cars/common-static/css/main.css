@@ -84,20 +84,7 @@ a:hover {
     color: black;
 }
 
-#slogan {
-    width: 80%;
-    margin-top: 0;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 150px;
-    font-size: 3.5em;
-    text-align: center;
-    letter-spacing: 0.08em;
-    color: #fff;
-    text-shadow:0px 4px 3px rgba(0,0,0,0.4),
-             0px 8px 13px rgba(0,0,0,0.1),
-             0px 18px 23px rgba(0,0,0,0.1);
-}
+
 
 .wrap {
     width: 50%;
@@ -152,16 +139,6 @@ input[type="glowinginwhite"]:focus {
     -moz-transition: all 0.30s ease-in-out;
     -ms-transition: all 0.30s ease-in-out;
     -o-transition: all 0.30s ease-in-out;
-}
-
-#whole-screen-bg-1 {
-    background-image: url('/static/images/bg-1.jpg');
-    height: 100vh;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    margin-top: 0;
 }
 
 #whole-screen-bg-2 {
@@ -305,13 +282,6 @@ input[type="glowinginwhite"]:focus {
 @media screen and (max-width: 800px) {
     .standart-container {
         margin: auto;
-        width: 90%;
-    }
-
-    #slogan {
-        padding-top: 115px;
-        font-size: 2.5em;
-        font-weight: 600;
         width: 90%;
     }
 

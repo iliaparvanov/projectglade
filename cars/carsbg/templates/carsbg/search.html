@@ -1,41 +1,47 @@
 {% extends "base.html" %}
 
 {% block content %}
-	
-	    <form action=/searchService/ method="post" accept-charset="utf-8">
-	        
-	    </form>
-	<form action=/searchService/ method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form-standart">
-		{% csrf_token %}	
-		<div class="input-group">
-            <input style="height: 6vh;" type="glowinginwhite" name="search" class="form-control" placeholder="Търсете по име или адрес...." aria-describedby="basic-addon2" id = "search">
-           
-        </div>
-		Град<select  id = "cityId" class="custom-select" name = "cityId" value='cityId' style="margin-bottom: 10px;">
-			<option type = "text" name="Всички" value="Всички">Всички</option>
-			{% for i in city %}
-				<option type = "text" id="{{ i.name }}" value= "{{ i.name }}" ">{{ i.name }}</option>
-			{% endfor %}
-		</select>
-		Рейтинг<select id = "ratingId" class="custom-select" name="ratingId" style="margin-bottom: 10px;">
-			<option type = "text" name="Всички" value="Всички">Всички</option>
-			<option type = "text" name="Всички" value="1">1</option>
-			<option type = "text" name="Всички" value="2">2</option>
-			<option type = "text" name="Всички" value="3">3</option>
-			<option type = "text" name="Всички" value="4">4</option>
-			<option type = "text" name="Всички" value="5">5</option>
+	{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'carsbg/css/carsbg.css' %}">
+	<div id="whole-screen-bg-1">
+		<h1 class="slogan">НАМЕРЕТЕ
+		<span class="txt-type" data-wait="3000" data-words='["СЕРВИЗ", "АВТОКЪЩА", "МОРГА"]'></span><br>
+		БЛИЗО ДО ВАС</h1>
+	</div>
+	<div class="search-form-wrapper">
+		<form action=/searchService/ method="post" enctype="multipart/form-data" accept-charset="utf-8" class="form-standart">
+			{% csrf_token %}
+			<div class="input-group">
+	            <input type="glowinginwhite" name="search" class="form-control" placeholder="Търсете по име или адрес...." aria-describedby="basic-addon2" id = "search">
 
-		</select>
-		
-		
-		Тип на обекта<select name = "typeOfObject" class="custom-select" style="margin-bottom: 10px;">
-			<option type = "text" name="Всички" value="Всички">Всички</option>
+	        </div>
+			Град<select  id = "cityId" class="custom-select" name = "cityId" value='cityId' style="margin-bottom: 10px;">
+				<option type = "text" name="Всички" value="Всички">Всички</option>
+				{% for i in city %}
+					<option type = "text" id="{{ i.name }}" value= "{{ i.name }}" ">{{ i.name }}</option>
+				{% endfor %}
+			</select>
+			Рейтинг<select id = "ratingId" class="custom-select" name="ratingId" style="margin-bottom: 10px;">
+				<option type = "text" name="Всички" value="Всички">Всички</option>
+				<option type = "text" name="Всички" value="1">1</option>
+				<option type = "text" name="Всички" value="2">2</option>
+				<option type = "text" name="Всички" value="3">3</option>
+				<option type = "text" name="Всички" value="4">4</option>
+				<option type = "text" name="Всички" value="5">5</option>
 
-			{% for i in types %}
-				<option type = "text" name="{{ i }}" value="{{ i }}">{{ i }}</option type = "text" >
-			{% endfor %}
-		</select>
+			</select>
 
-		<input type="submit" href="/" value="Търси" name="Create">
-	</form>
+
+			Тип на обекта<select name = "typeOfObject" class="custom-select" style="margin-bottom: 10px;">
+				<option type = "text" name="Всички" value="Всички">Всички</option>
+
+				{% for i in types %}
+					<option type = "text" name="{{ i }}" value="{{ i }}">{{ i }}</option type = "text" >
+				{% endfor %}
+			</select>
+
+			<input type="submit" href="/" value="Търси" name="Create">
+		</form>
+	</div>
+	<script src="{% static 'carsbg/js/typewriter.js' %}"></script>
 {% endblock %}

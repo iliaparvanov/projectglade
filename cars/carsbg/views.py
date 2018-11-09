@@ -71,7 +71,7 @@ def home(request):
 	profile = 1
 	if request.user.is_authenticated:
 		profile = Profile.objects.get(user = request.user)
-		
+
 	return render(request, 'carsbg/home.html', {"form" : form, "flagForBase" : flagForBase, "profile" : profile})
 
 def login_user(request):
@@ -124,7 +124,7 @@ def signup(request):
 			return redirect('/')
 		else:
 			return render(request, 'carsbg/home.html', {'form' : form, 'errorFlagSignup' : 1})
-	else:		
+	else:
 		form = MyRegistrationForm()
 		return render(request, 'carsbg/home.html', {'form' : form})
 
@@ -167,7 +167,7 @@ def addService(request):
 		workdayEnd = request.POST.get('workdayEnd')
 		saturdayStart = request.POST.get('saturdayStart')
 		saturdayEnd = request.POST.get('saturdayEnd')
-		
+
 		description = request.POST.get('description')
 
 		workday = str(workdayStart) + ' - ' + str(workdayEnd)
@@ -185,10 +185,10 @@ def addService(request):
 			city = City(name=cityName)
 			city.save()
 
-		
+
 		obj1 = Object(name=name, city=city, address=address, tel=tel, typeOfObject = typeOfObject, image = img, rating = 0, workingTime = workingTime, description = description)
 		obj1.save()
-		
+
 
 
 		for i in services:
@@ -216,7 +216,7 @@ def search(request):
 
 @csrf_exempt
 def searchService(request):
-	
+
 	if request.method == 'POST':
 
 		searchWord = request.POST.get('search', '')
@@ -225,14 +225,14 @@ def searchService(request):
 		city = request.POST.get('cityId', '')
 		obj = []
 		print(rating)
-		
+
 		if Object.objects.filter(name__icontains = searchWord):
 			results = Object.objects.filter(name__icontains = searchWord).order_by("name")
 			for i in results:
 				if i not in obj:
 					obj.append(i)
 
-		
+
 
 		if Object.objects.filter(address__icontains = searchWord):
 			results = Object.objects.filter(address__icontains = searchWord).order_by("name")
@@ -240,12 +240,11 @@ def searchService(request):
 				if i not in obj:
 					obj.append(i)
 
-		if (str(obj[3].ratingDisplay) == rating):
-			print(obj[3].ratingDisplay, rating)
+
 
 		if typeOfObject != "Всички":
 			obj = [i for i in obj if i.typeOfObject == typeOfObject]
-				
+
 		if rating != "Всички":
 			оbj = [i for i in obj if i.ratingDisplay == int(rating)]
 
@@ -253,7 +252,7 @@ def searchService(request):
 			obj = [i for i in obj if i.city.name == city]
 
 
-		
+
 
 		form = MyRegistrationForm()
 		profile = 1
@@ -274,7 +273,7 @@ def searchService(request):
 
 		term = request.GET.get('term', '')
 		results = []
-		
+
 		suggestions = Object.objects.filter(name__icontains = term, typeOfObject = "Сервиз")
 		for i in suggestions:
 			suggestions_json = {}
@@ -325,7 +324,7 @@ def objectCreate(request, comments, result, users, services):
 		city = request.GET.get('city')
 		typeOfObject = request.GET.get('typeOfObject')
 		user = request.POST.get('user')
-	
+
 	currentUserComment = 0
 	commentsObj = 0
 	userFlag = 0
@@ -334,7 +333,7 @@ def objectCreate(request, comments, result, users, services):
 
 
 	result.append(Object.objects.filter(name = name, tel = tel, address = address, city = City.objects.filter(name = city)[0], typeOfObject = typeOfObject)[0])
-	
+
 	servicesObj = (Service.objects.filter(obj = result[0]))
 	try:
 		currentUserComment = Comment.objects.filter(obj = result[0], user = Profile.objects.filter(user = User.objects.filter(username = user)[0])[0])
@@ -370,12 +369,12 @@ def objectCreate(request, comments, result, users, services):
 def viewObject(request):
 
 	services = []
-	comments = []	
+	comments = []
 	result = list()
 	rating = 0
 	users = []
 	alert = ''
-	
+
 	objectCreate(request, comments, result, users, services)
 	if len(comments) > 0:
 		rating = result[0].rating // len(comments)
@@ -409,7 +408,7 @@ def addComment(request):
 			limitExceeded = 1
 			alert = "Вече оценихте този обект"
 
-		
+
 
 		count = 0
 		for i in Comment.objects.filter(ip = ip):
@@ -440,7 +439,7 @@ def addComment(request):
 		if len(comments) > 0:
 			rating = result.rating // len(comments)
 
-	
+
 	return JsonResponse({"alert" : alert}, safe = False)
 
 def deleteComment(request):
